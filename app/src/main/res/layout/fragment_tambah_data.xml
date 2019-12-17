@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TambahDataFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:text="Menambah Stock Baru" />
+
+        <EditText
+            android:id="@+id/et_barkod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="Scan Barcode" />
+
+        <EditText
+            android:id="@+id/et_nama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:hint="Nama Barang" />
+
+        <EditText
+            android:id="@+id/et_jml"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:hint="Jumlah"
+            android:inputType="number" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            >
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:text="Rp" />
+
+            <EditText
+                android:id="@+id/et_hrgawal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:hint="Harga Awal"
+                android:inputType="number" />
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            >
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:text="Rp" />
+
+            <EditText
+                android:id="@+id/et_hrgjual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="Harga Jual"
+                android:inputType="number" />
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btn_tambahbarang"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="Tambah Barang"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="Cancel"
+            android:textAllCaps="false" />
+    </LinearLayout>
+
+</FrameLayout>

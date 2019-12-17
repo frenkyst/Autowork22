@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeKaryawanFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:text="@string/hello_blank_fragment" />-->
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rl_layout"
+        android:background="@color/viewfinder_border"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginBottom="5dp">
+
+        <TextView
+            android:id="@+id/tv_barkod"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="Code"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_nama"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="Nama"
+            android:textSize="16sp" />
+
+
+
+        <TextView
+            android:id="@+id/tv_jml"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="Jumlah"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_harga"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="Harga"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rc_list_request"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:clipToPadding="false" />
+</FrameLayout>
