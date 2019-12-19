@@ -26,6 +26,8 @@ import com.example.autowork.model.LogHistory;
 import com.example.autowork.model.Meminta;
 import com.example.autowork.MainActivity;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -317,39 +319,57 @@ public class TransaksiKaryawanFragment extends Fragment{
 
     // PROSES PUSH DATA KE FIREBASE
     private void inputDatabase(Meminta meminta, LogHistory log, String barkod, String ud, String udtr) {
-        // DATA UPDATE JUMLAH STOK SAAT DILAKUKAN TRANSAKSI
-        database1.child(GlobalVariabel.Toko)
-                .child(GlobalVariabel.Gudang)
-                .child(barkod)
-                .child("jml")
-                .setValue(ud);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Name, email address, and profile photo Url
+            String name = user.getDisplayName();
+            String uid = user.getUid();
+
+            // DATA UPDATE JUMLAH STOK SAAT DILAKUKAN TRANSAKSI
+            database1.child(GlobalVariabel.Toko)
+                    .child(GlobalVariabel.Gudang)
+                    .child(barkod)
+                    .child("jml")
+                    .setValue(ud);
 
 
-        Long timestampl = System.currentTimeMillis()/1000;
-        String timestamp = timestampl.toString();
+            Long timestampl = System.currentTimeMillis()/1000;
+            String timestamp = timestampl.toString();
 
-        // DATA BARANG YANG MASUK TABEL TRANSAKSI 1
-        database1.child(GlobalVariabel.Toko)
-                .child(GlobalVariabel.Transaksi)
-                .child(timestamp)
-                .setValue(meminta);
+            // DATA BARANG YANG MASUK TABEL TRANSAKSI 1
+            database1.child(GlobalVariabel.Toko)
+                    .child(GlobalVariabel.Transaksi+"/"+uid+"/transaksi")
+                    .child(timestamp)
+                    .setValue(meminta);
 
-        // DATA TOTAL PEMBAYARAN TABEL TRANSAKSI 1
-        database1.child(GlobalVariabel.Toko)
-                .child(GlobalVariabel.Transaksi)
-                .child("zzzzzzzzz").child("total")
-                .setValue(udtr);
+            // DATA TOTAL PEMBAYARAN TABEL TRANSAKSI 1
+            database1.child(GlobalVariabel.Toko)
+                    .child(GlobalVariabel.Transaksi+"/"+uid)
+                    .child("total")
+                    .setValue(udtr);
 
-        database1.child(GlobalVariabel.Toko)
-                .child(GlobalVariabel.Log)
-                .child(timestamp)
-                .setValue(log);
+            database1.child(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi+"/"+uid)
+                    .child("namakaryawan")
+                    .setValue(name);
+            database1.child(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi+"/"+uid)
+                    .child("uid")
+                    .setValue(uid);
+
+            //INPUT LOG TRANSAKSI KARYAWAN
+            database1.child(GlobalVariabel.Toko)
+                    .child(GlobalVariabel.Log)
+                    .child(timestamp)
+                    .setValue(log);
 
 
 //        etBarkod.setEnabled(true);
-        Toast.makeText(getActivity(),
-                "Data Berhasil Tambah",
-                Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),
+                    "Data Berhasil Tambah",
+                    Toast.LENGTH_SHORT).show();
+
+
+        }
 
     }
 
@@ -378,29 +398,36 @@ public class TransaksiKaryawanFragment extends Fragment{
 
     // FUNGSI MENDAPATKAN NILAI TOTAL TRANSAKSI DARI TABEL TRANSAKSI
     private void ambiltotal(){
-        database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.Transaksi).child("zzzzzzzzz").child("total");
-        database.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Name, email address, and profile photo Url
+//            String name = user.getDisplayName();
+            String uid = user.getUid();
+            database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.Transaksi).child(uid).child("total");
+            database.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
 //                        String totalbayar = dataSnapshot2.child("total").getValue(String.class);
-                String totaltransaksi = dataSnapshot2.getValue(String.class);
+                    String totaltransaksi = dataSnapshot2.getValue(String.class);
 
-                if (TextUtils.isEmpty(totaltransaksi)) {
-                        totalTransaksi=0;
+                    if (TextUtils.isEmpty(totaltransaksi)) {
+                        totalTransaksi = 0;
                     } else {
                         tvtotaltransaksi.setText(totaltransaksi);
                     }
 
-                totalTransaksi = Integer.parseInt(tvtotaltransaksi.getText().toString());
+                    totalTransaksi = Integer.parseInt(tvtotaltransaksi.getText().toString());
 
 
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
 
-            }
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-        });
+                }
+
+            });
+        }
     }
 
 }

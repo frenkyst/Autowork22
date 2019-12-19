@@ -48,7 +48,7 @@ public class KasirActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        DetailBayarFragment fragment = new DetailBayarFragment();
+        HomeKasirFragment fragment = new HomeKasirFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.framekasir, fragment);
         fragmentTransaction.commit();

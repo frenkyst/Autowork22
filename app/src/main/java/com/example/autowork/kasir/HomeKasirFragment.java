@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.autowork.GlobalVariabel;
 import com.example.autowork.R;
+import com.example.autowork.adapter.MemintaTransaksi;
 import com.example.autowork.adapter.MemintaTransaksikasir;
 import com.example.autowork.model.Meminta;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,10 +41,10 @@ public class HomeKasirFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private DatabaseReference database, fromPath, toPath, totalTopath;
+    private DatabaseReference database, fromPath, toPath;
 
     private ArrayList<Meminta> daftarReq;
-    private MemintaTransaksikasir memintatransaksikasir;
+    private MemintaTransaksi memintatransaksi;
 
     private RecyclerView rc_list_request;
     private ProgressDialog loading;
@@ -60,8 +60,6 @@ public class HomeKasirFragment extends Fragment {
 
 
         database = FirebaseDatabase.getInstance().getReference();
-        TextView tv_totalBayar;
-        tv_totalBayar = v.findViewById(R.id.tv_totalBayar);
 
         rc_list_request = v.findViewById(R.id.rc_list_request);
         //fab_add = findViewById(R.id.fab_add);
@@ -99,20 +97,14 @@ public class HomeKasirFragment extends Fragment {
                      */
                     daftarReq.add(requests);
 
-                    //=========================================================================================================
-                    // MENAMPILKAN TOTAL HARGA KESELURUHAN
-                    String totalbayar = dataSnapshot.child("zzzzzzzzz").child("total").getValue().toString();
-
-                    tv_totalBayar.setText("Rp. "+totalbayar);
-                    //==========================================================================================================
                 }
 
                 /**
                  * Inisialisasi adapter dan data hotel dalam bentuk ArrayList
                  * dan mengeset Adapter ke dalam RecyclerView
                  */
-                memintatransaksikasir = new MemintaTransaksikasir(daftarReq, getActivity());
-                rc_list_request.setAdapter(memintatransaksikasir);
+                memintatransaksi = new MemintaTransaksi(daftarReq, getActivity());
+                rc_list_request.setAdapter(memintatransaksi);
                 loading.dismiss();
             }
 
@@ -129,53 +121,6 @@ public class HomeKasirFragment extends Fragment {
         });
 
 
-        v.findViewById(R.id.btn_bayar).setOnClickListener((view) -> {
-
-            Long timestampl = System.currentTimeMillis()/1000;
-            String timestamp = timestampl.toString(), nama;
-//            String childKasir = GlobalVariabel.Toko+"/"+GlobalVariabel.Kasir+"/"+timestamp;
-
-            fromPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi);
-            toPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.Kasir+"/"+timestamp);
-//            totalTopath = FirebaseDatabase.getInstance().getReference(childKasir+"/zzzzzzzzz");
-
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            if (user != null) {
-                // Name, email address, and profile photo Url
-                String name = user.getDisplayName();
-
-                copyRecord(fromPath,toPath,name,timestamp);
-            }
-
-
-
-
-
-
-
-
-
-        });
-
-
-//        database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.Transaksi);
-//        database.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                String totalbayar = dataSnapshot.child("zzzzzzzzz").getValue().toString();
-//                tv_totalBayar.setText(totalbayar);
-//
-//                Toast.makeText(getActivity(), "tes", Toast.LENGTH_SHORT).show();
-//
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
 
         return v;
     }
@@ -185,32 +130,6 @@ public class HomeKasirFragment extends Fragment {
 
 
 
-    public void copyRecord(DatabaseReference fromPath, final DatabaseReference toPath, String nama, String timeStamp) {
-        fromPath.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                toPath.child("detail").setValue(dataSnapshot.getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isComplete()) {
-//                            fromPath.removeValue();
-                            Toast.makeText(getActivity(), "copy sukses", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getActivity(), "copy failed", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-//                totalTopath.setValue(dataSnapshot.child("zzzzzzzzz").getValue());
-                toPath.child("detail").child("zzzzzzzzz").setValue(dataSnapshot.child("zzzzzzzzz").getValue());
-                toPath.child("totalTransaksi").setValue(dataSnapshot.child("zzzzzzzzz").child("total").getValue());
-                toPath.child("namaKasir").setValue(nama);
-                toPath.child("kodeTransaksi").setValue(timeStamp);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-    }
 
 }
