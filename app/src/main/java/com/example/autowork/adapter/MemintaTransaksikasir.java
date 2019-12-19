@@ -1,14 +1,19 @@
 package com.example.autowork.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.autowork.MainActivity;
 import com.example.autowork.R;
+import com.example.autowork.kasir.KasirActivity;
 import com.example.autowork.model.Meminta;
 
 import java.util.List;
@@ -20,7 +25,7 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout rl_layouttransaksi;
-        public TextView tv_barkod, tv_nama, tv_jml, tv_total;
+        public TextView tv_barkod, tv_nama, tv_jml, tv_total, tv_taptransaksi;
 
         public MyViewHolder(View view) {
             super(view);
@@ -29,6 +34,8 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
             tv_nama = view.findViewById(R.id.tv_nama);
             tv_jml = view.findViewById(R.id.tv_jml);
             tv_total = view.findViewById(R.id.tv_total);
+
+            tv_taptransaksi = view.findViewById(R.id.tv_taptransaksi);
         }
     }
 
@@ -42,8 +49,11 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.meminta_datatransaksi, parent, false);
 
+
         return new MemintaTransaksikasir.MyViewHolder(itemView);
     }
+
+
 
     @Override
     public void onBindViewHolder(MemintaTransaksikasir.MyViewHolder holder, final int position) {
@@ -53,24 +63,47 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
         holder.tv_nama.setText(movie.getNama());
         holder.tv_jml.setText(movie.getJml());
         holder.tv_total.setText(movie.getTotal());
+//        holder.tv_totalBayar.setText(movie.getTotal());
+        holder.tv_taptransaksi.setText(" ");
 
-/*
-        holder.rl_layout.setOnClickListener(new View.OnClickListener() {
+
+        holder.tv_taptransaksi.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Intent goDetail = new Intent(mActivity, MainActivity.class);
-                goDetail.putExtra("id", movie.getKey());
-                goDetail.putExtra("title", movie.getNama());
-                goDetail.putExtra("email", movie.getEmail());
-                goDetail.putExtra("desk", movie.getDesk());
 
-                mActivity.startActivity(goDetail);
+                //creating a popup menu
+                PopupMenu popup = new PopupMenu(mActivity, holder.tv_taptransaksi);
+                //inflating menu from xml resource
+                popup.inflate(R.menu.kasir_menu);
+                //adding click listener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.menu1:
+                                //handle menu1 click
+                                break;
+                            case R.id.menu2:
+                                //handle menu2 click
+                                break;
+                            case R.id.menu3:
+                                //handle menu3 click
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                //displaying the popup
+                popup.show();
+
+
 
 
             }
         });
-//*/
+
+
 
     }
 
@@ -78,5 +111,7 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
     public int getItemCount() {
         return moviesList.size();
     }
+
+
 
 }

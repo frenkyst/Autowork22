@@ -128,8 +128,8 @@ public class TambahDataFragment extends Fragment {
 
 
     private void submit(Meminta meminta, LogHistory log,String id) {
-        database.child("TOKO 1")
-                .child("Gudang 0")
+        database.child(GlobalVariabel.Toko)
+                .child(GlobalVariabel.Gudang)
                 .child(id)
                 //.child(prikey)
                 .setValue(meminta);
@@ -137,8 +137,8 @@ public class TambahDataFragment extends Fragment {
         Long timestampl = System.currentTimeMillis()/1000;
         String timestamp = timestampl.toString();
 
-        database.child("TOKO 1")
-                .child("Log")
+        database.child(GlobalVariabel.Toko)
+                .child(GlobalVariabel.Log)
                 .child(timestamp)
                 //.child(prikey)
                 .setValue(log);

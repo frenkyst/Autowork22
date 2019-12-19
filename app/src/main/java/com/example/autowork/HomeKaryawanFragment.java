@@ -81,7 +81,7 @@ public class HomeKaryawanFragment extends Fragment {
                 true,
                 false);
 
-        database.child("TOKO 1").child("Gudang 0").addValueEventListener(new ValueEventListener() {
+        database.child(GlobalVariabel.Toko).child(GlobalVariabel.Gudang).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

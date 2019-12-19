@@ -1,5 +1,7 @@
 package com.example.autowork;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +18,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
+import com.example.autowork.adapter.MemintaTransaksikasir;
+import com.example.autowork.kasir.HomeKasirFragment;
 import com.example.autowork.kasir.KasirActivity;
 
 public class MainActivity extends AppCompatActivity
@@ -115,4 +119,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

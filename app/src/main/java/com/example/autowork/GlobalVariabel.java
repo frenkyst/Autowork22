@@ -2,9 +2,19 @@ package com.example.autowork;
 
 public class GlobalVariabel {
     public static String
-            Toko = "TOKO 1",
-            Gudang = "Gudang 0",
-            Log = "Log",
-            Transaksi = "Transaksi 1",
-            UserMan = "UserMan";
+            Toko = "TOKO 2",
+            Gudang = "Gudang 2",
+            Log = "Log 2",
+            Transaksi = "Transaksi 2",
+            UserMan = "UserMan 2";
+
+
+    //VARIABEL BOSS
+    public static String
+    uid="ranul",
+    VarFragmen="HomeBossFragment" //VARIABEL DEFAULT HOME FRAGMENT
+
+
+            ;
+
 }

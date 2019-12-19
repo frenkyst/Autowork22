@@ -10,39 +10,60 @@
     android:layout_marginRight="2dp"
     android:layout_marginBottom="2dp">
 
-    <TextView
-        android:id="@+id/tv_barkod"
-        android:layout_width="100dp"
+    <RelativeLayout
+        android:id="@+id/ll_tap"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:text="Code"
-        android:textSize="16sp"
-        />
 
-    <TextView
-        android:id="@+id/tv_nama"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:text="Nama"
-        android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/tv_jml"
-        android:layout_width="70dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:text="Jumlah"
+        >
 
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/tv_taptransaksi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:textSize="16sp"
+            />
 
-    <TextView
-        android:id="@+id/tv_total"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:text="Total"
-        android:textAlignment="viewEnd"
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/tv_barkod"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="Code"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_nama"
+            android:layout_toRightOf="@+id/tv_barkod"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="Nama"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_jml"
+            android:layout_toRightOf="@+id/tv_nama"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="Jumlah"
+
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_total"
+            android:layout_toRightOf="@+id/tv_jml"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="Total"
+            android:textAlignment="viewEnd"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
 
 </LinearLayout>

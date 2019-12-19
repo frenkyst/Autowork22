@@ -38,7 +38,7 @@
                 android:textSize="20sp"
                 android:hint="Nama " />
             <TextView
-                android:layout_width="5dp"
+                android:layout_width="15dp"
                 android:layout_height="match_parent"
                 android:textSize="20sp"
                 android:hint=":" />
@@ -66,7 +66,7 @@
                 android:textSize="20sp"
                 android:hint="Email " />
             <TextView
-                android:layout_width="5dp"
+                android:layout_width="15dp"
                 android:layout_height="match_parent"
                 android:textSize="20sp"
                 android:hint=":" />
@@ -94,7 +94,7 @@
                 android:textSize="20sp"
                 android:hint="Status " />
             <TextView
-                android:layout_width="5dp"
+                android:layout_width="15dp"
                 android:layout_height="match_parent"
                 android:textSize="20sp"
                 android:hint=":" />

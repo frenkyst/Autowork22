@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
@@ -97,6 +98,7 @@ public class KasirActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_tools) {
+            reloadFragment();
 
         } else if (id == R.id.nav_share) {
             startActivity(new Intent(this, BossActivity.class));
@@ -107,5 +109,15 @@ public class KasirActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void reloadFragment(){
+        // Reload current fragment
+        Fragment frg = null;
+        frg = getSupportFragmentManager().findFragmentById(R.id.framekasir);
+        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.detach(frg);
+        ft.attach(frg);
+        ft.commit();
     }
 }

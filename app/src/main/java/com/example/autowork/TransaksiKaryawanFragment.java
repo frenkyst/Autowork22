@@ -234,7 +234,7 @@ public class TransaksiKaryawanFragment extends Fragment{
             String etBarkod1 = etBarkod.getText().toString();
             etBarkod1.toLowerCase();
 
-            database = FirebaseDatabase.getInstance().getReference().child("TOKO 1").child("Gudang 0").child(etBarkod1);
+            database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.Gudang).child(etBarkod1);
             database.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -318,8 +318,8 @@ public class TransaksiKaryawanFragment extends Fragment{
     // PROSES PUSH DATA KE FIREBASE
     private void inputDatabase(Meminta meminta, LogHistory log, String barkod, String ud, String udtr) {
         // DATA UPDATE JUMLAH STOK SAAT DILAKUKAN TRANSAKSI
-        database1.child("TOKO 1")
-                .child("Gudang 0")
+        database1.child(GlobalVariabel.Toko)
+                .child(GlobalVariabel.Gudang)
                 .child(barkod)
                 .child("jml")
                 .setValue(ud);
@@ -329,19 +329,19 @@ public class TransaksiKaryawanFragment extends Fragment{
         String timestamp = timestampl.toString();
 
         // DATA BARANG YANG MASUK TABEL TRANSAKSI 1
-        database1.child("TOKO 1")
-                .child("Transaksi 1")
+        database1.child(GlobalVariabel.Toko)
+                .child(GlobalVariabel.Transaksi)
                 .child(timestamp)
                 .setValue(meminta);
 
         // DATA TOTAL PEMBAYARAN TABEL TRANSAKSI 1
-        database1.child("TOKO 1")
-                .child("Transaksi 1")
+        database1.child(GlobalVariabel.Toko)
+                .child(GlobalVariabel.Transaksi)
                 .child("zzzzzzzzz").child("total")
                 .setValue(udtr);
 
-        database1.child("TOKO 1")
-                .child("Log")
+        database1.child(GlobalVariabel.Toko)
+                .child(GlobalVariabel.Log)
                 .child(timestamp)
                 .setValue(log);
 
@@ -378,7 +378,7 @@ public class TransaksiKaryawanFragment extends Fragment{
 
     // FUNGSI MENDAPATKAN NILAI TOTAL TRANSAKSI DARI TABEL TRANSAKSI
     private void ambiltotal(){
-        database = FirebaseDatabase.getInstance().getReference().child("TOKO 1").child("Transaksi 1").child("zzzzzzzzz").child("total");
+        database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.Transaksi).child("zzzzzzzzz").child("total");
         database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {

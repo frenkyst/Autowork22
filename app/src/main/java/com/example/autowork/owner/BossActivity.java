@@ -1,5 +1,6 @@
 package com.example.autowork.owner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -14,17 +15,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.autowork.GlobalVariabel;
 import com.example.autowork.R;
+import com.example.autowork.kasir.KasirActivity;
 
 public class BossActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static String FragmentVar="HomeBossFragment",
-    uid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Home");
         setContentView(R.layout.activity_boss);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -44,23 +47,20 @@ public class BossActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        if (FragmentVar.equals("HomeBossFragment")) {
-            home();
-        }
-        else if (FragmentVar.equals("DetailuserBossFragment")){
+        HomeBossFragment fragment = new HomeBossFragment();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frameboss, fragment);
+        fragmentTransaction.commit();
 
-            detailUser();
-        }
 
-//        public void (){
-//
-//        }
 
 
     }
 
     @Override
     public void onBackPressed() {
+
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -85,6 +85,7 @@ public class BossActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            finish();
             return true;
         }
 
@@ -98,16 +99,12 @@ public class BossActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-           home();
+
         } else if (id == R.id.nav_karyawan) {
 
         } else if (id == R.id.nav_kasir) {
 
         } else if (id == R.id.nav_baru) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
 
         }
 
@@ -118,20 +115,8 @@ public class BossActivity extends AppCompatActivity
 
 
 
-    public void detailUser(){
-        DetailuserBossFragment fragment = new DetailuserBossFragment();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frameboss, fragment);
-        fragmentTransaction.commit();
 
 
-    }
 
-    public void home(){
-        HomeBossFragment fragment = new HomeBossFragment();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frameboss, fragment);
-        fragmentTransaction.commit();
-    }
 
 }

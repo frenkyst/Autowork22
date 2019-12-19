@@ -140,8 +140,8 @@ public class UpdatestokdataFragment extends Fragment {
 
     // PROSES PUSH DATA KE FIREBASE
     private void editUser(LogHistory log, String id, String ud) {
-        database1.child("TOKO 1")
-                .child("Gudang 0")
+        database1.child(GlobalVariabel.Toko)
+                .child(GlobalVariabel.Gudang)
                 .child(id)
                 .child("jml")
                 .setValue(ud);
@@ -150,7 +150,7 @@ public class UpdatestokdataFragment extends Fragment {
         Long timestampl = System.currentTimeMillis()/1000;
         String timestamp = timestampl.toString();
 
-        database1.child("TOKO 1")
+        database1.child(GlobalVariabel.Toko)
                 .child("Log")
                 .child(timestamp)
                 .setValue(log);
@@ -177,7 +177,7 @@ public class UpdatestokdataFragment extends Fragment {
             String etBarkod1 = etBarkod.getText().toString();
             etBarkod1.toLowerCase();
 
-            database = FirebaseDatabase.getInstance().getReference().child("TOKO 1").child("Gudang 0").child(etBarkod1);
+            database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.Gudang).child(etBarkod1);
             database.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

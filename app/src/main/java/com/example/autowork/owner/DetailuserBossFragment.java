@@ -36,15 +36,17 @@ public class DetailuserBossFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        BossActivity.FragmentVar="HomeBossFragment";
-
-
+        GlobalVariabel.VarFragmen="HomeBossFragment";
 
         View v = inflater.inflate(R.layout.fragment_detailuser_boss, container, false);
 
         tvNama = v.findViewById(R.id.tv_nama1);
         tvEmail = v.findViewById(R.id.tv_email1);
         tvStatus = v.findViewById(R.id.tv_status1);
+
+
+
+
 
 
         mengambil();
@@ -58,16 +60,14 @@ public class DetailuserBossFragment extends Fragment {
         v.findViewById(R.id.btn_karyawan).setOnClickListener((view) -> {
 
 
-            database = FirebaseDatabase.getInstance().getReference();
-            database.child(GlobalVariabel.Toko)
-                    .child(GlobalVariabel.UserMan)
-                    .child(BossActivity.uid)
-                    .child("status")
-                    .setValue("Karyawan");
+            submit("Karyawan",
+                    "Ya");
+            remove("Kasir");
+            remove("PHK");
 
             mengambil();
 
-            Toast.makeText(getActivity(), "Sukses??",
+            Toast.makeText(getActivity(), "Sukses Karyawan??",
                     Toast.LENGTH_SHORT).show();
 
         });
@@ -75,10 +75,32 @@ public class DetailuserBossFragment extends Fragment {
         // TOMBOL ANGKAT KASIR DAN FUNGSI
         v.findViewById(R.id.btn_kasir).setOnClickListener((view) -> {
 
+            remove("Karyawan");
+            submit("Kasir",
+                    "Ya");
+            remove("PHK");
+
+            mengambil();
+
+            Toast.makeText(getActivity(), "Sukses Kasir??",
+                    Toast.LENGTH_SHORT).show();
+
         });
 
         // TOMBOL ANGKAT PHK DAN FUNGSI
         v.findViewById(R.id.btn_phk).setOnClickListener((view) -> {
+
+
+            remove("Karyawan");
+            remove("Kasir");
+            submit("PHK",
+                    "Ya");
+
+            mengambil();
+
+            Toast.makeText(getActivity(), "Sukses PHK??",
+                    Toast.LENGTH_SHORT).show();
+
 
         });
 
@@ -88,13 +110,23 @@ public class DetailuserBossFragment extends Fragment {
     }
 
     public void mengambil(){
-        database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.UserMan).child(BossActivity.uid);
+        database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.UserMan).child(GlobalVariabel.uid);
         database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String nama = dataSnapshot.child("nama").getValue(String.class);
                 String email = dataSnapshot.child("email").getValue(String.class);
-                String status = dataSnapshot.child("status").getValue(String.class);
+//                String status = dataSnapshot.child("status").getValue(String.class);
+                String status = null;
+
+                if(dataSnapshot.child("Karyawan").exists()){
+                    status = "Karyawan";
+                } else if(dataSnapshot.child("Kasir").exists()){
+                    status = "Kasir";
+                } else if(dataSnapshot.child("PHK").exists()){
+                    status = "PHK";
+                }
+
 
                 tvNama.setText(nama);
                 tvEmail.setText(email);
@@ -111,5 +143,24 @@ public class DetailuserBossFragment extends Fragment {
             }
         });
     }
+
+    public void submit(String status, String value){
+        database = FirebaseDatabase.getInstance().getReference();
+        database.child(GlobalVariabel.Toko)
+                .child(GlobalVariabel.UserMan)
+                .child(GlobalVariabel.uid)
+                .child(status)
+                .setValue(value);
+    }
+
+    public void remove(String status){
+        database = FirebaseDatabase.getInstance().getReference();
+        database.child(GlobalVariabel.Toko)
+                .child(GlobalVariabel.UserMan)
+                .child(GlobalVariabel.uid)
+                .child(status)
+                .removeValue();
+    }
+
 
 }

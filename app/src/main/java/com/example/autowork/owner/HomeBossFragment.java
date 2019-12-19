@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.autowork.GlobalVariabel;
 import com.example.autowork.R;
 import com.example.autowork.adapter.MemintaUserManboss;
 import com.example.autowork.model.UserMan;
@@ -47,6 +48,7 @@ public class HomeBossFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home_boss, container, false);
 
 
+
         database = FirebaseDatabase.getInstance().getReference();
 
         rc_list_request = v.findViewById(R.id.rc_list_request);
@@ -62,7 +64,7 @@ public class HomeBossFragment extends Fragment {
                 true,
                 false);
 
-        database.child("TOKO 1").child("UserMan").addValueEventListener(new ValueEventListener() {
+        database.child(GlobalVariabel.Toko).child(GlobalVariabel.UserMan).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

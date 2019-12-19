@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.autowork.kasir.KasirActivity;
 import com.example.autowork.model.UserMan;
+import com.example.autowork.owner.BossActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -23,8 +24,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -88,8 +92,10 @@ public class LoginActivity extends AppCompatActivity {
         //and take the user to profile activity
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
-            finish();
-//            startActivity(new Intent(this,MainActivity.class));
+
+            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
+            findViewById(R.id.loadingLogin).setVisibility(View.VISIBLE);
+
             UserMan();
 
 
@@ -171,20 +177,80 @@ public class LoginActivity extends AppCompatActivity {
             String email = user.getEmail();
             String uid = user.getUid();
 
-            submit(new UserMan(
-                            name,
-                            email.toLowerCase(),
-                            uid),
-                    uid
-            );
 
 
-            if (email.equals("fs75614011@gmail.com")) {
+            database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.UserMan).child(uid);
+            database.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    String uid1 =(dataSnapshot.child("uid").getValue().toString());
+//                    String status1 = String.valueOf((dataSnapshot.child("status").getValue()));
 
-                startActivity(new Intent(this,KasirActivity.class));
+                    if (dataSnapshot.child("uid").exists()) {
 
-            }
-            Toast.makeText(LoginActivity.this, name+"  "+uid+"  "+email, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "  CEK ?  ", Toast.LENGTH_SHORT).show();
+
+                        if (dataSnapshot.child("BOSS").exists()){
+
+                            confim("BOSS");
+
+                        } else if (dataSnapshot.child("Karyawan").exists()){
+
+                            confim("Karyawan");
+
+                        } else if (dataSnapshot.child("Kasir").exists()){
+
+                            confim("Kasir");
+
+                        } else {
+
+                            findViewById(R.id.loadingLogin).setVisibility(View.INVISIBLE);
+                            findViewById(R.id.belumTerdaftar).setVisibility(View.VISIBLE);
+
+
+
+                        }
+
+//                        confim();
+
+                    } else {
+
+                        submit(new UserMan(
+                                        name,
+                                        email.toLowerCase(),
+                                        uid),
+                                uid
+                        );
+
+                        UserMan();
+
+                        Toast.makeText(LoginActivity.this, "  Register ?  ", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(LoginActivity.this, "  CEK eror ?  ", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+
+//            submit(new UserMan(
+//                            name,
+//                            email.toLowerCase(),
+//                            uid),
+//                    uid
+//            );
+//
+//
+//            if (email.equals("fs75614011@gmail.com")) {
+//
+//                startActivity(new Intent(this,KasirActivity.class));
+//
+//            }
+//            Toast.makeText(LoginActivity.this, name+"  "+uid+"  "+email, Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -192,13 +258,28 @@ public class LoginActivity extends AppCompatActivity {
 
     private void submit(UserMan userman, String uid) {
         database = FirebaseDatabase.getInstance().getReference();
-        database.child("TOKO 1")
-                .child("UserMan")
+        database.child(GlobalVariabel.Toko)
+                .child(GlobalVariabel.UserMan)
                 .child(uid)
                 .setValue(userman);
 
         Toast.makeText(LoginActivity.this, "input data user",
                 Toast.LENGTH_SHORT).show();
+    }
+
+    private void confim(String select){
+
+        if (select.equals("BOSS")){
+            startActivity(new Intent(this, BossActivity.class));
+        } else if (select.equals("Karyawan")){
+            startActivity(new Intent(this, MainActivity.class));
+        } else if (select.equals("Kasir")){
+            startActivity(new Intent(this, KasirActivity.class));
+        }
+
+        finish();
+
+
     }
 
 }
