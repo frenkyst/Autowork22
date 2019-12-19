@@ -21,6 +21,7 @@ import com.example.autowork.HomeKaryawanFragment;
 import com.example.autowork.MainActivity;
 import com.example.autowork.R;
 import com.example.autowork.owner.BossActivity;
+import com.example.autowork.owner.DetailUserActivity;
 
 public class KasirActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -47,7 +48,7 @@ public class KasirActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        HomeKasirFragment fragment = new HomeKasirFragment();
+        DetailBayarFragment fragment = new DetailBayarFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.framekasir, fragment);
         fragmentTransaction.commit();
