@@ -73,7 +73,7 @@ public class DetailBayarFragment extends Fragment {
                 true,
                 false);
 
-        database.child(GlobalVariabel.Toko).child(GlobalVariabel.Transaksi).addValueEventListener(new ValueEventListener() {
+        database.child(GlobalVariabel.Toko).child(GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -81,7 +81,7 @@ public class DetailBayarFragment extends Fragment {
                  * Saat ada data baru, masukkan datanya ke ArrayList
                  */
                 daftarReq = new ArrayList<>();
-                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+                for (DataSnapshot noteDataSnapshot : dataSnapshot.child("transaksi").getChildren()) {
                     /**
                      * Mapping data pada DataSnapshot ke dalam object Wisata
                      * Dan juga menyimpan primary key pada object Wisata
@@ -98,7 +98,7 @@ public class DetailBayarFragment extends Fragment {
 
                     //=========================================================================================================
                     // MENAMPILKAN TOTAL HARGA KESELURUHAN
-                    String totalbayar = dataSnapshot.child("zzzzzzzzz").child("total").getValue().toString();
+                    String totalbayar = dataSnapshot.child("total").getValue().toString();
 
                     tv_totalBayar.setText("Rp. "+totalbayar);
                     //==========================================================================================================
@@ -132,7 +132,7 @@ public class DetailBayarFragment extends Fragment {
             String timestamp = timestampl.toString(), nama;
 //            String childKasir = GlobalVariabel.Toko+"/"+GlobalVariabel.Kasir+"/"+timestamp;
 
-            fromPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi);
+            fromPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid);
             toPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.Kasir+"/"+timestamp);
 //            totalTopath = FirebaseDatabase.getInstance().getReference(childKasir+"/zzzzzzzzz");
 

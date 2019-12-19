@@ -70,7 +70,7 @@ public class MemintaUserManboss extends RecyclerView.Adapter<MemintaUserManboss.
 //                BossActivity.FragmentVar="DetailuserBossFragment";
 
                 GlobalVariabel.uid = movie.getUid();
-                GlobalVariabel.VarFragmen="DetailuserBossFragment";
+//                GlobalVariabel.VarFragmen="DetailuserBossFragment";
 
                 Intent intent = new Intent(mActivity, DetailUserActivity.class);
 

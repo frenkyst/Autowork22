@@ -93,23 +93,26 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             // Handle the camera action
+            HomeKaryawanFragment fragment = new HomeKaryawanFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frameawal, fragment);
+            fragmentTransaction.commit();
+        } else if (id == R.id.nav_stokBaru) {
             TambahDataFragment fragment = new TambahDataFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frameawal, fragment);
             fragmentTransaction.commit();
-        } else if (id == R.id.nav_gallery) {
-            TransaksiKaryawanFragment fragment = new TransaksiKaryawanFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frameawal, fragment);
-            fragmentTransaction.commit();
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_menambahStok) {
             UpdatestokdataFragment fragment = new UpdatestokdataFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frameawal, fragment);
             fragmentTransaction.commit();
-        } else if (id == R.id.nav_tools) {
-
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_transaksi) {
+            TransaksiKaryawanFragment fragment = new TransaksiKaryawanFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frameawal, fragment);
+            fragmentTransaction.commit();
+        } else if (id == R.id.nav_lihatTransaksi) {
 
         } else if (id == R.id.nav_send) {
             startActivity(new Intent(this, KasirActivity.class));

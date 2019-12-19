@@ -9,11 +9,11 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_stokBaru"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Stok Baru" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_menambahStok"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Menambah Stok" />
 
@@ -22,11 +22,11 @@
     <item android:title="Communicate">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_transaksi"
                 android:icon="@drawable/ic_menu_share"
                 android:title="Transaksi Penjualan" />
             <item
-                android:id="@+id/nav_tools"
+                android:id="@+id/nav_lihatTransaksi"
                 android:icon="@drawable/ic_menu_manage"
                 android:title="Lihat Transaksi" />
             <item
