@@ -95,9 +95,12 @@ public class HomeKasirFragment extends Fragment {
                      */
                     daftarReq.add(requests);
 
+                    //=========================================================================================================
+                    // MENAMPILKAN TOTAL HARGA KESELURUHAN
                     String totalbayar = dataSnapshot.child("zzzzzzzzz").child("total").getValue().toString();
 
                     tv_totalBayar.setText("Rp. "+totalbayar);
+                    //==========================================================================================================
                 }
 
                 /**
@@ -122,6 +125,11 @@ public class HomeKasirFragment extends Fragment {
         });
 
 
+        v.findViewById(R.id.btn_bayar).setOnClickListener((view) -> {
+
+
+
+        });
 
 
 //        database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.Transaksi);
