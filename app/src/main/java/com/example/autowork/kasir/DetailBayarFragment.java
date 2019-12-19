@@ -53,7 +53,7 @@ public class DetailBayarFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_home_kasir, container, false);
+        View v = inflater.inflate(R.layout.fragment_detail_bayar, container, false);
 
 
         database = FirebaseDatabase.getInstance().getReference();
