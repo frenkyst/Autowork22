@@ -21,6 +21,8 @@ import com.example.autowork.adapter.MemintaTransaksikasir;
 import com.example.autowork.model.Meminta;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,7 +41,7 @@ public class HomeKasirFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private DatabaseReference database, fromPath, toPath;
+    private DatabaseReference database, fromPath, toPath, totalTopath;
 
     private ArrayList<Meminta> daftarReq;
     private MemintaTransaksikasir memintatransaksikasir;
@@ -129,10 +131,24 @@ public class HomeKasirFragment extends Fragment {
 
         v.findViewById(R.id.btn_bayar).setOnClickListener((view) -> {
 
-            fromPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi);
-            toPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.Kasir);
+            Long timestampl = System.currentTimeMillis()/1000;
+            String timestamp = timestampl.toString(), nama;
+//            String childKasir = GlobalVariabel.Toko+"/"+GlobalVariabel.Kasir+"/"+timestamp;
 
-            copyRecord(fromPath,toPath);
+            fromPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi);
+            toPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.Kasir+"/"+timestamp);
+//            totalTopath = FirebaseDatabase.getInstance().getReference(childKasir+"/zzzzzzzzz");
+
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user != null) {
+                // Name, email address, and profile photo Url
+                String name = user.getDisplayName();
+
+                copyRecord(fromPath,toPath,name,timestamp);
+            }
+
+
+
 
 
 
@@ -169,21 +185,26 @@ public class HomeKasirFragment extends Fragment {
 
 
 
-    public void copyRecord(DatabaseReference fromPath, final DatabaseReference toPath) {
+    public void copyRecord(DatabaseReference fromPath, final DatabaseReference toPath, String nama, String timeStamp) {
         fromPath.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                toPath.setValue(dataSnapshot.getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                toPath.child("detail").setValue(dataSnapshot.getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isComplete()) {
-                            fromPath.removeValue();
+//                            fromPath.removeValue();
                             Toast.makeText(getActivity(), "copy sukses", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(getActivity(), "copy failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+//                totalTopath.setValue(dataSnapshot.child("zzzzzzzzz").getValue());
+                toPath.child("detail").child("zzzzzzzzz").setValue(dataSnapshot.child("zzzzzzzzz").getValue());
+                toPath.child("totalTransaksi").setValue(dataSnapshot.child("zzzzzzzzz").child("total").getValue());
+                toPath.child("namaKasir").setValue(nama);
+                toPath.child("kodeTransaksi").setValue(timeStamp);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
