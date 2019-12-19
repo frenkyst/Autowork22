@@ -117,11 +117,11 @@ public class UpdatestokdataFragment extends Fragment {
 
 
                 editUser(new LogHistory(
-                                Sbarkod.toLowerCase(),
-                                Snama.toLowerCase(),
-                                Sjml.toLowerCase(),logapa), //IKI VARIABEL CLAS LOGHISTORY
+                                Sbarkod,
+                                Snama,
+                                Sjml,logapa), //IKI VARIABEL CLAS LOGHISTORY
 
-                        Sbarkod.toLowerCase(), Sjmlplus.toLowerCase()); //jmlud DARI  PENJUMLAHAN SETELAH MENGISI INPUT TEXT JML (BUTTON BARKODE)
+                        Sbarkod, Sjmlplus); //jmlud DARI  PENJUMLAHAN SETELAH MENGISI INPUT TEXT JML (BUTTON BARKODE)
 
                 etBarkod.setEnabled(true);
                 etBarkod.setText("");
@@ -175,7 +175,7 @@ public class UpdatestokdataFragment extends Fragment {
         } else {
 
             String etBarkod1 = etBarkod.getText().toString();
-            etBarkod1.toLowerCase();
+//            etBarkod1.toLowerCase();
 
             database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.Gudang).child(etBarkod1);
             database.addListenerForSingleValueEvent(new ValueEventListener() {

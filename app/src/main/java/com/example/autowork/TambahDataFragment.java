@@ -90,15 +90,15 @@ public class TambahDataFragment extends Fragment {
 
 
                 submit(new Meminta(
-                        Sbarkod.toLowerCase(),
-                        Snama.toLowerCase(),
-                        Sjml.toLowerCase(),
-                        Shrgawal.toLowerCase(),
-                        Shrgjual.toLowerCase()),
+                        Sbarkod,
+                        Snama,
+                        Sjml,
+                        Shrgawal,
+                        Shrgjual),
                         new LogHistory(
-                                Sbarkod.toLowerCase(),
-                                Snama.toLowerCase(),
-                                Sjml.toLowerCase(), logapa),
+                                Sbarkod,
+                                Snama,
+                                Sjml, logapa),
                         Sbarkod);
 
             }

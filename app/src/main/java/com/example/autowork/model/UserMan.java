@@ -6,6 +6,7 @@ public class UserMan {
     private String email;
     private String key;
     private String uid;
+//    private String total;
 
 
     public UserMan(String nama, String email, String key, String uid) {

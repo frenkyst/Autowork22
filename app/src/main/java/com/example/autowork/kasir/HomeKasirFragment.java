@@ -19,6 +19,7 @@ import com.example.autowork.R;
 import com.example.autowork.adapter.MemintaTransaksi;
 import com.example.autowork.adapter.MemintaTransaksikasir;
 import com.example.autowork.model.Meminta;
+import com.example.autowork.model.Transaksi;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,7 +44,7 @@ public class HomeKasirFragment extends Fragment {
 
     private DatabaseReference database, fromPath, toPath;
 
-    private ArrayList<Meminta> daftarReq;
+    private ArrayList<Transaksi> daftarReq;
     private MemintaTransaksi memintatransaksi;
 
     private RecyclerView rc_list_request;
@@ -88,7 +89,7 @@ public class HomeKasirFragment extends Fragment {
                      * Dan juga menyimpan primary key pada object Wisata
                      * untuk keperluan Edit dan Delete data
                      */
-                    Meminta requests = noteDataSnapshot.getValue(Meminta.class);
+                    Transaksi requests = noteDataSnapshot.getValue(Transaksi.class);
                     requests.setKey(noteDataSnapshot.getKey());
 
                     /**

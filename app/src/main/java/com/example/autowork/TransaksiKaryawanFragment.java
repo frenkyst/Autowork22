@@ -188,17 +188,17 @@ public class TransaksiKaryawanFragment extends Fragment{
                 // end UPDATE TOTAL PEMBAYARAN PADA TABEL TRANSAKSI 1 =========================
 
                 inputDatabase(new Meminta(
-                                Sbarkod.toLowerCase(),
-                                Snama.toLowerCase(),
-                                Sjml.toLowerCase(),
-                                Stotal.toLowerCase()), //IKI VARIABEL MEMINTA || DATA TRANSAKSI BARANG
+                                Sbarkod,
+                                Snama,
+                                Sjml,
+                                Stotal), //IKI VARIABEL MEMINTA || DATA TRANSAKSI BARANG
 
                         new LogHistory(
-                                Sbarkod.toLowerCase(),
-                                Snama.toLowerCase(),
-                                Sjml.toLowerCase(),logapa), // IKI LOG KELUAR MASUK TRANSAKSI KARYAWAN
+                                Sbarkod,
+                                Snama,
+                                Sjml,logapa), // IKI LOG KELUAR MASUK TRANSAKSI KARYAWAN
 
-                        Sbarkod.toLowerCase(), jmlud, //jmlud DARI  PENJUMLAHAN SETELAH MENGISI INPUT TEXT JML (BUTTON BARKODE)
+                        Sbarkod, jmlud, //jmlud DARI  PENJUMLAHAN SETELAH MENGISI INPUT TEXT JML (BUTTON BARKODE)
                         totalUTS); // HASIL TOTAL PEMBAYARAN
 
                 etBarkod.setEnabled(true);
@@ -234,7 +234,7 @@ public class TransaksiKaryawanFragment extends Fragment{
         } else {
 
             String etBarkod1 = etBarkod.getText().toString();
-            etBarkod1.toLowerCase();
+//            etBarkod1.toLowerCase();
 
             database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.Gudang).child(etBarkod1);
             database.addListenerForSingleValueEvent(new ValueEventListener() {

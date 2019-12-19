@@ -12,12 +12,13 @@ import android.widget.TextView;
 
 import com.example.autowork.R;
 import com.example.autowork.model.Meminta;
+import com.example.autowork.model.Transaksi;
 
 import java.util.List;
 
 public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyViewHolder> {
 
-    private List<Meminta> moviesList;
+    private List<Transaksi> moviesList;
     private Activity mActivity;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -27,14 +28,14 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
         public MyViewHolder(View view) {
             super(view);
             rl_layouttransaksi = view.findViewById(R.id.rl_layout);
-            tv_nama = view.findViewById(R.id.tv_nama);
-            tv_total = view.findViewById(R.id.tv_total);
+            tv_nama = view.findViewById(R.id.tv_namakaryawan);
+            tv_total = view.findViewById(R.id.tv_totalkaryawan);
 
             tv_taptransaksi = view.findViewById(R.id.tv_taptransaksi);
         }
     }
 
-    public MemintaTransaksi(List<Meminta> moviesList, Activity activity) {
+    public MemintaTransaksi(List<Transaksi> moviesList, Activity activity) {
         this.moviesList = moviesList;
         this.mActivity = activity;
     }
@@ -52,12 +53,12 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
 
     @Override
     public void onBindViewHolder(MemintaTransaksi.MyViewHolder holder, final int position) {
-        final Meminta movie = moviesList.get(position);
+        final Transaksi movie = moviesList.get(position);
 
-        holder.tv_nama.setText(movie.getNama());
+        holder.tv_nama.setText(movie.getNamakaryawan());
         holder.tv_total.setText(movie.getTotal());
 //        holder.tv_totalBayar.setText(movie.getTotal());
-        holder.tv_taptransaksi.setText(" ");
+//        holder.tv_taptransaksi.setText(movie.getUid());
 
 
         holder.tv_taptransaksi.setOnClickListener( new View.OnClickListener() {
