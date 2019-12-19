@@ -19,6 +19,8 @@ import com.example.autowork.GlobalVariabel;
 import com.example.autowork.R;
 import com.example.autowork.adapter.MemintaTransaksikasir;
 import com.example.autowork.model.Meminta;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,7 +39,7 @@ public class HomeKasirFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private DatabaseReference database;
+    private DatabaseReference database, fromPath, toPath;
 
     private ArrayList<Meminta> daftarReq;
     private MemintaTransaksikasir memintatransaksikasir;
@@ -127,6 +129,14 @@ public class HomeKasirFragment extends Fragment {
 
         v.findViewById(R.id.btn_bayar).setOnClickListener((view) -> {
 
+            fromPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi);
+            toPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.Kasir);
+
+            copyRecord(fromPath,toPath);
+
+
+
+
 
 
         });
@@ -154,5 +164,32 @@ public class HomeKasirFragment extends Fragment {
         return v;
     }
 
+
+
+
+
+
+    public void copyRecord(DatabaseReference fromPath, final DatabaseReference toPath) {
+        fromPath.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                toPath.setValue(dataSnapshot.getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isComplete()) {
+                            fromPath.removeValue();
+                            Toast.makeText(getActivity(), "copy sukses", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getActivity(), "copy failed", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 }
