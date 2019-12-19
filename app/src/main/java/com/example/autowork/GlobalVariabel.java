@@ -6,6 +6,7 @@ public class GlobalVariabel {
             Gudang = "Gudang 2",
             Log = "Log 2",
             Transaksi = "Transaksi 2",
+    Kasir = "Kasir 2",
             UserMan = "UserMan 2";
 
 
