@@ -2,7 +2,7 @@ package com.example.autowork.model;
 
 public class Transaksi {
 
-    private String namakaryawan;
+    private String namaKaryawan;
     private String total;
     private String uid;
     private String key;
@@ -10,8 +10,8 @@ public class Transaksi {
     public Transaksi(){ }
 
 
-    public Transaksi(String namakaryawan, String total, String uid, String key) {
-        this.namakaryawan = namakaryawan;
+    public Transaksi(String namaKaryawan, String total, String uid, String key) {
+        this.namaKaryawan = namaKaryawan;
         this.total = total;
         this.uid = uid;
         this.key = key;
@@ -19,11 +19,11 @@ public class Transaksi {
 
 
     public String getNamakaryawan() {
-        return namakaryawan;
+        return namaKaryawan;
     }
 
     public void setNamakaryawan(String namakaryawan) {
-        this.namakaryawan = namakaryawan;
+        this.namaKaryawan = namaKaryawan;
     }
 
     public String getTotal() {
@@ -56,7 +56,7 @@ public class Transaksi {
 
     @Override
     public String toString() {
-        return  " "+namakaryawan+"\n" +
+        return  " "+namaKaryawan+"\n" +
                 " "+total+"\n" +
                 " "+uid;
 

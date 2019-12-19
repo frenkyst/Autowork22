@@ -151,7 +151,7 @@ public class UpdatestokdataFragment extends Fragment {
         String timestamp = timestampl.toString();
 
         database1.child(GlobalVariabel.Toko)
-                .child("Log")
+                .child(GlobalVariabel.Log)
                 .child(timestamp)
                 .setValue(log);
 
