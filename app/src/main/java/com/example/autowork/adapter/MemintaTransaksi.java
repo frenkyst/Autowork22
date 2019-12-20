@@ -66,7 +66,7 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
         final Transaksi movie = moviesList.get(position);
 
         holder.tv_nama.setText(movie.getNamakaryawan());
-        holder.tv_total.setText(movie.getTotal());
+        holder.tv_total.setText(movie.getTotalTransaksi());
 //        holder.tv_totalBayar.setText(movie.getTotal());
         holder.tv_taptransaksi.setText(movie.getUid());
 
