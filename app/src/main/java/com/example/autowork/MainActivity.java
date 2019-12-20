@@ -20,6 +20,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
 import com.example.autowork.adapter.MemintaTransaksikasir;
+import com.example.autowork.kasir.DetailBayarFragment;
 import com.example.autowork.kasir.HomeKasirFragment;
 import com.example.autowork.kasir.KasirActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -28,6 +29,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -137,6 +139,22 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.frameawal, fragment);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_lihatTransaksi) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user != null) {
+                // Name, email address, and profile photo Url
+//                String name = user.getDisplayName();
+//                String email = user.getEmail();
+                String uid = user.getUid();
+
+                GlobalVariabel.uid = uid;
+                GlobalVariabel.invisible = "ya";
+
+                DetailBayarFragment fragment = new DetailBayarFragment();
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.frameawal, fragment);
+                fragmentTransaction.commit();
+
+            }
 
         } else if (id == R.id.nav_send) {
             startActivity(new Intent(this, KasirActivity.class));

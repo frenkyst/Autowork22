@@ -55,6 +55,13 @@ public class DetailBayarFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_detail_bayar, container, false);
 
+        if(GlobalVariabel.invisible.equals("ya")){
+            v.findViewById(R.id.btn_bayar).setVisibility(View.INVISIBLE);
+        } else {
+            v.findViewById(R.id.btn_bayar).setVisibility(View.VISIBLE);
+        }
+
+
 
         database = FirebaseDatabase.getInstance().getReference();
         TextView tv_totalBayar;
@@ -98,7 +105,9 @@ public class DetailBayarFragment extends Fragment {
 
                     //=========================================================================================================
                     // MENAMPILKAN TOTAL HARGA KESELURUHAN
-                    String totalbayar = dataSnapshot.child("totalTransaksi").getValue().toString();
+                    String totalbayar = dataSnapshot.child("totalTransaksi").getValue(String.class);
+
+
 
                     tv_totalBayar.setText("Rp. "+totalbayar);
                     //==========================================================================================================

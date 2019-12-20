@@ -18,4 +18,12 @@ public class GlobalVariabel {
 
             ;
 
+    //VARIABEL KASIR
+    public static String
+    invisible= "null";
+
+
+
+    ;
+
 }

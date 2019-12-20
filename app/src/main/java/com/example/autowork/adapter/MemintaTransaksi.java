@@ -88,18 +88,7 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
                             case R.id.menu1:
                                 //handle menu1 click
                                 GlobalVariabel.uid = movie.getUid();
-//                                f_manager.beginTransaction()
-//                                        .replace(R.id.frameawal, new DetailBayarFragment())
-//                                        .commit();
-
-//                                HomeKasirFragment fragment = new HomeKasirFragment();
-//                                ((KasirActivity)context).getSupportFragmentManager().beginTransaction().replace(R.id.framekasir, fragment).addToBackStack(null).commit();
-
-//                                FragmentManager manager=((AppCompatActivity)context).getSupportFragmentManager();
-//                                FragmentTransaction Ft=manager.beginTransaction();
-//                                Ft.replace(R.id.framekasir,new DetailBayarFragment());
-//
-//                                Ft.commit();
+                                GlobalVariabel.invisible = "null";
 
                                 AppCompatActivity activity = (AppCompatActivity) view.getContext();
                                 Fragment myFragment = new DetailBayarFragment();
