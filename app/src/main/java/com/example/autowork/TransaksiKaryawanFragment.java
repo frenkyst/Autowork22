@@ -346,7 +346,7 @@ public class TransaksiKaryawanFragment extends Fragment{
             // DATA TOTAL PEMBAYARAN TABEL TRANSAKSI 1
             database1.child(GlobalVariabel.Toko)
                     .child(GlobalVariabel.Transaksi+"/"+uid)
-                    .child("totalTrasaksi")
+                    .child("totalTransaksi")
                     .setValue(udtr);
 
             database1.child(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi+"/"+uid)
@@ -403,7 +403,7 @@ public class TransaksiKaryawanFragment extends Fragment{
             // Name, email address, and profile photo Url
 //            String name = user.getDisplayName();
             String uid = user.getUid();
-            database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.Transaksi).child(uid).child("totalTrasaksi");
+            database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.Transaksi).child(uid).child("totalTransaksi");
             database.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {

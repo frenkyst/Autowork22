@@ -2,6 +2,7 @@ package com.example.autowork.kasir;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -18,10 +19,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
 import com.example.autowork.HomeKaryawanFragment;
+import com.example.autowork.LoginActivity;
 import com.example.autowork.MainActivity;
 import com.example.autowork.R;
 import com.example.autowork.owner.BossActivity;
 import com.example.autowork.owner.DetailUserActivity;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class KasirActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -80,6 +88,24 @@ public class KasirActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            GoogleSignInClient mGoogleSignInClient;
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(getString(R.string.default_web_client_id))
+                    .requestEmail()
+                    .build();
+            mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+            FirebaseAuth.getInstance().signOut();
+            // Google sign out
+            mGoogleSignInClient.signOut().addOnCompleteListener(this,
+                    new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            startActivity(new Intent(KasirActivity.this, LoginActivity.class));
+
+                        }
+                    });
+
             return true;
         }
 

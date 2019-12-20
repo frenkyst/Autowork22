@@ -98,7 +98,7 @@ public class DetailBayarFragment extends Fragment {
 
                     //=========================================================================================================
                     // MENAMPILKAN TOTAL HARGA KESELURUHAN
-                    String totalbayar = dataSnapshot.child("total").getValue().toString();
+                    String totalbayar = dataSnapshot.child("totalTransaksi").getValue().toString();
 
                     tv_totalBayar.setText("Rp. "+totalbayar);
                     //==========================================================================================================
@@ -181,7 +181,7 @@ public class DetailBayarFragment extends Fragment {
         fromPath.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                toPath.child("detail").setValue(dataSnapshot.getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                toPath.setValue(dataSnapshot.getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isComplete()) {
@@ -193,8 +193,8 @@ public class DetailBayarFragment extends Fragment {
                     }
                 });
 //                totalTopath.setValue(dataSnapshot.child("zzzzzzzzz").getValue());
-                toPath.child("detail").child("zzzzzzzzz").setValue(dataSnapshot.child("zzzzzzzzz").getValue());
-                toPath.child("totalTransaksi").setValue(dataSnapshot.child("zzzzzzzzz").child("total").getValue());
+//                toPath.child("detail").child("zzzzzzzzz").setValue(dataSnapshot.child("zzzzzzzzz").getValue());
+//                toPath.child("totalTransaksi").setValue(dataSnapshot.child("zzzzzzzzz").child("total").getValue());
                 toPath.child("namaKasir").setValue(nama);
                 toPath.child("kodeTransaksi").setValue(timeStamp);
             }
