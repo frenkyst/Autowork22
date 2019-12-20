@@ -69,8 +69,8 @@ public class TambahDataFragment extends Fragment {
 
         v.findViewById(R.id.btn_tambahbarang).setOnClickListener((view) -> {
 
-            database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.Gudang);
-            database.addListenerForSingleValueEvent(new ValueEventListener() {
+//            database = FirebaseDatabase.getInstance();
+            database.child(GlobalVariabel.Toko).child(GlobalVariabel.Gudang).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
