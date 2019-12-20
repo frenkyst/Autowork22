@@ -109,6 +109,7 @@ public class DetailuserBossFragment extends Fragment {
 
     }
 
+    // MENGAMBIL DETAIL USER DARI FIREBASE
     public void mengambil(){
         database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.UserMan).child(GlobalVariabel.uid);
         database.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -144,6 +145,8 @@ public class DetailuserBossFragment extends Fragment {
         });
     }
 
+    //============================================================================================= START
+    //FUNGSI UNTUK MENGUBAH STATUS (KARYAWAN/KASIR/PHK)
     public void submit(String status, String value){
         database = FirebaseDatabase.getInstance().getReference();
         database.child(GlobalVariabel.Toko)
@@ -153,6 +156,7 @@ public class DetailuserBossFragment extends Fragment {
                 .setValue(value);
     }
 
+    //JIKA STATUS DI RUBAH MAKA STATUS SEBELUMNYA AKAN DI HAPUS DENGAN FUNGSI BERIKUT
     public void remove(String status){
         database = FirebaseDatabase.getInstance().getReference();
         database.child(GlobalVariabel.Toko)
@@ -161,6 +165,8 @@ public class DetailuserBossFragment extends Fragment {
                 .child(status)
                 .removeValue();
     }
+
+    //============================================================================================= END
 
 
 }

@@ -1,7 +1,5 @@
 package com.example.autowork;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -103,6 +101,8 @@ public class MainActivity extends AppCompatActivity
 
                         }
                     });
+            finish();
+
             return true;
         }
 

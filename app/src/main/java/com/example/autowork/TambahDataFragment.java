@@ -3,6 +3,7 @@ package com.example.autowork;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,12 @@ import android.widget.Toast;
 
 import com.example.autowork.model.LogHistory;
 import com.example.autowork.model.Meminta;
+import com.example.autowork.model.UserMan;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 /**
@@ -64,44 +69,77 @@ public class TambahDataFragment extends Fragment {
 
         v.findViewById(R.id.btn_tambahbarang).setOnClickListener((view) -> {
 
-            String Sbarkod = etbarkod.getText().toString();
-            String Snama = etnama.getText().toString();
-            String Sjml = etjml.getText().toString();
-            String Shrgawal = ethrgawal.getText().toString();
-            String Shrgjual = ethrgjual.getText().toString();
-            String logapa  = "Barang Baru";
-
-            if (Sbarkod.equals("")) {
-                etbarkod.setError("Silahkan masukkan code");
-                etbarkod.requestFocus();
-            } else if (Snama.equals("")) {
-                etnama.setError("Silahkan masukkan nama");
-                etnama.requestFocus();
-            } else if (Sjml.equals("")) {
-                etjml.setError("Silahkan masukkan jumlah");
-                etjml.requestFocus();
-            } else if (Shrgawal.equals("")) {
-                ethrgawal.setError("Silahkan masukkan harga awal");
-                ethrgawal.requestFocus();
-            } else if (Shrgjual.equals("")) {
-                ethrgjual.setError("Silahkan masukkan harga jual");
-                ethrgjual.requestFocus();
-            } else {
+            database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.Gudang);
+            database.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
-                submit(new Meminta(
-                        Sbarkod,
-                        Snama,
-                        Sjml,
-                        Shrgawal,
-                        Shrgjual),
-                        new LogHistory(
-                                Sbarkod,
-                                Snama,
-                                Sjml, logapa),
-                        Sbarkod);
+                    String Sbarkod = etbarkod.getText().toString();
+                    String Snama = etnama.getText().toString();
+                    String Sjml = etjml.getText().toString();
+                    String Shrgawal = ethrgawal.getText().toString();
+                    String Shrgjual = ethrgjual.getText().toString();
+                    String logapa  = "Barang Baru";
 
-            }
+                    if (dataSnapshot.child(Sbarkod).exists()) {
+
+                        Toast.makeText(getActivity(), "Data yang anda masukan sudah ada di gudang silahkan lakukan update stok untuk mengubah stok", Toast.LENGTH_SHORT).show();
+
+
+
+
+                    } else {
+
+
+
+
+
+                        if (Sbarkod.equals("")) {
+                            etbarkod.setError("Silahkan masukkan code");
+                            etbarkod.requestFocus();
+                        } else if (Snama.equals("")) {
+                            etnama.setError("Silahkan masukkan nama");
+                            etnama.requestFocus();
+                        } else if (Sjml.equals("")) {
+                            etjml.setError("Silahkan masukkan jumlah");
+                            etjml.requestFocus();
+                        } else if (Shrgawal.equals("")) {
+                            ethrgawal.setError("Silahkan masukkan harga awal");
+                            ethrgawal.requestFocus();
+                        } else if (Shrgjual.equals("")) {
+                            ethrgjual.setError("Silahkan masukkan harga jual");
+                            ethrgjual.requestFocus();
+                        } else {
+
+
+                            submit(new Meminta(
+                                            Sbarkod,
+                                            Snama,
+                                            Sjml,
+                                            Shrgawal,
+                                            Shrgjual),
+                                    new LogHistory(
+                                            Sbarkod,
+                                            Snama,
+                                            Sjml, logapa),
+                                    Sbarkod);
+
+                        }
+
+
+
+                    }
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    Toast.makeText(getActivity(), "  CEK eror ?  ", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
 
         });
 

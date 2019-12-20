@@ -110,6 +110,8 @@ public class BossActivity extends AppCompatActivity
 
                         }
                     });
+            finish();
+
             return true;
         }
 

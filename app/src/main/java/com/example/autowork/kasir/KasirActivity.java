@@ -106,6 +106,7 @@ public class KasirActivity extends AppCompatActivity
 
                         }
                     });
+            finish();
 
             return true;
         }

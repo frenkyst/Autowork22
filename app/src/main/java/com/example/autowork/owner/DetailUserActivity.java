@@ -19,3 +19,7 @@ public class DetailUserActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 }
+
+//==================================================================================================
+// ACTIVITY UNTUK MENAMPILKAN FRAGMENT DetaiuserBossFragment
+//==================================================================================================
