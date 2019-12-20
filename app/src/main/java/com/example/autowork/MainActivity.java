@@ -19,9 +19,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
-import com.example.autowork.adapter.MemintaTransaksikasir;
 import com.example.autowork.kasir.DetailBayarFragment;
-import com.example.autowork.kasir.HomeKasirFragment;
 import com.example.autowork.kasir.KasirActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
