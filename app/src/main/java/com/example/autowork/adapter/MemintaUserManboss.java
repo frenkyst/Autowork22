@@ -60,7 +60,10 @@ public class MemintaUserManboss extends RecyclerView.Adapter<MemintaUserManboss.
 //        holder.ll_tapuserman.movie
 
 
-
+        /**
+         * =====================================================================(STAR)
+         * FUNGSI UNTUK MENAMPILKAN MENU POPUP MENUJU KE DETAIL SAAT ITEM DI PILIH
+         */
         holder.tv_tap.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,6 +83,9 @@ public class MemintaUserManboss extends RecyclerView.Adapter<MemintaUserManboss.
 
             }
         });
+        /**
+         * ====================================================================(END)
+         */
 
 //        holder.tv_nama.setOnClickListener(new View.OnClickListener() {
 //            @Override

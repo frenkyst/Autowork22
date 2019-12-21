@@ -39,6 +39,7 @@ public class MemintaView extends RecyclerView.Adapter<MemintaView.MyViewHolder> 
         this.mActivity = activity;
     }
 
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())

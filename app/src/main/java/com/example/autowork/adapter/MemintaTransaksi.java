@@ -71,6 +71,10 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
         holder.tv_taptransaksi.setText(movie.getUid());
 
 
+        /**
+         * ============================================================================================================================================(STAR)
+         * FUNGSI UNTUK MENAMPILKAN MENU POPUP MENUJU KE DETAIL SAAT ITEM DI PILIH
+         */
         holder.tv_taptransaksi.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,6 +118,9 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
 
             }
         });
+        /**
+         * ===============================================================================================================================================(END)
+         */
 
 
 
@@ -124,12 +131,5 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
         return moviesList.size();
     }
 
-    public FragmentManager f_manager;
-//    //in your constructor add FragmentManager
-//    public MemintaTransaksi(Context context, FragmentManager f_manager)
-//    {
-//        this.context = context;
-//        this.f_manager = f_manager;
-//    }
 
 }

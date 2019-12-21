@@ -66,7 +66,10 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
 //        holder.tv_totalBayar.setText(movie.getTotal());
         holder.tv_taptransaksi.setText(" ");
 
-
+        /**
+         * ==============================================================================(STAR)
+         * FUNGSI UNTUK MENAMPILKAN MENU POPUP MENUJU KE DETAIL SAAT ITEM DI PILIH
+         */
         holder.tv_taptransaksi.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,6 +105,9 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
 
             }
         });
+        /**
+         * ==============================================================================(END)
+         */
 
 
 
