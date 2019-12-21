@@ -103,14 +103,15 @@ public class DetailBayarFragment extends Fragment {
                      */
                     daftarReq.add(requests);
 
-                    //=========================================================================================================
-                    // MENAMPILKAN TOTAL HARGA KESELURUHAN
+                    /**
+                     * =============================================================================(STAR)
+                     * MENAMPILKAN TOTAL HARGA KESELURUHAN
+                     * */
                     String totalbayar = dataSnapshot.child("totalTransaksi").getValue(String.class);
-
-
-
                     tv_totalBayar.setText("Rp. "+totalbayar);
-                    //==========================================================================================================
+                    /**
+                     * =============================================================================(END)
+                     */
                 }
 
                 /**
@@ -135,6 +136,10 @@ public class DetailBayarFragment extends Fragment {
         });
 
 
+        /**
+         * ========================================================================================================================================(STAR)
+         *TOMBOL BAYAR UNTUK MELAKUKAN TRANSAKSI PEMBAYARAN OLEH KASIR
+         */
         v.findViewById(R.id.btn_bayar).setOnClickListener((view) -> {
 
             Long timestampl = System.currentTimeMillis()/1000;
@@ -142,7 +147,7 @@ public class DetailBayarFragment extends Fragment {
 //            String childKasir = GlobalVariabel.Toko+"/"+GlobalVariabel.Kasir+"/"+timestamp;
 
             fromPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid);
-            toPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.Kasir+"/"+timestamp);
+            toPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.NotaPembayaran+"/"+timestamp);
 //            totalTopath = FirebaseDatabase.getInstance().getReference(childKasir+"/zzzzzzzzz");
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -154,38 +159,25 @@ public class DetailBayarFragment extends Fragment {
             }
 
 
-
-
-
-
-
-
-
         });
+        /**
+         * ========================================================================================================================================(END)
+         *TOMBOL BAYAR UNTUK MELAKUKAN TRANSAKSI PEMBAYARAN OLEH KASIR
+         */
 
 
-//        database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.Transaksi);
-//        database.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//
-//                String totalbayar = dataSnapshot.child("zzzzzzzzz").getValue().toString();
-//                tv_totalBayar.setText(totalbayar);
-//
-//                Toast.makeText(getActivity(), "tes", Toast.LENGTH_SHORT).show();
-//
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
 
         return v;
     }
 
+    /**
+     *
+     * @description Memindahkan dataq transaksi ke notaPembayaran (firebase)
+     * @param fromPath key lokasi transaksi
+     * @param toPath key lokasi notaPembayaran
+     * @param nama nama kasir yang melakukan transaksi
+     * @param timeStamp waktu yang di konveersi ke angka
+     */
     public void copyRecord(DatabaseReference fromPath, final DatabaseReference toPath, String nama, String timeStamp) {
         fromPath.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -2,12 +2,13 @@ package com.example.autowork;
 
 public class GlobalVariabel {
     public static String
-            Toko = "TOKO 2",
-            Gudang = "Gudang 2",
-            Log = "Log 2",
-            Transaksi = "Transaksi 2",
-    Kasir = "Kasir 2",
-            UserMan = "UserMan 2";
+            UbahNo = "2",
+            Toko = "TOKO "+UbahNo,
+            Gudang = "Gudang "+UbahNo,
+            Log = "Log "+UbahNo,
+            Transaksi = "Transaksi "+UbahNo,
+    NotaPembayaran = "Nota Pembayaran "+UbahNo,
+            UserMan = "UserMan "+UbahNo;
 
 
     //VARIABEL BOSS
@@ -20,10 +21,13 @@ public class GlobalVariabel {
 
     //VARIABEL KASIR
     public static String
-    invisible= "null";
+    invisible= "null"
+
+
+            ;
 
 
 
-    ;
+
 
 }
