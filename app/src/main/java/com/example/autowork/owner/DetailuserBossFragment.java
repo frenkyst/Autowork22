@@ -44,19 +44,11 @@ public class DetailuserBossFragment extends Fragment {
         tvEmail = v.findViewById(R.id.tv_email1);
         tvStatus = v.findViewById(R.id.tv_status1);
 
-
-
-
-
-
         mengambil();
 
-
-
-
-
-
-        // TOMBOL ANGKAT KARYAWAN DAN FUNGSI
+        /**
+         * TOMBOL ANGKAT KARYAWAN DAN FUNGSI
+         */
         v.findViewById(R.id.btn_karyawan).setOnClickListener((view) -> {
 
 
@@ -72,7 +64,9 @@ public class DetailuserBossFragment extends Fragment {
 
         });
 
-        // TOMBOL ANGKAT KASIR DAN FUNGSI
+        /**
+         * TOMBOL ANGKAT KASIR DAN FUNGSI
+         */
         v.findViewById(R.id.btn_kasir).setOnClickListener((view) -> {
 
             remove("Karyawan");
@@ -87,7 +81,9 @@ public class DetailuserBossFragment extends Fragment {
 
         });
 
-        // TOMBOL ANGKAT PHK DAN FUNGSI
+        /**
+         * TOMBOL ANGKAT PHK DAN FUNGSI
+         */
         v.findViewById(R.id.btn_phk).setOnClickListener((view) -> {
 
 
@@ -109,7 +105,9 @@ public class DetailuserBossFragment extends Fragment {
 
     }
 
-    // MENGAMBIL DETAIL USER DARI FIREBASE
+    /**
+     * MENGAMBIL DETAIL USER DARI FIREBASE
+     */
     public void mengambil(){
         database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.UserMan).child(GlobalVariabel.uid);
         database.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -145,8 +143,13 @@ public class DetailuserBossFragment extends Fragment {
         });
     }
 
-    //============================================================================================= START
-    //FUNGSI UNTUK MENGUBAH STATUS (KARYAWAN/KASIR/PHK)
+    /**
+     * ============================================================================================= START
+     * FUNGSI UNTUK MENGUBAH STATUS (KARYAWAN/KASIR/PHK)
+     * @deprecated menginput data ke firebase berdasarkan param status
+     * @param status Karyawan/Kasir/PHK
+     * @param value nilai sembarang default = Ya
+     */
     public void submit(String status, String value){
         database = FirebaseDatabase.getInstance().getReference();
         database.child(GlobalVariabel.Toko)
@@ -156,7 +159,11 @@ public class DetailuserBossFragment extends Fragment {
                 .setValue(value);
     }
 
-    //JIKA STATUS DI RUBAH MAKA STATUS SEBELUMNYA AKAN DI HAPUS DENGAN FUNGSI BERIKUT
+    /**
+     * JIKA STATUS DI RUBAH MAKA STATUS SEBELUMNYA AKAN DI HAPUS DENGAN FUNGSI BERIKUT
+     * @deprecated menghapus data firebase berdasarkan param status
+     * @param status Karyawan/Kasir/PHK
+     */
     public void remove(String status){
         database = FirebaseDatabase.getInstance().getReference();
         database.child(GlobalVariabel.Toko)
@@ -165,8 +172,9 @@ public class DetailuserBossFragment extends Fragment {
                 .child(status)
                 .removeValue();
     }
-
-    //============================================================================================= END
+    /**
+     * ============================================================================================= END
+     */
 
 
 }
