@@ -32,21 +32,10 @@ public class TambahDataFragment extends Fragment {
         // Required empty public constructor
     }
 
-
-
-
-
-
-
-
-
     private DatabaseReference database;
     private EditText etbarkod, etnama, etjml, ethrgawal, ethrgjual;
-    private ProgressDialog loading;
-    private Button btn_tambahbarang, btn_cencel;
-
-
-
+//    private ProgressDialog loading;
+//    private Button btn_tambahbarang, btn_cencel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,10 +52,10 @@ public class TambahDataFragment extends Fragment {
         ethrgjual = v.findViewById(R.id.et_hrgjual);
 
 
-        //jajal = Integer.valueOf(jajal10);
-
-        //*/
-
+        /**
+         * ==========================================================================================================================================================================(STAR)
+         * TOMBOL PROSES INPUT DATA BARANG BARU KE FIREBASE
+         */
         v.findViewById(R.id.btn_tambahbarang).setOnClickListener((view) -> {
 
 //            database = FirebaseDatabase.getInstance();
@@ -86,14 +75,7 @@ public class TambahDataFragment extends Fragment {
 
                         Toast.makeText(getActivity(), "Data yang anda masukan sudah ada di gudang silahkan lakukan update stok untuk mengubah stok", Toast.LENGTH_SHORT).show();
 
-
-
-
                     } else {
-
-
-
-
 
                         if (Sbarkod.equals("")) {
                             etbarkod.setError("Silahkan masukkan code");
@@ -124,10 +106,7 @@ public class TambahDataFragment extends Fragment {
                                             Snama,
                                             Sjml, logapa),
                                     Sbarkod);
-
                         }
-
-
 
                     }
 
@@ -142,6 +121,10 @@ public class TambahDataFragment extends Fragment {
 
 
         });
+
+        /**
+         * ==========================================================================================================================================================================(END)
+         */
 
 
         // Inflate the layout for this fragment
@@ -162,9 +145,13 @@ public class TambahDataFragment extends Fragment {
     }
 
 
-
-
-
+    /**
+     * PROSES PUSH DATA KE FIREBASE
+     * @deprecated push data barang baru
+     * @param meminta data barang
+     * @param log data log barang
+     * @param id key lokasi penyimpanan sama dengan barkod
+     */
     private void submit(Meminta meminta, LogHistory log,String id) {
         database.child(GlobalVariabel.Toko)
                 .child(GlobalVariabel.Gudang)
@@ -175,6 +162,9 @@ public class TambahDataFragment extends Fragment {
         Long timestampl = System.currentTimeMillis()/1000;
         String timestamp = timestampl.toString();
 
+        /**
+         * PUSH DATA LOG
+         */
         database.child(GlobalVariabel.Toko)
                 .child(GlobalVariabel.Log)
                 .child(timestamp)
@@ -183,6 +173,9 @@ public class TambahDataFragment extends Fragment {
 
 //        loading.dismiss();
 
+        /**
+         * SET TEXTVIEW MEJADI KOSONG
+         */
         etbarkod.setText("");
         etnama.setText("");
         etjml.setText("");
@@ -191,6 +184,9 @@ public class TambahDataFragment extends Fragment {
 
         //View v = inflater.inflate(R.layout.fragment_in, container, false);
 
+        /**
+         * NOTIF DATA BERHASIL DI TAMBAHKAN KE FIREBASE
+         */
         Toast.makeText(getActivity(),
                 "Data Berhasil ditambahkan",
                 Toast.LENGTH_SHORT).show();
