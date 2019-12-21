@@ -10,38 +10,77 @@ tools:context=".kasir.NotaPembayaranFragment">
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/rl_layouttransaksi"
-        android:background="@color/viewfinder_border"
+        android:background="@color/warnaNota"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         >
 
+        <TextView
+            android:id="@+id/tv_kode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kode   : "
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_kodeTransaksi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/tv_kode"
+            android:text="-"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_nama1"
+            android:layout_below="@id/tv_kode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama : "
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tv_nama"
+            android:layout_toRightOf="@id/tv_nama1"
+            android:layout_alignBaseline="@+id/tv_nama1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:text="Nama"
-            android:textSize="16sp" />
+            android:text="-"
+            android:textSize="18sp"/>
 
         <TextView
-            android:id="@+id/tv_email"
+            android:id="@+id/tv_tanggal"
             android:layout_alignParentRight="true"
+            android:layout_alignBaseline="@id/tv_nama1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="100dp"
-            android:text="Email"
+            android:layout_marginRight="7dp"
+            android:text="00/00/0000    00:00"
 
-            android:textSize="16sp" />
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rc_list_request"
+            android:background="@color/warnaNota"
+            android:layout_marginTop="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:clipToPadding="false" />
+
+        <TextView
+            android:id="@+id/tv_totalnota"
+            android:background="@color/warnaNota1"
+            android:layout_marginTop="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/rc_list_request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="7dp"
+            android:text="Rp.-"
+            android:textSize="16sp"/>
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rc_list_request"
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
 
-        android:clipToPadding="false" />
 </FrameLayout>
