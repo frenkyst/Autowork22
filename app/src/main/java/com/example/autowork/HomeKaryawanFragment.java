@@ -32,8 +32,6 @@ public class HomeKaryawanFragment extends Fragment {
         // Required empty public constructor
     }
 
-
-
     private DatabaseReference database;
 
     private ArrayList<Meminta> daftarReq;
@@ -43,26 +41,11 @@ public class HomeKaryawanFragment extends Fragment {
     private ProgressDialog loading;
 
 
-
-
-
-
-
-
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View vi = inflater.inflate(R.layout.fragment_home_karyawan, container, false);
-
-
-
-
-
-
 
 
 

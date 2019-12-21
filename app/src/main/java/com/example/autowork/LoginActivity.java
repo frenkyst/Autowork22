@@ -168,7 +168,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    //PENGATURAN USERMANAGER KASIR DAN KARYAWAN AKAN DI APRROF OLEH OWNER ATAU ADMIN
+    /**
+     * =================================================================================================================================(STAR)
+     * PENGATURAN USERMANAGER KASIR DAN KARYAWAN AKAN DI APRROF OLEH OWNER ATAU ADMIN
+     */
     public void UserMan() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -255,7 +258,16 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * =================================================================================================================================(END)
+     */
 
+
+    /**
+     * @deprecated push data user ke firebase dari variabel userman
+     * @param userman data user
+     * @param uid key lokasi penyimpanan data
+     */
     private void submit(UserMan userman, String uid) {
         database = FirebaseDatabase.getInstance().getReference();
         database.child(GlobalVariabel.Toko)
@@ -267,6 +279,10 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * @deprecated menampilkan BossActivity/MainActivity/KasirActivity
+     * @param select BOSS/Karyawan/Kasir
+     */
     private void confim(String select){
 
         if (select.equals("BOSS")){
