@@ -29,7 +29,7 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
 
         public MyViewHolder(View view) {
             super(view);
-            rl_layouttransaksi = view.findViewById(R.id.rl_layout);
+            rl_layouttransaksi = view.findViewById(R.id.rl_layouttransaksi);
             tv_barkod = view.findViewById(R.id.tv_barkod);
             tv_nama = view.findViewById(R.id.tv_nama);
             tv_jml = view.findViewById(R.id.tv_jml);

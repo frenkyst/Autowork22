@@ -116,7 +116,7 @@ public class UpdatestokdataFragment extends Fragment {
             } else {
 
 
-                editUser(new LogHistory(
+               pushData(new LogHistory(
                                 Sbarkod,
                                 Snama,
                                 Sjml,logapa), //IKI VARIABEL CLAS LOGHISTORY
@@ -139,7 +139,7 @@ public class UpdatestokdataFragment extends Fragment {
     }
 
     // PROSES PUSH DATA KE FIREBASE
-    private void editUser(LogHistory log, String id, String ud) {
+    private void pushData(LogHistory log, String id, String ud) {
         database1.child(GlobalVariabel.Toko)
                 .child(GlobalVariabel.Gudang)
                 .child(id)
@@ -147,7 +147,7 @@ public class UpdatestokdataFragment extends Fragment {
                 .setValue(ud);
 
 
-        Long timestampl = System.currentTimeMillis()/1000;
+        Long timestampl = System.currentTimeMillis();
         String timestamp = timestampl.toString();
 
         database1.child(GlobalVariabel.Toko)

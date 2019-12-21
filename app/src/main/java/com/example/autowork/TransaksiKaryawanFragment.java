@@ -351,7 +351,7 @@ public class TransaksiKaryawanFragment extends Fragment{
                     .setValue(ud);
 
 
-            Long timestampl = System.currentTimeMillis()/1000;
+            Long timestampl = System.currentTimeMillis();
             String timestamp = timestampl.toString();
 
             /**

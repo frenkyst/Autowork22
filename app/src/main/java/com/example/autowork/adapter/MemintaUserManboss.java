@@ -23,12 +23,12 @@ public class MemintaUserManboss extends RecyclerView.Adapter<MemintaUserManboss.
     private Activity mActivity;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public LinearLayout rl_layoutuseman;
+        public LinearLayout rl_layoutuserman;
         public TextView tv_nama, tv_email, tv_tap;
 
         public MyViewHolder(View view) {
             super(view);
-            rl_layoutuseman = view.findViewById(R.id.rl_layout);
+            rl_layoutuserman = view.findViewById(R.id.rl_layoutuserman);
 //            tv_barkod = view.findViewById(R.id.tv_barkod);
             tv_nama = view.findViewById(R.id.tv_nama);
             tv_email = view.findViewById(R.id.tv_email);

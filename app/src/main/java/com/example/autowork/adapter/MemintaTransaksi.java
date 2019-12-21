@@ -37,7 +37,7 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
 
         public MyViewHolder(View view) {
             super(view);
-            rl_layouttransaksi = view.findViewById(R.id.rl_layout);
+            rl_layouttransaksi = view.findViewById(R.id.rl_layoutTransaksiKaryawan);
             tv_nama = view.findViewById(R.id.tv_namakaryawan);
             tv_total = view.findViewById(R.id.tv_totalkaryawan);
 
