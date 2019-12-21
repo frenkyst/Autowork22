@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.autowork.GlobalVariabel;
 import com.example.autowork.R;
@@ -21,7 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +44,8 @@ public class NotaPembayaranFragment extends Fragment {
     private RecyclerView rc_list_request;
     private ProgressDialog loading;
 
+    private TextView namaKasir,kode,tanggal;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,7 +56,9 @@ public class NotaPembayaranFragment extends Fragment {
         database = FirebaseDatabase.getInstance().getReference();
 
         rc_list_request = v.findViewById(R.id.rc_list_request);
-        //fab_add = findViewById(R.id.fab_add);
+        namaKasir = v.findViewById(R.id.tv_nama);
+        kode = v.findViewById(R.id.tv_kodeTransaksi);
+        tanggal = v.findViewById(R.id.tv_tanggal);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         rc_list_request.setLayoutManager(mLayoutManager);
@@ -85,6 +92,17 @@ public class NotaPembayaranFragment extends Fragment {
                      * ke dalam ArrayList
                      */
                     daftarReq.add(requests);
+
+                    String namaKasir1 = dataSnapshot.child("namaKasir").getValue(String.class);
+                    String kode1 = dataSnapshot.getKey();
+
+                    namaKasir.setText(namaKasir1);
+                    kode.setText(kode1);
+
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                    String dateString = formatter.format(new Date(Long.parseLong(GlobalVariabel.timestamp)));
+                    tanggal.setText(dateString);
+
 
                 }
 

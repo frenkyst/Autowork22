@@ -71,6 +71,8 @@ public class MemintaNota extends RecyclerView.Adapter<MemintaNota.MyViewHolder>{
         DecimalFormat decim = new DecimalFormat("#,###.##");
         holder.tv_hargaAwal.setText(decim.format(hargaAwal));
 
+
+
         holder.tv_total.setText(decim.format(total));
 
 //        holder.tv_hargaAwal.setText(hargaAwal1);
