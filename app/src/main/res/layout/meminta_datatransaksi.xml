@@ -38,28 +38,30 @@
         <TextView
             android:id="@+id/tv_nama"
             android:layout_toRightOf="@+id/tv_barkod"
-            android:layout_width="100dp"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="7dp"
             android:text="Nama"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tv_jml"
-            android:layout_toRightOf="@+id/tv_nama"
-            android:layout_width="70dp"
+            android:layout_toLeftOf="@+id/tv_total"
+            android:layout_centerInParent="true"
+            android:layout_width="30dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:text="Jumlah"
+            android:layout_marginRight="7dp"
+            android:text="J"
 
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tv_total"
-            android:layout_toRightOf="@+id/tv_jml"
-            android:layout_width="100dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
+            android:layout_marginRight="7dp"
             android:text="Total"
             android:textAlignment="viewEnd"
             android:textSize="16sp" />

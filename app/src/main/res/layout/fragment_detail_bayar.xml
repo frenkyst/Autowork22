@@ -6,7 +6,7 @@
     tools:context=".kasir.DetailBayarFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/rl_layouttransaksi"
         android:background="@color/viewfinder_border"
@@ -28,15 +28,17 @@
 
         <TextView
             android:id="@+id/tv_nama"
-            android:layout_width="100dp"
+            android:layout_toRightOf="@+id/tv_barkod"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="7dp"
             android:text="Nama"
             android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tv_jml"
-            android:layout_width="70dp"
+            android:layout_toLeftOf="@id/tv_total"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:text="Jumlah"
@@ -45,14 +47,15 @@
 
         <TextView
             android:id="@+id/tv_total"
-            android:layout_width="100dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
+            android:layout_marginRight="7dp"
             android:text="Total"
             android:textAlignment="viewEnd"
             android:textSize="16sp" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rc_list_request"
