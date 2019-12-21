@@ -42,7 +42,7 @@ public class HomeKasirFragment extends Fragment {
         // Required empty public constructor
     }
 
-    private DatabaseReference database, fromPath, toPath;
+    private DatabaseReference database;
 
     private ArrayList<Transaksi> daftarReq;
     private MemintaTransaksi memintatransaksi;

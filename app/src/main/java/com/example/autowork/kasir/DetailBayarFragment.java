@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -148,6 +149,7 @@ public class DetailBayarFragment extends Fragment {
 
             Long timestampl = System.currentTimeMillis();
             timestamp = timestampl.toString();
+            GlobalVariabel.timestamp = timestamp;
 //            String childKasir = GlobalVariabel.Toko+"/"+GlobalVariabel.Kasir+"/"+timestamp;
 
             fromPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid);
@@ -169,6 +171,11 @@ public class DetailBayarFragment extends Fragment {
                         "Nota Pembayaran",
                         totalBayars));
             }
+
+
+            AppCompatActivity activity = (AppCompatActivity) view.getContext();
+            Fragment myFragment = new NotaPembayaranFragment();
+            activity.getSupportFragmentManager().beginTransaction().replace(R.id.framekasir, myFragment).addToBackStack(null).commit();
 
 
 
