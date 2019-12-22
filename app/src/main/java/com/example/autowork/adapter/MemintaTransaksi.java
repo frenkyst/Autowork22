@@ -23,6 +23,7 @@ import com.example.autowork.kasir.KasirActivity;
 import com.example.autowork.model.Meminta;
 import com.example.autowork.model.Transaksi;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyViewHolder> {
@@ -66,7 +67,9 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
         final Transaksi movie = moviesList.get(position);
 
         holder.tv_nama.setText(movie.getNamakaryawan());
-        holder.tv_total.setText(movie.getTotalTransaksi());
+        DecimalFormat decim = new DecimalFormat("#,###.##");
+        holder.tv_total.setText(decim.format(Integer.parseInt(movie.getTotalTransaksi())));
+//        holder.tv_total.setText(movie.getTotalTransaksi());
 //        holder.tv_totalBayar.setText(movie.getTotal());
         holder.tv_taptransaksi.setText(movie.getUid());
 

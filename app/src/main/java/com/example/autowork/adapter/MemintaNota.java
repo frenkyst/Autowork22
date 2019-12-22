@@ -77,6 +77,8 @@ public class MemintaNota extends RecyclerView.Adapter<MemintaNota.MyViewHolder>{
 
 //        holder.tv_hargaAwal.setText(hargaAwal1);
 
+
+
     }
 
     @Override

@@ -22,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -44,7 +45,7 @@ public class NotaPembayaranFragment extends Fragment {
     private RecyclerView rc_list_request;
     private ProgressDialog loading;
 
-    private TextView namaKasir,kode,tanggal;
+    private TextView tv_namaKasir,tv_kode,tv_tanggal,tv_totalNota;
 
 
     @Override
@@ -56,9 +57,10 @@ public class NotaPembayaranFragment extends Fragment {
         database = FirebaseDatabase.getInstance().getReference();
 
         rc_list_request = v.findViewById(R.id.rc_list_request);
-        namaKasir = v.findViewById(R.id.tv_nama);
-        kode = v.findViewById(R.id.tv_kodeTransaksi);
-        tanggal = v.findViewById(R.id.tv_tanggal);
+        tv_namaKasir = v.findViewById(R.id.tv_nama);
+        tv_kode = v.findViewById(R.id.tv_kodeTransaksi);
+        tv_tanggal = v.findViewById(R.id.tv_tanggal);
+        tv_totalNota = v.findViewById(R.id.tv_totalnota);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         rc_list_request.setLayoutManager(mLayoutManager);
@@ -96,12 +98,12 @@ public class NotaPembayaranFragment extends Fragment {
                     String namaKasir1 = dataSnapshot.child("namaKasir").getValue(String.class);
                     String kode1 = dataSnapshot.getKey();
 
-                    namaKasir.setText(namaKasir1);
-                    kode.setText(kode1);
+                    tv_namaKasir.setText(namaKasir1);
+                    tv_kode.setText(kode1);
 
                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
                     String dateString = formatter.format(new Date(Long.parseLong(GlobalVariabel.timestamp)));
-                    tanggal.setText(dateString);
+                    tv_tanggal.setText(dateString);
 
 
                 }
@@ -113,6 +115,16 @@ public class NotaPembayaranFragment extends Fragment {
                 memintaNota = new MemintaNota(daftarReq, getActivity());
                 rc_list_request.setAdapter(memintaNota);
                 loading.dismiss();
+
+
+                int totalPrice = 0;
+                for (int i = 0; i<daftarReq.size(); i++)
+                {
+                    totalPrice += Integer.parseInt( daftarReq.get(i).getTotal());
+                }
+                DecimalFormat decim = new DecimalFormat("#,###.##");
+                tv_totalNota.setText("Rp. "+decim.format(totalPrice));
+//                totalNota.setText(String.valueOf(totalPrice));
             }
 
             @Override

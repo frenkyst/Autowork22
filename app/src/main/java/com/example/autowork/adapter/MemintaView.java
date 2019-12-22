@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.autowork.R;
 import com.example.autowork.model.Meminta;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class MemintaView extends RecyclerView.Adapter<MemintaView.MyViewHolder> {
@@ -54,7 +55,10 @@ public class MemintaView extends RecyclerView.Adapter<MemintaView.MyViewHolder> 
 
         holder.tv_barkod.setText(movie.getBarkod());
         holder.tv_nama.setText(movie.getNama());
-        holder.tv_harga.setText(movie.getHargajual());
+
+        DecimalFormat decim = new DecimalFormat("#,###.##");
+        holder.tv_harga.setText(decim.format(Integer.parseInt(movie.getHargajual())));
+//        holder.tv_harga.setText(movie.getHargajual());
         holder.tv_jml.setText(movie.getJml());
 /*
         holder.rl_layout.setOnClickListener(new View.OnClickListener() {

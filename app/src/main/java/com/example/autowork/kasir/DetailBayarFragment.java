@@ -31,6 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
@@ -113,7 +114,10 @@ public class DetailBayarFragment extends Fragment {
                      * MENAMPILKAN TOTAL HARGA KESELURUHAN
                      * */
                     String totalbayar = dataSnapshot.child("totalTransaksi").getValue(String.class);
-                    tv_totalBayar.setText("Rp. "+totalbayar);
+
+                    DecimalFormat decim = new DecimalFormat("#,###.##");
+                    tv_totalBayar.setText("Rp. "+decim.format(Integer.parseInt(totalbayar)));
+//                    tv_totalBayar.setText("Rp. "+totalbayar);
                     /**
                      * =============================================================================(END)
                      */

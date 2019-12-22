@@ -39,6 +39,8 @@ import com.google.zxing.integration.android.IntentResult;
 
 //import com.google.zxing.Result;
 
+import java.text.DecimalFormat;
+
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 import static android.os.SystemClock.sleep;
@@ -62,13 +64,13 @@ public class TransaksiKaryawanFragment extends Fragment{
     private DatabaseReference database, database1;
 
     private EditText etBarkod, etNama, etJml;
-    private TextView tvtotal, tvtotaltransaksi;
+    private TextView tvtotal, tvtotaltransaksi,tvtotaltransaksi1;
     private ProgressDialog loading;
     private ViewConfiguration ketok;
     private Button btn_cancel, btn_tambahbarang, btn_barkod, btn_cencel1;
 
     private String jmlud, hasilbarkod,     totalUTS, Stotal;
-    private Integer sjml, shrgjual, stotal, jmlu, jmludi, totalBayar, totalupdateTransaksi, stotal1, stotal2, totalTransaksi;
+    private Integer sjml, shrgjual, stotal, jmlu, jmludi, totalBayar, totalupdateTransaksi, totalTransaksi;
 
 
 
@@ -118,6 +120,7 @@ public class TransaksiKaryawanFragment extends Fragment{
 //        ettotal = vt.findViewById(R.id.et_total);
         tvtotal = vt.findViewById(R.id.tv_total);
         tvtotaltransaksi = vt.findViewById(R.id.tv_totaltransaksi);
+        tvtotaltransaksi1 = vt.findViewById(R.id.tv_totaltransaksi1);
 
         ambiltotal();
 
@@ -148,9 +151,9 @@ public class TransaksiKaryawanFragment extends Fragment{
             String Sjml = etJml.getText().toString();
             String logapa = "Transaksi Karyawan";
 
-            String Stotal = tvtotal.getText().toString();
+//            String Stotal = tvtotal.getText().toString();
 
-            String Stotaltransaksi = tvtotaltransaksi.getText().toString();
+//            String Stotaltransaksi = tvtotaltransaksi.getText().toString();
             //String Shrgawal = etHrgawal.getText().toString();
             //String Sjmlud = jmlud.toString();
 
@@ -162,8 +165,6 @@ public class TransaksiKaryawanFragment extends Fragment{
             } else {
 
                 // UPDATE TOTAL PEMBAYARAN PADA TABEL TRANSAKSI 1
-                stotal2 = Integer.parseInt(Stotal);
-
                 totalupdateTransaksi = totalTransaksi + stotal; /** TOTALTRANSAKSI DARI FUNGSI AMBILTOTAL() DAN STOTAL DARI FUNGSI PENJUMLAHAN KETIKA  USER MENGINPUTKAN JUMLAH */
                 totalUTS = Integer.toString(totalupdateTransaksi);
 
@@ -174,7 +175,7 @@ public class TransaksiKaryawanFragment extends Fragment{
                                 Sbarkod,
                                 Snama,
                                 Sjml,
-                                Stotal), //IKI VARIABEL MEMINTA || DATA TRANSAKSI BARANG
+                                stotal.toString()), //IKI VARIABEL MEMINTA || DATA TRANSAKSI BARANG
 
                         new LogHistory(
                                 Sbarkod,
@@ -284,16 +285,15 @@ public class TransaksiKaryawanFragment extends Fragment{
                                 shrgjual = Integer.parseInt(hrgjual); /** KONVERSI VALUE HARGA JUAL DARI DATABASE FIREBASE */
                                 stotal = sjml * shrgjual; /** DILAKUKAN PENJUMLAHAN UNTUK MENDAPATKAN TOTAL HARGA BARANG DIKALI JUMLAH BARANG*/
 
-//                                stotal1 = stotal;
-                                stotal2 = stotal;
 
                                 jmlu = Integer.parseInt(jml); /** KONVERSI VALUE JUMLAH BARANG DARI DATABASE FIREBASE */
                                 jmludi = jmlu - sjml; /** PENJUMLAHAN VALUE JUMLAH BARANG DARI DATABASE FIREBASE DIKURANGI JUMLAH TRANSAKSI DARI EDIT TEXT USER */
                                 jmlud = Integer.toString(jmludi); /** KONVERSI VALUE JUMLAH UNTUK MELAKUKAN UPDATE JUMLAH BARANG DI DATABASE FIREBASE */
 
 
-
-                                tvtotal.setText(Integer.toString(stotal));  /** MENAMPILKAN TOTAL HARGA KE VIEW LAYOUT (KONVERSI VALUE TOTAL HARGA BARANG) */
+                                DecimalFormat decim = new DecimalFormat("#,###.##");
+                                tvtotal.setText("Rp. "+decim.format(stotal));/** MENAMPILKAN TOTAL HARGA KE VIEW LAYOUT (KONVERSI VALUE TOTAL HARGA BARANG) */
+//                                tvtotal.setText(Integer.toString(stotal));
                             }
 
                             @Override
@@ -458,10 +458,16 @@ public class TransaksiKaryawanFragment extends Fragment{
                     if (TextUtils.isEmpty(totaltransaksi)) {
                         totalTransaksi = 0;
                     } else {
-                        tvtotaltransaksi.setText(totaltransaksi);
+                        DecimalFormat decim = new DecimalFormat("#,###.##");
+                        tvtotaltransaksi.setText("Rp. "+decim.format(Integer.parseInt(totaltransaksi)));
+//                        tvtotaltransaksi.setText(totaltransaksi);
+                        tvtotaltransaksi1.setText(totaltransaksi);
+
+
+//                    totalTransaksi = Integer.parseInt(totaltransaksi);
+                        totalTransaksi = Integer.parseInt(tvtotaltransaksi1.getText().toString());
                     }
 
-                    totalTransaksi = Integer.parseInt(tvtotaltransaksi.getText().toString());
 
 
                 }
