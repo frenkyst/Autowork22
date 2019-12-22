@@ -66,6 +66,9 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        DetailBayarFragment myFragment = new DetailBayarFragment();
+        fragmentTransaction.remove(myFragment).commit();
     }
 
     @Override
@@ -120,22 +123,24 @@ public class MainActivity extends AppCompatActivity
             HomeKaryawanFragment fragment = new HomeKaryawanFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frameawal, fragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.addToBackStack(null).commit();
         } else if (id == R.id.nav_stokBaru) {
             TambahDataFragment fragment = new TambahDataFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frameawal, fragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.addToBackStack(null).commit();
         } else if (id == R.id.nav_menambahStok) {
             UpdatestokdataFragment fragment = new UpdatestokdataFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frameawal, fragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.addToBackStack(null).commit();
         } else if (id == R.id.nav_transaksi) {
+            this.getSupportFragmentManager().popBackStackImmediate();
+
             TransaksiKaryawanFragment fragment = new TransaksiKaryawanFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frameawal, fragment);
-            fragmentTransaction.commit();
+            fragmentTransaction.addToBackStack(null).commit();
         } else if (id == R.id.nav_lihatTransaksi) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
@@ -150,7 +155,7 @@ public class MainActivity extends AppCompatActivity
                 DetailBayarFragment fragment = new DetailBayarFragment();
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.frameawal, fragment);
-                fragmentTransaction.commit();
+                fragmentTransaction.addToBackStack(null).commit();
 
             }
 

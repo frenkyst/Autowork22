@@ -122,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                 //authenticating with firebase
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
-                Toast.makeText(LoginActivity.this, "test jal"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Api Key Error yak e"+e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -191,7 +191,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (dataSnapshot.child("uid").exists()) {
 
-                        Toast.makeText(LoginActivity.this, "  CEK ?  ", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(LoginActivity.this, "  CEK ?  ", Toast.LENGTH_SHORT).show();
 
                         if (dataSnapshot.child("BOSS").exists()){
 
@@ -234,7 +234,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(LoginActivity.this, "  CEK eror ?  ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "  Google Play Error  ", Toast.LENGTH_SHORT).show();
                 }
             });
 

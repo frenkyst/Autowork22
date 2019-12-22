@@ -102,6 +102,8 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
                                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.framekasir, myFragment).addToBackStack(null).commit();
 
 
+
+
                                 break;
                             case R.id.menu2:
                                 //handle menu2 click

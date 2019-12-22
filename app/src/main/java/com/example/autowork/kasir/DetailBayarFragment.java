@@ -115,12 +115,23 @@ public class DetailBayarFragment extends Fragment {
                      * */
                     String totalbayar = dataSnapshot.child("totalTransaksi").getValue(String.class);
 
-                    DecimalFormat decim = new DecimalFormat("#,###.##");
-                    tv_totalBayar.setText("Rp. "+decim.format(Integer.parseInt(totalbayar)));
+                    if(dataSnapshot.child("totalTransaksi").exists()) {
+                        DecimalFormat decim = new DecimalFormat("#,###.##");
+                        tv_totalBayar.setText("Rp. " + decim.format(Integer.parseInt(totalbayar)));
 //                    tv_totalBayar.setText("Rp. "+totalbayar);
+
+                    }
                     /**
                      * =============================================================================(END)
                      */
+
+//                    if (dataSnapshot.child("totalTransaksi").equals(null)){
+//                        Toast.makeText(getActivity(), "???????????????", Toast.LENGTH_SHORT).show();
+//                    } else {
+//                        Toast.makeText(getContext(), "???????????????", Toast.LENGTH_SHORT).show();
+////                        getActivity().finish();
+//                    }
+
                 }
 
                 /**
@@ -130,6 +141,7 @@ public class DetailBayarFragment extends Fragment {
                 memintatransaksikasir = new MemintaTransaksikasir(daftarReq, getActivity());
                 rc_list_request.setAdapter(memintatransaksikasir);
                 loading.dismiss();
+
             }
 
             @Override
@@ -179,6 +191,7 @@ public class DetailBayarFragment extends Fragment {
 
             AppCompatActivity activity = (AppCompatActivity) view.getContext();
             Fragment myFragment = new NotaPembayaranFragment();
+            activity.getSupportFragmentManager().popBackStackImmediate();
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.framekasir, myFragment).addToBackStack(null).commit();
 
 
@@ -206,17 +219,7 @@ public class DetailBayarFragment extends Fragment {
         fromPath.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                toPath.setValue(dataSnapshot.getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isComplete()) {
-//                            fromPath.removeValue();
-                            Toast.makeText(getActivity(), "copy sukses", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getActivity(), "copy failed", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                toPath.setValue(dataSnapshot.getValue());
 //                totalTopath.setValue(dataSnapshot.child("zzzzzzzzz").getValue());
 //                toPath.child("detail").child("zzzzzzzzz").setValue(dataSnapshot.child("zzzzzzzzz").getValue());
 //                toPath.child("totalTransaksi").setValue(dataSnapshot.child("zzzzzzzzz").child("total").getValue());
@@ -244,5 +247,7 @@ public class DetailBayarFragment extends Fragment {
                 Toast.LENGTH_SHORT).show();
 
     }
+
+
 
 }

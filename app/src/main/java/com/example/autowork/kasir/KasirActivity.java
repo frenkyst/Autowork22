@@ -71,6 +71,9 @@ public class KasirActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        DetailBayarFragment myFragment = new DetailBayarFragment();
+        fragmentTransaction.remove(myFragment).commit();
     }
 
     @Override
@@ -122,10 +125,7 @@ public class KasirActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             // Handle the camera action
-            NotaPembayaranFragment fragment = new NotaPembayaranFragment();
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.framekasir, fragment);
-            fragmentTransaction.commit();
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
