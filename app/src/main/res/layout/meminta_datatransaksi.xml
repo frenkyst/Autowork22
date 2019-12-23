@@ -19,14 +19,6 @@
         >
 
         <TextView
-            android:id="@+id/tv_taptransaksi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=" "
-            android:textSize="16sp"
-            />
-
-        <TextView
             android:id="@+id/tv_barkod"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
@@ -66,6 +58,16 @@
             android:textAlignment="viewEnd"
             android:textSize="16sp" />
 
+        <TextView
+            android:id="@+id/tv_taptransaksi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:textSize="16sp"
+            />
+
     </RelativeLayout>
+
+
 
 </LinearLayout>

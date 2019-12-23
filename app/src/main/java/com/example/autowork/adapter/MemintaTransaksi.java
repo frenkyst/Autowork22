@@ -92,7 +92,7 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
-                            case R.id.menu1:
+                            case R.id.item_detail:
                                 //handle menu1 click
                                 GlobalVariabel.uid = movie.getUid();
                                 GlobalVariabel.invisible = "null";
@@ -105,12 +105,7 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
 
 
                                 break;
-                            case R.id.menu2:
-                                //handle menu2 click
-                                break;
-                            case R.id.menu3:
-                                //handle menu3 click
-                                break;
+
                         }
                         return false;
                     }

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.autowork.GlobalVariabel;
 import com.example.autowork.MainActivity;
 import com.example.autowork.R;
 import com.example.autowork.kasir.KasirActivity;
@@ -78,7 +79,7 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
             @Override
             public void onClick(View view) {
 
-
+                GlobalVariabel.barkod = movie.getBarkod();
                 //creating a popup menu
                 PopupMenu popup = new PopupMenu(mActivity, holder.tv_taptransaksi);
                 //inflating menu from xml resource
@@ -88,15 +89,10 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
-                            case R.id.menu1:
+                            case R.id.item_edit:
                                 //handle menu1 click
                                 break;
-                            case R.id.menu2:
-                                //handle menu2 click
-                                break;
-                            case R.id.menu3:
-                                //handle menu3 click
-                                break;
+
                         }
                         return false;
                     }
