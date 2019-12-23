@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -27,7 +28,8 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout rl_layouttransaksi;
-        public TextView tv_barkod, tv_nama, tv_jml, tv_total, tap_edit;
+        public TextView tv_barkod, tv_nama, tv_jml, tv_total;
+        public ImageView tap_edit;
 
         public MyViewHolder(View view) {
             super(view);
@@ -69,7 +71,7 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
         holder.tv_total.setText(decim.format(Integer.parseInt(movie.getTotal())));
 //        holder.tv_total.setText(movie.getTotal());
 //        holder.tv_totalBayar.setText(movie.getTotal());
-        holder.tap_edit.setText(" ");
+//        holder.tap_edit.setText(" ");
 
         /**
          * ==============================================================================(STAR)
