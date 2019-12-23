@@ -34,7 +34,7 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout rl_layouttransaksi;
-        public TextView tv_nama, tv_total, tv_taptransaksi;
+        public TextView tv_nama, tv_total, tap_edit;
 
         public MyViewHolder(View view) {
             super(view);
@@ -42,7 +42,7 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
             tv_nama = view.findViewById(R.id.tv_namakaryawan);
             tv_total = view.findViewById(R.id.tv_totalkaryawan);
 
-            tv_taptransaksi = view.findViewById(R.id.tv_taptransaksi);
+            tap_edit = view.findViewById(R.id.tap_edit);
         }
     }
 
@@ -71,20 +71,20 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
         holder.tv_total.setText(decim.format(Integer.parseInt(movie.getTotalTransaksi())));
 //        holder.tv_total.setText(movie.getTotalTransaksi());
 //        holder.tv_totalBayar.setText(movie.getTotal());
-        holder.tv_taptransaksi.setText(movie.getUid());
+        holder.tap_edit.setText(movie.getUid());
 
 
         /**
          * ============================================================================================================================================(STAR)
          * FUNGSI UNTUK MENAMPILKAN MENU POPUP MENUJU KE DETAIL SAAT ITEM DI PILIH
          */
-        holder.tv_taptransaksi.setOnClickListener( new View.OnClickListener() {
+        holder.tap_edit.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
                 //creating a popup menu
-                PopupMenu popup = new PopupMenu(mActivity, holder.tv_taptransaksi);
+                PopupMenu popup = new PopupMenu(mActivity, holder.tap_edit);
                 //inflating menu from xml resource
                 popup.inflate(R.menu.kasir_menu);
                 //adding click listener

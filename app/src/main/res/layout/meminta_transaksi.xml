@@ -13,22 +13,27 @@
     <RelativeLayout
         android:id="@+id/ll_tap"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="27dp"
 
 
         >
 
-        <TextView
-            android:id="@+id/tv_taptransaksi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text=" "
-            android:textSize="16sp"
+        <ImageView
+            android:id="@+id/tap_edit"
+            android:layout_centerInParent="true"
+            android:background="@color/puteh"
+            android:layout_width="16dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_popup_edit"
+            android:layout_marginRight="5dp"
             />
 
 
         <TextView
             android:id="@+id/tv_namakaryawan"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
@@ -39,10 +44,12 @@
         <TextView
             android:id="@+id/tv_totalkaryawan"
             android:layout_toRightOf="@+id/tv_namakaryawan"
+            android:layout_toLeftOf="@+id/tap_edit"
+            android:layout_centerInParent="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"
+
+            android:layout_marginRight="5dp"
             android:text="Total"
             android:textAlignment="viewEnd"
             android:textSize="16sp" />

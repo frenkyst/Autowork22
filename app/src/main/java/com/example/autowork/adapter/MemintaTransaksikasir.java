@@ -27,7 +27,7 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout rl_layouttransaksi;
-        public TextView tv_barkod, tv_nama, tv_jml, tv_total, tv_taptransaksi;
+        public TextView tv_barkod, tv_nama, tv_jml, tv_total, tap_edit;
 
         public MyViewHolder(View view) {
             super(view);
@@ -37,7 +37,7 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
             tv_jml = view.findViewById(R.id.tv_jml);
             tv_total = view.findViewById(R.id.tv_total);
 
-            tv_taptransaksi = view.findViewById(R.id.tv_taptransaksi);
+            tap_edit = view.findViewById(R.id.tap_edit);
         }
     }
 
@@ -69,19 +69,19 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
         holder.tv_total.setText(decim.format(Integer.parseInt(movie.getTotal())));
 //        holder.tv_total.setText(movie.getTotal());
 //        holder.tv_totalBayar.setText(movie.getTotal());
-        holder.tv_taptransaksi.setText(" ");
+        holder.tap_edit.setText(" ");
 
         /**
          * ==============================================================================(STAR)
          * FUNGSI UNTUK MENAMPILKAN MENU POPUP MENUJU KE DETAIL SAAT ITEM DI PILIH
          */
-        holder.tv_taptransaksi.setOnClickListener( new View.OnClickListener() {
+        holder.tap_edit.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 GlobalVariabel.barkod = movie.getBarkod();
                 //creating a popup menu
-                PopupMenu popup = new PopupMenu(mActivity, holder.tv_taptransaksi);
+                PopupMenu popup = new PopupMenu(mActivity, holder.tap_edit);
                 //inflating menu from xml resource
                 popup.inflate(R.menu.kasir_menu);
                 //adding click listener
