@@ -173,6 +173,9 @@ public class TransaksiKaryawanFragment extends Fragment{
                 totalUTS = Integer.toString(totalupdateTransaksi);
                 totalULS = Integer.toString(totalUpdateLaba);
 
+                Long timestampl = System.currentTimeMillis();
+                String timestamp = timestampl.toString();
+
 
                 // end UPDATE TOTAL PEMBAYARAN PADA TABEL TRANSAKSI 1 =========================
 
@@ -189,7 +192,13 @@ public class TransaksiKaryawanFragment extends Fragment{
                                 Sjml, logapa), // IKI LOG KELUAR MASUK TRANSAKSI KARYAWAN
 
                         Sbarkod, jmlud, //jmlud DARI  PENJUMLAHAN SETELAH MENGISI INPUT TEXT JML (BUTTON BARKODE)
-                        totalUTS, totalULS); // HASIL TOTAL PEMBAYARAN
+                        totalUTS, totalULS, timestamp); // HASIL TOTAL PEMBAYARAN
+
+                inputDataLaba(new TransaksiKaryawan(
+                                Snama,
+                                Sjml,
+                                Laba.toString())
+                        ,timestamp);
 
                 /**
                  * MENSET BARKOD MENJADI ENABLE LAGI KARENA JIKA BARANG DITEMUKAN DARI DATABASE EDTI TEXT BARKOD DI SET MENJADI DISABLE
@@ -342,7 +351,7 @@ public class TransaksiKaryawanFragment extends Fragment{
      * @param ud value hasil update barang setelah transaksi
      * @param udtr  value total pembayaran
      */
-    private void inputDatabase(TransaksiKaryawan transaksiKaryawan, LogHistory log, String barkod, String ud, String udtr, String udla) {
+    private void inputDatabase(TransaksiKaryawan transaksiKaryawan, LogHistory log, String barkod, String ud, String udtr, String udla, String timestamp) {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -360,8 +369,6 @@ public class TransaksiKaryawanFragment extends Fragment{
                     .setValue(ud);
 
 
-            Long timestampl = System.currentTimeMillis();
-            String timestamp = timestampl.toString();
 
             /**
              * DATA BARANG YANG MASUK TABEL TRANSAKSI 1
@@ -417,6 +424,17 @@ public class TransaksiKaryawanFragment extends Fragment{
 
         }
 
+    }
+
+    private void inputDataLaba(TransaksiKaryawan transaksiKaryawan, String timestamp){
+
+        /**
+         * DATA LABA YANG MASUK TABEL LABA
+         */
+        database1.child(GlobalVariabel.Toko)
+                .child(GlobalVariabel.Laba)
+                .child(timestamp)
+                .setValue(transaksiKaryawan);
     }
 
     /**
