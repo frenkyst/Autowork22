@@ -1,6 +1,8 @@
 package com.example.autowork.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -8,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.autowork.GlobalVariabel;
 import com.example.autowork.MainActivity;
@@ -18,6 +22,7 @@ import com.example.autowork.R;
 import com.example.autowork.kasir.KasirActivity;
 import com.example.autowork.model.Meminta;
 
+import java.text.BreakIterator;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -26,10 +31,16 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
     private List<Meminta> moviesList;
     private Activity mActivity;
 
+    AlertDialog.Builder dialog;
+
+    public EditText txt_jumlahBarang;
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout rl_layouttransaksi;
         public TextView tv_barkod, tv_nama, tv_jml, tv_total;
         public ImageView tap_edit;
+
+
 
         public MyViewHolder(View view) {
             super(view);
@@ -40,6 +51,9 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
             tv_total = view.findViewById(R.id.tv_total);
 
             tap_edit = view.findViewById(R.id.tap_edit);
+            txt_jumlahBarang = view.findViewById(R.id.txt_jumlahBarang);
+
+
         }
     }
 
@@ -93,6 +107,45 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
                         switch (item.getItemId()) {
                             case R.id.item_edit:
                                 //handle menu1 click
+                                dialog = new AlertDialog.Builder(mActivity);
+                                View dialogView = LayoutInflater.from(mActivity).inflate(R.layout.show_edit_dialog, null);
+
+//                                inflater = getLayoutInflater();
+//                                dialogView = inflater.inflate(R.layout.show_edit_dialog, null);
+                                dialog.setView(dialogView);
+                                dialog.setCancelable(true);
+                                dialog.setIcon(R.mipmap.ic_launcher);
+//                                dialog.setTitle("Form Edit");
+
+
+                                txt_jumlahBarang = dialogView.findViewById(R.id.txt_jumlahBarang);
+
+                                kosong();
+
+                                dialog.setPositiveButton("UBAH", new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        String jumlahBarang = txt_jumlahBarang.getText().toString();
+
+                                        Toast.makeText(mActivity, "???????????????", Toast.LENGTH_SHORT).show();
+
+//                                        txt_hasil.setText("Nama : " + nama + "\n" + "Usia : " + usia + "\n" + "Alamat : " + alamat + "\n" + "Status : " + status);
+                                        dialog.dismiss();
+                                    }
+                                });
+
+                                dialog.setNegativeButton("BATAL", new DialogInterface.OnClickListener() {
+
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+
+                                dialog.show();
+
                                 break;
 
                         }
@@ -121,5 +174,14 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
     }
 
 
+    private void kosong(){
+
+        txt_jumlahBarang.setText(null);
+    }
+
+    private void DialogForm(View view) {
+
+
+    }
 
 }

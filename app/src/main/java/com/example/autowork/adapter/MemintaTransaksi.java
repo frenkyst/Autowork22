@@ -88,7 +88,7 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
                 //creating a popup menu
                 PopupMenu popup = new PopupMenu(mActivity, holder.tap_edit);
                 //inflating menu from xml resource
-                popup.inflate(R.menu.kasir_menu);
+                popup.inflate(R.menu.detail_menu);
                 //adding click listener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override

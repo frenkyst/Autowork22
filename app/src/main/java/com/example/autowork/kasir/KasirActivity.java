@@ -153,4 +153,6 @@ public class KasirActivity extends AppCompatActivity
         ft.attach(frg);
         ft.commit();
     }
+
 }
+

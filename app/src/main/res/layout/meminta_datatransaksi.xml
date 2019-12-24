@@ -46,7 +46,8 @@
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:text="000"
-
+            android:layout_marginRight="4dp"
+            android:textAlignment="viewEnd"
             android:textSize="16sp" />
 
         <ImageView
