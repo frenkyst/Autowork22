@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
@@ -33,6 +34,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.Result;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -212,32 +215,27 @@ public class TransaksiKaryawanFragment extends Fragment{
                                 Snama,
                                 Integer.parseInt(Sjml), logapa), // IKI LOG KELUAR MASUK TRANSAKSI KARYAWAN
 
-                        Sbarkod, jmludi, //jmlud DARI  PENJUMLAHAN SETELAH MENGISI INPUT TEXT JML (BUTTON BARKODE)
-                        totalupdateTransaksi, totalUpdateLaba, timestamp); // HASIL TOTAL PEMBAYARAN
-
-                inputDataLaba(new TransaksiKaryawan(
+                        Sbarkod, Integer.parseInt(Sjml), //jmlud DARI  PENJUMLAHAN SETELAH MENGISI INPUT TEXT JML (BUTTON BARKODE)
+                        totalupdateTransaksi, totalUpdateLaba, timestamp,
+                        new TransaksiKaryawan(
                                 Snama,
                                 Integer.parseInt(Sjml),
                                 Laba)
-                                ,timestamp);
+                        ); // HASIL TOTAL PEMBAYARAN
+
 
                 /**
                  * MENSET BARKOD MENJADI ENABLE LAGI KARENA JIKA BARANG DITEMUKAN DARI DATABASE EDTI TEXT BARKOD DI SET MENJADI DISABLE
                  * DAN MENSET NAMA DAN JUMLAH MENJADI KOSONG LAGI
                  */
                 etBarkod.setEnabled(true);
+                etJml.setEnabled(false);
                 etNama.setText("");
                 etJml.setText("");
 
             }
 
-
-
         });
-//*/
-
-
-
 
         return vt;
     }
@@ -262,20 +260,6 @@ public class TransaksiKaryawanFragment extends Fragment{
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-//                        if (dataSnapshot.child(GlobalVariabel.Transaksi).child(uid).child("totalTransaksi").exists() && dataSnapshot.child(GlobalVariabel.Transaksi).child(uid).child("totalLaba").exists()) {
-//
-//                            totalTransaksi = dataSnapshot.child(GlobalVariabel.Transaksi).child(uid).child("totalTransaksi").getValue(Integer.class);
-//                            totalLabaint = dataSnapshot.child(GlobalVariabel.Transaksi).child(uid).child("totalLaba").getValue(Integer.class);
-//
-//                            tvtotaltransaksi.setText("Rp. " + decim.format(totalTransaksi));
-//
-//                        } else {
-//
-//                            totalTransaksi = 0;
-//                            totalLabaint = 0;
-//
-//                        }
-
                     /**
                      * VERIFIKASI BARKOD APAKAH ADA DI DATABASE FIREBASE
                      * JIKA NAMA DARI DATABASE TIDAK ADA MAKA AKAN MUNCUL Code salah
@@ -296,6 +280,7 @@ public class TransaksiKaryawanFragment extends Fragment{
                          * JIKA DATA DITEMUKAN MAKA HARGA DI JUMLAHKAN
                          */
                         etBarkod.setEnabled(false);//MENSET EDIT TEXT MENJADI DISABLE TIDAK BISA DI RUBAH
+                        etJml.setEnabled(true);
 
                         /**
                          * FUNSI PENJUMLAHAN DISAAT BERSAMAAN KITA MENGETIK DI EDIT TEXT
@@ -310,6 +295,13 @@ public class TransaksiKaryawanFragment extends Fragment{
                             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
                                 String sJml = etJml.getText().toString();  /** JUMLAH DIAMBIL DARI EDIT TEXT */
+
+                                if (etJml.getText().toString().matches("^0") )
+                                {
+                                    // Not allowed
+                                    Toast.makeText(getActivity(), "not allowed", Toast.LENGTH_LONG).show();
+                                    etJml.setText("");
+                                }
 
                                 if (sJml.equals("")) { /** INISIALISASI MENGHINDARI EROR JIKA EDIT TEXT KOSONG ATAU USER MELAKUKAN PENGHAPUSAN JUMLAH DI EDIT TEXT */
                                     sjml = 0;
@@ -370,7 +362,7 @@ public class TransaksiKaryawanFragment extends Fragment{
      * @param updateStok value hasil update barang setelah transaksi
      * @param udtr  value total pembayaran
      */
-    private void inputDatabase(TransaksiKaryawan transaksiKaryawan, LogHistory log, String barkod, Integer updateStok, Integer udtr, Integer udla, String timestamp) {
+    private void inputDatabase(TransaksiKaryawan transaksiKaryawan, LogHistory log, String barkod, Integer updateStok, Integer udtr, Integer udla, String timestamp, TransaksiKaryawan transaksiKaryawanLaba) {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -378,83 +370,101 @@ public class TransaksiKaryawanFragment extends Fragment{
             String name = user.getDisplayName();
             String uid = user.getUid();
 
-            /**
-             * DATA UPDATE JUMLAH STOK SAAT DILAKUKAN TRANSAKSI
-             */
             database1.child(GlobalVariabel.Toko)
                     .child(GlobalVariabel.Gudang)
-                    .child(barkod)
-                    .child("jml")
-                    .setValue(updateStok);
+                    .child(barkod+"/jml").runTransaction(new Transaction.Handler() {
 
+                String status;
 
+                @NonNull
+                @Override
+                public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
 
-            /**
-             * DATA BARANG YANG MASUK TABEL TRANSAKSI 1
-             */
-            database1.child(GlobalVariabel.Toko)
-                    .child(GlobalVariabel.Transaksi+"/"+uid+"/transaksi")
-                    .child(timestamp)
-                    .setValue(transaksiKaryawan);
+                    Integer jumlahStok = mutableData.getValue(Integer.class);
 
-            /**
-             * DATA TOTAL PEMBAYARAN TABEL TRANSAKSI 1
-             */
-            database1.child(GlobalVariabel.Toko)
-                    .child(GlobalVariabel.Transaksi+"/"+uid)
-                    .child("totalTransaksi")
-                    .setValue(udtr);
+                    if(jumlahStok>=updateStok){
+                        mutableData.setValue(jumlahStok-updateStok);
+                        status = "Berhasil !!";
+                        return Transaction.success(mutableData);
 
-            /**
-             * DATA TOTAL LABA TABEL TRANSAKSI 1
-             */
-            database1.child(GlobalVariabel.Toko)
-                    .child(GlobalVariabel.Transaksi+"/"+uid)
-                    .child("totalLaba")
-                    .setValue(udla);
+                    } else {
+                        status = "Stok Data Kurang !!";
+                        return Transaction.abort();
+                    }
+                }
 
-            /**
-             * DATA KARYAWAN YANG MELAKUKAN TRANSAKSI
-             */
-            database1.child(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi+"/"+uid)
-                    .child("namaKaryawan")
-                    .setValue(name);
-            database1.child(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi+"/"+uid)
-                    .child("uid")
-                    .setValue(uid);
+                @Override
+                public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
 
-            /**
-             * INPUT LOG TRANSAKSI KARYAWAN
-             */
-            database1.child(GlobalVariabel.Toko)
-                    .child(GlobalVariabel.Log)
-                    .child(timestamp)
-                    .setValue(log);
+                    if(databaseError != null){
 
+                        status = "Error ! Ulangi !";
 
-            /**
-             * NOTIF DATA BERHASIL DITAMBAHKAN KE FIREBASE
-             */
-//        etBarkod.setEnabled(true);
-            Toast.makeText(getActivity(),
-                    "Data Berhasil Tambah",
-                    Toast.LENGTH_SHORT).show();
+                    } else if(status.equals("Berhasil !!")) {
 
+                        /**
+                         * DATA BARANG YANG MASUK TABEL TRANSAKSI 1
+                         */
+                        database1.child(GlobalVariabel.Toko)
+                                .child(GlobalVariabel.Transaksi+"/"+uid+"/transaksi")
+                                .child(timestamp)
+                                .setValue(transaksiKaryawan);
+
+                        /**
+                         * DATA TOTAL PEMBAYARAN TABEL TRANSAKSI 1
+                         */
+                        database1.child(GlobalVariabel.Toko)
+                                .child(GlobalVariabel.Transaksi+"/"+uid)
+                                .child("totalTransaksi")
+                                .setValue(udtr);
+
+                        /**
+                         * DATA TOTAL LABA TABEL TRANSAKSI 1
+                         */
+                        database1.child(GlobalVariabel.Toko)
+                                .child(GlobalVariabel.Transaksi+"/"+uid)
+                                .child("totalLaba")
+                                .setValue(udla);
+
+                        /**
+                         * DATA KARYAWAN YANG MELAKUKAN TRANSAKSI
+                         */
+                        database1.child(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi+"/"+uid)
+                                .child("namaKaryawan")
+                                .setValue(name);
+                        database1.child(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi+"/"+uid)
+                                .child("uid")
+                                .setValue(uid);
+
+                        /**
+                         * INPUT LOG TRANSAKSI KARYAWAN
+                         */
+                        database1.child(GlobalVariabel.Toko)
+                                .child(GlobalVariabel.Log)
+                                .child(timestamp)
+                                .setValue(log);
+
+                        /**
+                         * DATA LABA YANG MASUK TABEL LABA
+                         */
+                        database1.child(GlobalVariabel.Toko)
+                                .child(GlobalVariabel.Laba)
+                                .child(timestamp)
+                                .setValue(transaksiKaryawanLaba);
+
+                    }
+
+                    Toast.makeText(getActivity(),
+                            status,
+                            Toast.LENGTH_SHORT).show();
+
+                }
+            });
 
         }
 
     }
 
-    private void inputDataLaba(TransaksiKaryawan transaksiKaryawan, String timestamp){
-
-        /**
-         * DATA LABA YANG MASUK TABEL LABA
-         */
-        database1.child(GlobalVariabel.Toko)
-                .child(GlobalVariabel.Laba)
-                .child(timestamp)
-                .setValue(transaksiKaryawan);
-    }
 
     /**
      * ================================================================================================(END)

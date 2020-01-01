@@ -66,6 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textAlignment="center"
+            android:enabled="false"
             android:hint="Jumlah"
             android:text=""
             android:inputType="number" />
