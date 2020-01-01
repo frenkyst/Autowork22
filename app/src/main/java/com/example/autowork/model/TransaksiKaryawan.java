@@ -3,18 +3,19 @@ package com.example.autowork.model;
 public class TransaksiKaryawan {
     private String barkod;
     private String nama;
-    private String jml;
-    private String total;
+    private Integer jml;
+    private Integer total;
+    private Integer laba;
 
-    public TransaksiKaryawan(String nama, String jml, String laba) {
+
+    public TransaksiKaryawan(String nama, Integer jml, Integer laba) {
         this.nama = nama;
         this.jml = jml;
         this.laba = laba;
     }
 
-    private String laba;
 
-    public TransaksiKaryawan(String barkod, String nama, String jml, String total, String laba) {
+    public TransaksiKaryawan(String barkod, String nama, Integer jml, Integer total, Integer laba) {
         this.barkod = barkod;
         this.nama = nama;
         this.jml = jml;
@@ -38,27 +39,27 @@ public class TransaksiKaryawan {
         this.nama = nama;
     }
 
-    public String getJml() {
+    public Integer getJml() {
         return jml;
     }
 
-    public void setJml(String jml) {
+    public void setJml(Integer jml) {
         this.jml = jml;
     }
 
-    public String getTotal() {
+    public Integer getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(Integer total) {
         this.total = total;
     }
 
-    public String getLaba() {
+    public Integer getLaba() {
         return laba;
     }
 
-    public void setLaba(String laba) {
+    public void setLaba(Integer laba) {
         this.laba = laba;
     }
 

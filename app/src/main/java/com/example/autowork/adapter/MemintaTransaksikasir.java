@@ -79,10 +79,10 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
 
         holder.tv_barkod.setText(movie.getBarkod());
         holder.tv_nama.setText(movie.getNama());
-        holder.tv_jml.setText(movie.getJml());
+        holder.tv_jml.setText(String.valueOf(movie.getJml()));
 
         DecimalFormat decim = new DecimalFormat("#,###.##");
-        holder.tv_total.setText(decim.format(Integer.parseInt(movie.getTotal())));
+        holder.tv_total.setText(decim.format(movie.getTotal()));
 //        holder.tv_total.setText(movie.getTotal());
 //        holder.tv_totalBayar.setText(movie.getTotal());
 //        holder.tap_edit.setText(" ");

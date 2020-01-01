@@ -120,7 +120,7 @@ public class NotaPembayaranFragment extends Fragment {
                 int totalPrice = 0;
                 for (int i = 0; i<daftarReq.size(); i++)
                 {
-                    totalPrice += Integer.parseInt( daftarReq.get(i).getTotal());
+                    totalPrice +=  daftarReq.get(i).getTotal();
                 }
                 DecimalFormat decim = new DecimalFormat("#,###.##");
                 tv_totalNota.setText("Rp. "+decim.format(totalPrice));

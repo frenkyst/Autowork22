@@ -55,15 +55,15 @@ public class MemintaNota extends RecyclerView.Adapter<MemintaNota.MyViewHolder>{
 
 
         holder.tv_nama.setText(movie.getNama());
-        holder.tv_jumlah.setText(movie.getJml());
+        holder.tv_jumlah.setText(String.valueOf(movie.getJml()));
 
 //        holder.tv_total.setText(movie.getTotal());
 
 
         int hargaAwal, jumlah, total;
 
-        total = Integer.parseInt( movie.getTotal());
-        jumlah = Integer.parseInt(movie.getJml());
+        total =  movie.getTotal();
+        jumlah = movie.getJml();
         hargaAwal = total/jumlah;
 
 //        String hargaAwal1 = String.valueOf(hargaAwal);

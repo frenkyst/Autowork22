@@ -5,11 +5,11 @@ public class LogKasir {
     private String nama;
     private String notaPembayaran;
     private String logapa;
-    private String totalTransaksi;
+    private Integer totalTransaksi;
 
 
 
-    public LogKasir(String nama, String notaPembayaran, String logapa, String totalTransaksi) {
+    public LogKasir(String nama, String notaPembayaran, String logapa, Integer totalTransaksi) {
         this.nama = nama;
         this.notaPembayaran = notaPembayaran;
         this.logapa = logapa;
@@ -40,11 +40,11 @@ public class LogKasir {
         this.logapa = logapa;
     }
 
-    public String getTotalTransaksi() {
+    public Integer getTotalTransaksi() {
         return totalTransaksi;
     }
 
-    public void setTotalTransaksi(String totalTransaksi) {
+    public void setTotalTransaksi(Integer totalTransaksi) {
         this.totalTransaksi = totalTransaksi;
     }
 

@@ -2,12 +2,12 @@ package com.example.autowork.model;
 
 public class Nota {
     private String nama;
-    private String jumlah;
-    private String total;
+    private Integer jumlah;
+    private Integer total;
     private String key;
 
 
-    public Nota(String nama, String jumlah, String total, String key) {
+    public Nota(String nama, Integer jumlah, Integer total, String key) {
         this.nama = nama;
         this.jumlah = jumlah;
         this.total = total;
@@ -22,19 +22,19 @@ public class Nota {
         this.nama = nama;
     }
 
-    public String getJumlah() {
+    public Integer getJumlah() {
         return jumlah;
     }
 
-    public void setJumlah(String jumlah) {
+    public void setJumlah(Integer jumlah) {
         this.jumlah = jumlah;
     }
 
-    public String getTotal() {
+    public Integer getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(Integer total) {
         this.total = total;
     }
 

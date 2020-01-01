@@ -70,7 +70,7 @@ public class TransaksiKaryawanFragment extends Fragment{
     private ViewConfiguration ketok;
     private Button btn_cancel, btn_tambahbarang, btn_barkod, btn_cencel1;
 
-    private String jmlud, hasilbarkod,     totalUTS, totalULS;
+    private String jmlud, hasilbarkod;
     private Integer sjml, shrgjual, stotal, jmlu, jmludi, totalBayar, totalupdateTransaksi, totalTransaksi=0;
 
     private Integer hargaAwalInt, totalLabaint=0, Laba, totalUpdateLaba;
@@ -170,8 +170,6 @@ public class TransaksiKaryawanFragment extends Fragment{
                 // UPDATE TOTAL PEMBAYARAN PADA TABEL TRANSAKSI 1
                 totalupdateTransaksi = totalTransaksi + stotal; /** TOTALTRANSAKSI DARI FUNGSI AMBILTOTAL() DAN STOTAL DARI FUNGSI PENJUMLAHAN KETIKA  USER MENGINPUTKAN JUMLAH */
                 totalUpdateLaba = totalLabaint + Laba;
-                totalUTS = Integer.toString(totalupdateTransaksi);
-                totalULS = Integer.toString(totalUpdateLaba);
 
                 Long timestampl = System.currentTimeMillis();
                 String timestamp = timestampl.toString();
@@ -182,23 +180,23 @@ public class TransaksiKaryawanFragment extends Fragment{
                 inputDatabase(new TransaksiKaryawan(
                                 Sbarkod,
                                 Snama,
-                                Sjml,
-                                stotal.toString(),
-                                Laba.toString()), //IKI VARIABEL MEMINTA || DATA TRANSAKSI BARANG
+                                Integer.parseInt(Sjml),
+                                stotal,
+                                Laba), //IKI VARIABEL MEMINTA || DATA TRANSAKSI BARANG
 
                         new LogHistory(
                                 Sbarkod,
                                 Snama,
-                                Sjml, logapa), // IKI LOG KELUAR MASUK TRANSAKSI KARYAWAN
+                                Integer.parseInt(Sjml), logapa), // IKI LOG KELUAR MASUK TRANSAKSI KARYAWAN
 
-                        Sbarkod, jmlud, //jmlud DARI  PENJUMLAHAN SETELAH MENGISI INPUT TEXT JML (BUTTON BARKODE)
-                        totalUTS, totalULS, timestamp); // HASIL TOTAL PEMBAYARAN
+                        Sbarkod, jmludi, //jmlud DARI  PENJUMLAHAN SETELAH MENGISI INPUT TEXT JML (BUTTON BARKODE)
+                        totalupdateTransaksi, totalUpdateLaba, timestamp); // HASIL TOTAL PEMBAYARAN
 
                 inputDataLaba(new TransaksiKaryawan(
                                 Snama,
-                                Sjml,
-                                Laba.toString())
-                        ,timestamp);
+                                Integer.parseInt(Sjml),
+                                Laba)
+                                ,timestamp);
 
                 /**
                  * MENSET BARKOD MENJADI ENABLE LAGI KARENA JIKA BARANG DITEMUKAN DARI DATABASE EDTI TEXT BARKOD DI SET MENJADI DISABLE
@@ -249,10 +247,10 @@ public class TransaksiKaryawanFragment extends Fragment{
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    String hargaawal = dataSnapshot.child("hargaawal").getValue(String.class);
+                    Integer hargaawal = dataSnapshot.child("hargaawal").getValue(Integer.class);
                     String nama = dataSnapshot.child("nama").getValue(String.class);
-                    String jml = dataSnapshot.child("jml").getValue(String.class);
-                    String hrgjual = dataSnapshot.child("hargajual").getValue(String.class);
+                    Integer jml = dataSnapshot.child("jml").getValue(Integer.class);
+                    Integer hrgjual = dataSnapshot.child("hargajual").getValue(Integer.class);
 
                     etNama.setText(nama); /** MEMUNCULKAN NAMA DARI DATABASE JIKA ADA */
                     //etJml.setText(jml);
@@ -293,13 +291,13 @@ public class TransaksiKaryawanFragment extends Fragment{
                                     sjml = Integer.parseInt(sJml);
                                 }
 
-                                shrgjual = Integer.parseInt(hrgjual); /** KONVERSI VALUE HARGA JUAL DARI DATABASE FIREBASE */
-                                hargaAwalInt = Integer.parseInt(hargaawal);
+                                shrgjual = hrgjual; /** KONVERSI VALUE HARGA JUAL DARI DATABASE FIREBASE */
+                                hargaAwalInt = hargaawal;
                                 stotal = sjml * shrgjual; /** DILAKUKAN PENJUMLAHAN UNTUK MENDAPATKAN TOTAL HARGA BARANG DIKALI JUMLAH BARANG*/
                                 Laba = stotal - (sjml * hargaAwalInt);
 
 
-                                jmlu = Integer.parseInt(jml); /** KONVERSI VALUE JUMLAH BARANG DARI DATABASE FIREBASE */
+                                jmlu = jml; /** KONVERSI VALUE JUMLAH BARANG DARI DATABASE FIREBASE */
                                 jmludi = jmlu - sjml; /** PENJUMLAHAN VALUE JUMLAH BARANG DARI DATABASE FIREBASE DIKURANGI JUMLAH TRANSAKSI DARI EDIT TEXT USER */
                                 jmlud = Integer.toString(jmludi); /** KONVERSI VALUE JUMLAH UNTUK MELAKUKAN UPDATE JUMLAH BARANG DI DATABASE FIREBASE */
 
@@ -351,7 +349,7 @@ public class TransaksiKaryawanFragment extends Fragment{
      * @param ud value hasil update barang setelah transaksi
      * @param udtr  value total pembayaran
      */
-    private void inputDatabase(TransaksiKaryawan transaksiKaryawan, LogHistory log, String barkod, String ud, String udtr, String udla, String timestamp) {
+    private void inputDatabase(TransaksiKaryawan transaksiKaryawan, LogHistory log, String barkod, Integer ud, Integer udtr, Integer udla, String timestamp) {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -487,16 +485,16 @@ public class TransaksiKaryawanFragment extends Fragment{
             database.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
-//                        String totalbayar = dataSnapshot2.child("total").getValue(String.class);
-                    String totaltransaksi = dataSnapshot2.child("totalTransaksi").getValue(String.class);
-                    String totallaba = dataSnapshot2.child("totalLaba").getValue(String.class);
+
+                    Integer totaltransaksi = dataSnapshot2.child("totalTransaksi").getValue(Integer.class);
+                    Integer totallaba = dataSnapshot2.child("totalLaba").getValue(Integer.class);
 
                     if (dataSnapshot2.child("totalTransaksi").exists() || dataSnapshot2.child("totalLaba").exists()){
                         DecimalFormat decim = new DecimalFormat("#,###.##");
-                        tvtotaltransaksi.setText("Rp. "+decim.format(Integer.parseInt(totaltransaksi)));
+                        tvtotaltransaksi.setText("Rp. "+decim.format(totaltransaksi));
 
-                        totalTransaksi = Integer.parseInt(totaltransaksi);
-                        totalLabaint =  Integer.parseInt(totallaba);
+                        totalTransaksi = totaltransaksi;
+                        totalLabaint =  totallaba;
 
 //                        Toast.makeText(getActivity(), "Data ada tapi NULL", Toast.LENGTH_SHORT).show();
                     } else {
@@ -504,21 +502,6 @@ public class TransaksiKaryawanFragment extends Fragment{
                         totalLabaint = 0;
 //                        Toast.makeText(getActivity(), "Data CEK", Toast.LENGTH_SHORT).show();
                     }
-
-//                    if (TextUtils.isEmpty(totaltransaksi)) {
-//                        totalTransaksi = 0;
-//                    } else {
-//                        DecimalFormat decim = new DecimalFormat("#,###.##");
-//                        tvtotaltransaksi.setText("Rp. "+decim.format(Integer.parseInt(totaltransaksi)));
-////                        tvtotaltransaksi.setText(totaltransaksi);
-//                        tvtotaltransaksi1.setText(totaltransaksi);
-//
-//
-////                    totalTransaksi = Integer.parseInt(totaltransaksi);
-//                        totalTransaksi = Integer.parseInt(totaltransaksi);
-//                    }
-
-
 
                 }
 

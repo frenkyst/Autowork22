@@ -3,14 +3,14 @@ package com.example.autowork.model;
 public class Transaksi {
 
     private String namaKaryawan;
-    private String totalTransaksi;
+    private Integer totalTransaksi;
     private String uid;
     private String key;
 
     public Transaksi(){ }
 
 
-    public Transaksi(String namaKaryawan, String totalTransaksi, String uid, String key) {
+    public Transaksi(String namaKaryawan, Integer totalTransaksi, String uid, String key) {
         this.namaKaryawan = namaKaryawan;
         this.totalTransaksi = totalTransaksi;
         this.uid = uid;
@@ -26,11 +26,11 @@ public class Transaksi {
         this.namaKaryawan = namaKaryawan;
     }
 
-    public String getTotalTransaksi() {
+    public Integer getTotalTransaksi() {
         return totalTransaksi;
     }
 
-    public void setTotalTransaksi(String totalTransaksi) {
+    public void setTotalTransaksi(Integer totalTransaksi) {
         this.totalTransaksi = totalTransaksi;
     }
 

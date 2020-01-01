@@ -57,9 +57,9 @@ public class MemintaView extends RecyclerView.Adapter<MemintaView.MyViewHolder> 
         holder.tv_nama.setText(movie.getNama());
 
         DecimalFormat decim = new DecimalFormat("#,###.##");
-        holder.tv_harga.setText(decim.format(Integer.parseInt(movie.getHargajual())));
+        holder.tv_harga.setText(decim.format(movie.getHargajual()));
 //        holder.tv_harga.setText(movie.getHargajual());
-        holder.tv_jml.setText(movie.getJml());
+        holder.tv_jml.setText(String.valueOf(movie.getJml()));
 /*
         holder.rl_layout.setOnClickListener(new View.OnClickListener() {
             @Override

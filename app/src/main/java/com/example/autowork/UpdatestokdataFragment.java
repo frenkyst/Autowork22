@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,6 +23,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -104,7 +107,7 @@ public class UpdatestokdataFragment extends Fragment {
 
             String Sbarkod = etBarkod.getText().toString();
             String Sjml = etJml.getText().toString();
-            String Sjmlplus = tvJmlplus.getText().toString();
+//            String Sjmlplus = tvJmlplus.getText().toString();
             String Snama = etNama.getText().toString();
             String logapa = "Update Stok";
 
@@ -119,18 +122,17 @@ public class UpdatestokdataFragment extends Fragment {
                pushData(new LogHistory(
                                 Sbarkod,
                                 Snama,
-                                Sjml,logapa), //IKI VARIABEL CLAS LOGHISTORY
+                       Integer.parseInt(Sjml),logapa), //IKI VARIABEL CLAS LOGHISTORY
 
-                        Sbarkod, Sjmlplus); //jmlud DARI  PENJUMLAHAN SETELAH MENGISI INPUT TEXT JML (BUTTON BARKODE)
+                        Sbarkod, Sjml); //jmlud DARI  PENJUMLAHAN SETELAH MENGISI INPUT TEXT JML (BUTTON BARKODE)
 
-                etBarkod.setEnabled(true);
-                etBarkod.setText("");
-                etNama.setText("");
-                etJml.setText("");
-                etJmlstok.setText("");
-                tvJmlplus.setText("");
-//                ettotal.setText("");
-                //ethrgjual.setText("");
+//                etBarkod.setEnabled(true);
+//                etBarkod.setText("");
+//                etNama.setText("");
+//                etJml.setText("");
+//                etJmlstok.setText("");
+//                tvJmlplus.setText("");
+
             }
 
         });
@@ -139,27 +141,58 @@ public class UpdatestokdataFragment extends Fragment {
     }
 
     // PROSES PUSH DATA KE FIREBASE
-    private void pushData(LogHistory log, String id, String ud) {
-        database1.child(GlobalVariabel.Toko)
-                .child(GlobalVariabel.Gudang)
-                .child(id)
-                .child("jml")
-                .setValue(ud);
+    private void pushData(LogHistory log, String kodebarang, String jumlahPenambahan) {
 
 
-        Long timestampl = System.currentTimeMillis();
-        String timestamp = timestampl.toString();
+            database.child(GlobalVariabel.Toko)
+                    .child(GlobalVariabel.Gudang)
+                    .child(kodebarang+"/jml").runTransaction(new Transaction.Handler() {
+                @NonNull
+                @Override
+                public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
 
-        database1.child(GlobalVariabel.Toko)
-                .child(GlobalVariabel.Log)
-                .child(timestamp)
-                .setValue(log);
+                    String jumlahStok = mutableData.getValue(String.class);
 
+                    if (jumlahStok == null) {
+                        return Transaction.success(mutableData);
+                    }
 
-//        etBarkod.setEnabled(true);
-        Toast.makeText(getActivity(),
-                "Data Berhasil Tambah",
-                Toast.LENGTH_SHORT).show();
+                    String valueUpdate = String.valueOf (Integer.parseInt(jumlahPenambahan)+Integer.parseInt(jumlahStok));
+
+                    mutableData.setValue("999");
+
+                    Toast.makeText(getActivity(),
+                            "MUTABLE = "+valueUpdate,
+                            Toast.LENGTH_SHORT).show();
+
+                    return Transaction.success(mutableData);
+                }
+
+                @Override
+                public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
+
+                    String status;
+
+                    if(databaseError != null){
+                        status = "eror";
+                    } else {
+
+//                        Long timestampl = System.currentTimeMillis();
+//                        String timestamp = timestampl.toString();
+//
+//                        database1.child(GlobalVariabel.Toko)
+//                                .child(GlobalVariabel.Log)
+//                                .child(timestamp)
+//                                .setValue(log);
+
+                        status = "sukses";
+                    }
+                    Toast.makeText(getActivity(),
+                            "status = "+status,
+                            Toast.LENGTH_SHORT).show();
+
+                }
+            });
 
     }
 
@@ -169,8 +202,6 @@ public class UpdatestokdataFragment extends Fragment {
 
         if (sBarkod.equals("")) {
             scane();
-//                        etBarkod.setError("Silahkan masukkan code"); // MAUNE TES MOD
-//                        etBarkod.requestFocus();
 
         } else {
 
@@ -178,26 +209,16 @@ public class UpdatestokdataFragment extends Fragment {
 //            etBarkod1.toLowerCase();
 
             database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.Gudang).child(etBarkod1);
-            database.addListenerForSingleValueEvent(new ValueEventListener() {
+            database.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String nama = dataSnapshot.child("nama").getValue(String.class);
-                    String jml = dataSnapshot.child("jml").getValue(String.class);
-//                    String hrgjual = dataSnapshot.child("hargajual").getValue(String.class);
-                    etNama.setText(nama);
-                    etJmlstok.setText(jml);
-                    //shrgjual1.setText(hrgjual);
 
-                    String sNama = etNama.getText().toString();
+                    if( dataSnapshot.child("nama").exists()){
+                        String nama = dataSnapshot.child("nama").getValue(String.class);
+                        Integer jml = dataSnapshot.child("jml").getValue(Integer.class);
 
-                    if (sNama.equals("")) {
-                        etBarkod.setError("Code Salah ??");
-                        etBarkod.requestFocus();
-                        etBarkod.selectAll();
-                        dialogyesno();
-
-
-                    } else {
+                        etNama.setText(nama);
+                        etJmlstok.setText(String.valueOf(jml));
 
                         etBarkod.setEnabled(false);
 
@@ -231,7 +252,11 @@ public class UpdatestokdataFragment extends Fragment {
                             }
                         });
 
-
+                    } else {
+                        etBarkod.setError("Code Salah ??");
+                        etBarkod.requestFocus();
+                        etBarkod.selectAll();
+                        dialogyesno();
 
                     }
 

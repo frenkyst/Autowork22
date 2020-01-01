@@ -4,13 +4,13 @@ public class LogHistory {
 
     private String barkod;
     private String nama;
-    private String jml;
+    private Integer jml;
     private String notaPembayaran;
     private String logapa;
-    private String totalTransaksi;
+    private Integer totalTransaksi;
 
 
-    public LogHistory(String notaPembayaran, String nama, String jml, String totalTransaksi, String logapa) {
+    public LogHistory(String notaPembayaran, String nama, Integer jml, Integer totalTransaksi, String logapa) {
         this.notaPembayaran = notaPembayaran;
         this.nama = nama;
         this.jml = jml;
@@ -20,7 +20,7 @@ public class LogHistory {
 
 
 
-    public LogHistory(String barkod, String nama, String jml, String logapa) {
+    public LogHistory(String barkod, String nama, Integer jml, String logapa) {
         this.barkod = barkod;
         this.nama = nama;
         this.jml = jml;
@@ -44,19 +44,19 @@ public class LogHistory {
         this.nama = nama;
     }
 
-    public String getJml() {
+    public Integer getJml() {
         return jml;
     }
 
-    public void setJml(String jml) {
+    public void setJml(Integer jml) {
         this.jml = jml;
     }
 
-    public String getTotalTransaksi() {
+    public Integer getTotalTransaksi() {
         return totalTransaksi;
     }
 
-    public void setTotalTransaksi(String detiltransaksi) {
+    public void setTotalTransaksi(Integer detiltransaksi) {
         this.totalTransaksi = detiltransaksi;
     }
 

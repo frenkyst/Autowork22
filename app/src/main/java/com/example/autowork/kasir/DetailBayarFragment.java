@@ -45,13 +45,14 @@ public class DetailBayarFragment extends Fragment {
     }
 
     private DatabaseReference database, fromPath, toPath, totalTopath;
-    Object Uid;
 
     private ArrayList<Meminta> daftarReq;
     private MemintaTransaksikasir memintatransaksikasir;
 
     private RecyclerView rc_list_request;
     private ProgressDialog loading;
+
+    private Integer totalBayar;
 
     String timestamp;
 
@@ -113,11 +114,12 @@ public class DetailBayarFragment extends Fragment {
                      * =============================================================================(STAR)
                      * MENAMPILKAN TOTAL HARGA KESELURUHAN
                      * */
-                    String totalbayar = dataSnapshot.child("totalTransaksi").getValue(String.class);
+
 
                     if(dataSnapshot.child("totalTransaksi").exists()) {
+                        totalBayar = dataSnapshot.child("totalTransaksi").getValue(Integer.class);
                         DecimalFormat decim = new DecimalFormat("#,###.##");
-                        tv_totalBayar.setText("Rp. " + decim.format(Integer.parseInt(totalbayar)));
+                        tv_totalBayar.setText("Rp. " + decim.format(totalBayar));
 //                    tv_totalBayar.setText("Rp. "+totalbayar);
 
                     }
@@ -176,8 +178,6 @@ public class DetailBayarFragment extends Fragment {
             if (user != null) {
                 // Name, email address, and profile photo Url
                 String name = user.getDisplayName();
-                String totalBayars;
-                totalBayars = tv_totalBayar.getText().toString();
 
                 copyRecord(fromPath,toPath,name,timestamp);
 
@@ -185,7 +185,7 @@ public class DetailBayarFragment extends Fragment {
                         name,
                         timestamp,
                         "Nota Pembayaran",
-                        totalBayars));
+                        totalBayar));
             }
 
 

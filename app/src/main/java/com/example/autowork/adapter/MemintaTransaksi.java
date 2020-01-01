@@ -70,7 +70,7 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
 
         holder.tv_nama.setText(movie.getNamakaryawan());
         DecimalFormat decim = new DecimalFormat("#,###.##");
-        holder.tv_total.setText(decim.format(Integer.parseInt(movie.getTotalTransaksi())));
+        holder.tv_total.setText(decim.format(movie.getTotalTransaksi()));
 //        holder.tv_total.setText(movie.getTotalTransaksi());
 //        holder.tv_totalBayar.setText(movie.getTotal());
 //        holder.tap_edit.setText(movie.getUid());

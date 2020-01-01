@@ -4,18 +4,18 @@ public class Meminta {
 
     private String barkod;
     private String nama;
-    private String jml;
+    private Integer jml;
 
     private String key;
 
 
 
-    private String hargaawal;
-    private String hargajual;
+    private Integer hargaawal;
+    private Integer hargajual;
 
-    private String total;
+    private Integer total;
 
-    private String jmlplus;
+    private Integer jmlplus;
 
 
 
@@ -24,21 +24,21 @@ public class Meminta {
     }
 
     // MODEL INPUT DATA LOG TRANSAKSI DATA (UPDATE DATA STOK, TRANSAKSI PENJUALAN)
-    public Meminta(String barkod, String nama, String jml) {
+    public Meminta(String barkod, String nama, Integer jml) {
         this.barkod = barkod;
         this.nama = nama;
         this.jml = jml;
     }
 
     // MODEL INPUT DATA KALKULASI TOTAL DARI TRANSAKSI PENJUALAN (jml = Total =>  |  total = total)
-    public Meminta(String total) {
+    public Meminta(Integer total) {
 
         this.total = total;
     }
 
 
     // MODEL INPUT DATA TRANSAKSI 1
-    public Meminta(String barkod, String nama, String jml, String total) {
+    public Meminta(String barkod, String nama, Integer jml, Integer total) {
         this.barkod = barkod;
         this.nama = nama;
         this.jml = jml;
@@ -46,7 +46,7 @@ public class Meminta {
     }
 
     // MODEL INPUT DATA BARANG BARU YANG BELUM PERNAH ADA SEBELUMNYA DAN MENJADI ADA
-    public Meminta(String barkod, String nama, String jml, String hargaawal, String hargajual) {
+    public Meminta(String barkod, String nama, Integer jml, Integer hargaawal, Integer hargajual) {
         this.barkod = barkod;
         this.nama = nama;
         this.jml = jml;
@@ -56,11 +56,11 @@ public class Meminta {
         //this.total = total;
     }
 
-    public String getTotal() {
+    public Integer getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(Integer total) {
         this.total = total;
     }
 
@@ -80,11 +80,11 @@ public class Meminta {
         this.nama = nama;
     }
 
-    public String getJml() {
+    public Integer getJml() {
         return jml;
     }
 
-    public void setJml(String jml) {
+    public void setJml(Integer jml) {
         this.jml = jml;
     }
 
@@ -96,19 +96,19 @@ public class Meminta {
         this.key = key;
     }
 
-    public String getHargaawal() {
+    public Integer getHargaawal() {
         return hargaawal;
     }
 
-    public void setHargaawal(String hargaawal) {
+    public void setHargaawal(Integer hargaawal) {
         this.hargaawal = hargaawal;
     }
 
-    public String getHargajual() {
+    public Integer getHargajual() {
         return hargajual;
     }
 
-    public void setHargajual(String hargajual) {
+    public void setHargajual(Integer hargajual) {
         this.hargajual = hargajual;
     }
 

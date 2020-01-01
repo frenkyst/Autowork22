@@ -98,13 +98,13 @@ public class TambahDataFragment extends Fragment {
                             submit(new Meminta(
                                             Sbarkod,
                                             Snama,
-                                            Sjml,
-                                            Shrgawal,
-                                            Shrgjual),
+                                            Integer.parseInt(Sjml),
+                                            Integer.parseInt(Shrgawal),
+                                            Integer.parseInt(Shrgjual)),
                                     new LogHistory(
                                             Sbarkod,
                                             Snama,
-                                            Sjml, logapa),
+                                            Integer.parseInt(Sjml), logapa),
                                     Sbarkod);
                         }
 
