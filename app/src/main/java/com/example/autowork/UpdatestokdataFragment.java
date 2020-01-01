@@ -29,6 +29,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.text.DecimalFormat;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,7 +48,7 @@ public class UpdatestokdataFragment extends Fragment {
     private TextView tvJmlplus;
 
     private String jmlud, hasilbarkod;
-    private Integer sjml, sjmlstok, jmlupdate;
+    private Integer sjml=0, jmlupdate;
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -61,8 +63,6 @@ public class UpdatestokdataFragment extends Fragment {
                 mencaribarkod();
             }
 
-            // At this point we may or may not have a reference to the activity
-//            displayToast();
         }
     }
 
@@ -74,10 +74,7 @@ public class UpdatestokdataFragment extends Fragment {
         integrator.setOrientationLocked(false);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
         integrator.setPrompt("Scan Barkod e?");
-//        integrator;
         integrator.initiateScan();
-
-
 
     }
 
@@ -115,23 +112,15 @@ public class UpdatestokdataFragment extends Fragment {
                 etJml.setError("Silahkan masukkan jumlah");
                 etJml.requestFocus();
 
-
             } else {
-
 
                pushData(new LogHistory(
                                 Sbarkod,
                                 Snama,
-                       Integer.parseInt(Sjml),logapa), //IKI VARIABEL CLAS LOGHISTORY
+                                Integer.parseInt(Sjml),
+                                logapa), //IKI VARIABEL CLAS LOGHISTORY
 
-                        Sbarkod, Sjml); //jmlud DARI  PENJUMLAHAN SETELAH MENGISI INPUT TEXT JML (BUTTON BARKODE)
-
-//                etBarkod.setEnabled(true);
-//                etBarkod.setText("");
-//                etNama.setText("");
-//                etJml.setText("");
-//                etJmlstok.setText("");
-//                tvJmlplus.setText("");
+                                Sbarkod, Sjml); //jmlud DARI  PENJUMLAHAN SETELAH MENGISI INPUT TEXT JML (BUTTON BARKODE)
 
             }
 
@@ -144,26 +133,16 @@ public class UpdatestokdataFragment extends Fragment {
     private void pushData(LogHistory log, String kodebarang, String jumlahPenambahan) {
 
 
-            database.child(GlobalVariabel.Toko)
+            database1.child(GlobalVariabel.Toko)
                     .child(GlobalVariabel.Gudang)
                     .child(kodebarang+"/jml").runTransaction(new Transaction.Handler() {
                 @NonNull
                 @Override
                 public Transaction.Result doTransaction(@NonNull MutableData mutableData) {
 
-                    String jumlahStok = mutableData.getValue(String.class);
+                    Integer jumlahStok = mutableData.getValue(Integer.class);
 
-                    if (jumlahStok == null) {
-                        return Transaction.success(mutableData);
-                    }
-
-                    String valueUpdate = String.valueOf (Integer.parseInt(jumlahPenambahan)+Integer.parseInt(jumlahStok));
-
-                    mutableData.setValue("999");
-
-                    Toast.makeText(getActivity(),
-                            "MUTABLE = "+valueUpdate,
-                            Toast.LENGTH_SHORT).show();
+                    mutableData.setValue(jumlahStok+Integer.parseInt(jumlahPenambahan));
 
                     return Transaction.success(mutableData);
                 }
@@ -174,21 +153,30 @@ public class UpdatestokdataFragment extends Fragment {
                     String status;
 
                     if(databaseError != null){
-                        status = "eror";
+                        status = "Error ! Ulangi !";
                     } else {
 
-//                        Long timestampl = System.currentTimeMillis();
-//                        String timestamp = timestampl.toString();
-//
-//                        database1.child(GlobalVariabel.Toko)
-//                                .child(GlobalVariabel.Log)
-//                                .child(timestamp)
-//                                .setValue(log);
+                        Long timestampl = System.currentTimeMillis();
+                        String timestamp = timestampl.toString();
 
-                        status = "sukses";
+                        database1.child(GlobalVariabel.Toko)
+                                .child(GlobalVariabel.Log)
+                                .child(timestamp)
+                                .setValue(log);
+
+                        status = "Berhasil !!";
+
+                        etBarkod.setEnabled(true);
+                        etBarkod.setText("");
+                        etNama.setText("");
+                        etJml.setText("");
+                        etJmlstok.setText("");
+                        tvJmlplus.setText("");
+
                     }
+
                     Toast.makeText(getActivity(),
-                            "status = "+status,
+                            status,
                             Toast.LENGTH_SHORT).show();
 
                 }
@@ -217,8 +205,9 @@ public class UpdatestokdataFragment extends Fragment {
                         String nama = dataSnapshot.child("nama").getValue(String.class);
                         Integer jml = dataSnapshot.child("jml").getValue(Integer.class);
 
+                        DecimalFormat decim = new DecimalFormat("#,###.##");
                         etNama.setText(nama);
-                        etJmlstok.setText(String.valueOf(jml));
+                        etJmlstok.setText(decim.format(jml));
 
                         etBarkod.setEnabled(false);
 
@@ -230,20 +219,18 @@ public class UpdatestokdataFragment extends Fragment {
 
                             @Override
                             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
                                 String sJml = etJml.getText().toString();
-                                String sJmlstok = etJmlstok.getText().toString();
 
                                 if (sJml.equals("")) {
                                     sjml=0;
-                                    sjmlstok=0;
                                 } else {
                                     sjml = Integer.parseInt(sJml);
-                                    sjmlstok = Integer.parseInt(sJmlstok);
                                 }
 
-                                jmlupdate = sjmlstok + sjml;
+                                jmlupdate = jml + sjml;
+                                tvJmlplus.setText(decim.format(jmlupdate));
 
-                                tvJmlplus.setText(Integer.toString(jmlupdate));  // MENAMPILKAN HASIL SETELAH DI UPDATE KE VIEW LAYOUT
                             }
 
                             @Override
@@ -251,6 +238,9 @@ public class UpdatestokdataFragment extends Fragment {
 
                             }
                         });
+
+                        jmlupdate = jml + sjml;
+                        tvJmlplus.setText(decim.format(jmlupdate));  // MENAMPILKAN HASIL SETELAH DI UPDATE KE VIEW LAYOUT
 
                     } else {
                         etBarkod.setError("Code Salah ??");
