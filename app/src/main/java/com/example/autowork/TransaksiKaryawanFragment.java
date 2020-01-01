@@ -59,8 +59,7 @@ public class TransaksiKaryawanFragment extends Fragment{
     }
 
 
-
-
+    DecimalFormat decim = new DecimalFormat("#,###.##");
 
     private DatabaseReference database, database1;
 
@@ -119,13 +118,39 @@ public class TransaksiKaryawanFragment extends Fragment{
         etBarkod = vt.findViewById(R.id.et_barkod);
         etNama = vt.findViewById(R.id.et_nama);
         etJml = vt.findViewById(R.id.et_jml);
-//        ettotal = vt.findViewById(R.id.et_total);
         tvtotal = vt.findViewById(R.id.tv_total);
         tvtotaltransaksi = vt.findViewById(R.id.tv_totaltransaksi);
         tvtotaltransaksi1 = vt.findViewById(R.id.tv_totaltransaksi1);
 
-        ambiltotal();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String uid = user.getUid();
 
+            database1.child(GlobalVariabel.Toko).child(GlobalVariabel.Transaksi).child(uid).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                    if (dataSnapshot.child("totalTransaksi").exists() && dataSnapshot.child("totalLaba").exists()) {
+
+                        totalTransaksi = dataSnapshot.child("totalTransaksi").getValue(Integer.class);
+                        totalLabaint = dataSnapshot.child("totalLaba").getValue(Integer.class);
+
+                        tvtotaltransaksi.setText("Rp. " + decim.format(totalTransaksi));
+
+                    } else {
+
+                        totalTransaksi = 0;
+                        totalLabaint = 0;
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
 
         // TOMBOL CENSEL
         vt.findViewById(R.id.btn_cancel).setOnClickListener((view) -> {
@@ -134,7 +159,6 @@ public class TransaksiKaryawanFragment extends Fragment{
 
         vt.findViewById(R.id.btn_cancel1).setOnClickListener((view) -> {
 
-            ambiltotal();
 
         });
 
@@ -165,7 +189,6 @@ public class TransaksiKaryawanFragment extends Fragment{
 
 
             } else {
-
 
                 // UPDATE TOTAL PEMBAYARAN PADA TABEL TRANSAKSI 1
                 totalupdateTransaksi = totalTransaksi + stotal; /** TOTALTRANSAKSI DARI FUNGSI AMBILTOTAL() DAN STOTAL DARI FUNGSI PENJUMLAHAN KETIKA  USER MENGINPUTKAN JUMLAH */
@@ -203,16 +226,11 @@ public class TransaksiKaryawanFragment extends Fragment{
                  * DAN MENSET NAMA DAN JUMLAH MENJADI KOSONG LAGI
                  */
                 etBarkod.setEnabled(true);
-//                etBarkod.setText(Integer.toString(totalBayar));
                 etNama.setText("");
                 etJml.setText("");
-//                tvtotaltransaksi.setText("--");
-
-//                ettotal.setText("");
 
             }
 
-            ambiltotal();
 
 
         });
@@ -234,35 +252,45 @@ public class TransaksiKaryawanFragment extends Fragment{
 
         if (sBarkod.equals("")) { /** JIKA BARCOD TIDAK DIISI MAKA AKAN MENGEKSEKUSI FUNGSI SCAN */
             scane();
-//                        etBarkod.setError("Silahkan masukkan code"); // MAUNE TES MOD
-//                        etBarkod.requestFocus();
 
         } else { /** JIKA DIISI MAKA AKAH DILAKUKAN PENCARIAN DATABASE */
 
             String etBarkod1 = etBarkod.getText().toString();
-//            etBarkod1.toLowerCase();
 
             database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.Gudang).child(etBarkod1);
             database.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                    Integer hargaawal = dataSnapshot.child("hargaawal").getValue(Integer.class);
-                    String nama = dataSnapshot.child("nama").getValue(String.class);
-                    Integer jml = dataSnapshot.child("jml").getValue(Integer.class);
-                    Integer hrgjual = dataSnapshot.child("hargajual").getValue(Integer.class);
-
-                    etNama.setText(nama); /** MEMUNCULKAN NAMA DARI DATABASE JIKA ADA */
-                    //etJml.setText(jml);
-                    //shrgjual1.setText(hrgjual);
-
-                    String sNama = etNama.getText().toString();
+//                        if (dataSnapshot.child(GlobalVariabel.Transaksi).child(uid).child("totalTransaksi").exists() && dataSnapshot.child(GlobalVariabel.Transaksi).child(uid).child("totalLaba").exists()) {
+//
+//                            totalTransaksi = dataSnapshot.child(GlobalVariabel.Transaksi).child(uid).child("totalTransaksi").getValue(Integer.class);
+//                            totalLabaint = dataSnapshot.child(GlobalVariabel.Transaksi).child(uid).child("totalLaba").getValue(Integer.class);
+//
+//                            tvtotaltransaksi.setText("Rp. " + decim.format(totalTransaksi));
+//
+//                        } else {
+//
+//                            totalTransaksi = 0;
+//                            totalLabaint = 0;
+//
+//                        }
 
                     /**
                      * VERIFIKASI BARKOD APAKAH ADA DI DATABASE FIREBASE
                      * JIKA NAMA DARI DATABASE TIDAK ADA MAKA AKAN MUNCUL Code salah
                      */
-                    if (dataSnapshot.child("nama").exists()) {
+                    if (dataSnapshot.child("hargaawal").exists() &&
+                            dataSnapshot.child("nama").exists() &&
+                            dataSnapshot.child("jml").exists() &&
+                            dataSnapshot.child("hargajual").exists()) {
+
+                        Integer hargaawal = dataSnapshot.child("hargaawal").getValue(Integer.class);
+                        String nama = dataSnapshot.child("nama").getValue(String.class);
+                        Integer jml = dataSnapshot.child("jml").getValue(Integer.class);
+                        Integer hrgjual = dataSnapshot.child("hargajual").getValue(Integer.class);
+
+                        etNama.setText(nama); /** MEMUNCULKAN NAMA DARI DATABASE JIKA ADA */
 
                         /**
                          * JIKA DATA DITEMUKAN MAKA HARGA DI JUMLAHKAN
@@ -284,26 +312,20 @@ public class TransaksiKaryawanFragment extends Fragment{
                                 String sJml = etJml.getText().toString();  /** JUMLAH DIAMBIL DARI EDIT TEXT */
 
                                 if (sJml.equals("")) { /** INISIALISASI MENGHINDARI EROR JIKA EDIT TEXT KOSONG ATAU USER MELAKUKAN PENGHAPUSAN JUMLAH DI EDIT TEXT */
-                                    sjml=0;
+                                    sjml = 0;
 
 
                                 } else { /** JIKA EDIT TEXT JUMLAH TIDAK KOSONG MAKA DILAKUKAN KONVERSI DATA DARI STRING KE INTEGER */
                                     sjml = Integer.parseInt(sJml);
                                 }
 
-                                shrgjual = hrgjual; /** KONVERSI VALUE HARGA JUAL DARI DATABASE FIREBASE */
-                                hargaAwalInt = hargaawal;
-                                stotal = sjml * shrgjual; /** DILAKUKAN PENJUMLAHAN UNTUK MENDAPATKAN TOTAL HARGA BARANG DIKALI JUMLAH BARANG*/
-                                Laba = stotal - (sjml * hargaAwalInt);
+                                stotal = sjml * hrgjual; /** DILAKUKAN PENJUMLAHAN UNTUK MENDAPATKAN TOTAL HARGA BARANG DIKALI JUMLAH BARANG*/
+                                Laba = stotal - (sjml * hargaawal);
 
-
-                                jmlu = jml; /** KONVERSI VALUE JUMLAH BARANG DARI DATABASE FIREBASE */
-                                jmludi = jmlu - sjml; /** PENJUMLAHAN VALUE JUMLAH BARANG DARI DATABASE FIREBASE DIKURANGI JUMLAH TRANSAKSI DARI EDIT TEXT USER */
-                                jmlud = Integer.toString(jmludi); /** KONVERSI VALUE JUMLAH UNTUK MELAKUKAN UPDATE JUMLAH BARANG DI DATABASE FIREBASE */
-
+                                jmludi = jml - sjml; /** PENJUMLAHAN VALUE JUMLAH BARANG DARI DATABASE FIREBASE DIKURANGI JUMLAH TRANSAKSI DARI EDIT TEXT USER */
 
                                 DecimalFormat decim = new DecimalFormat("#,###.##");
-                                tvtotal.setText("Rp. "+decim.format(stotal));/** MENAMPILKAN TOTAL HARGA KE VIEW LAYOUT (KONVERSI VALUE TOTAL HARGA BARANG) */
+                                tvtotal.setText("Rp. " + decim.format(stotal));/** MENAMPILKAN TOTAL HARGA KE VIEW LAYOUT (KONVERSI VALUE TOTAL HARGA BARANG) */
 //                                tvtotal.setText(Integer.toString(stotal));
                             }
 
@@ -331,7 +353,6 @@ public class TransaksiKaryawanFragment extends Fragment{
             });
 
 
-
         }
     }
 
@@ -346,10 +367,10 @@ public class TransaksiKaryawanFragment extends Fragment{
      * @param transaksiKaryawan trasaksi data barang
      * @param log data log transaksi karyawan
      * @param barkod barkod untuk menentukan lokasi barang yang di update
-     * @param ud value hasil update barang setelah transaksi
+     * @param updateStok value hasil update barang setelah transaksi
      * @param udtr  value total pembayaran
      */
-    private void inputDatabase(TransaksiKaryawan transaksiKaryawan, LogHistory log, String barkod, Integer ud, Integer udtr, Integer udla, String timestamp) {
+    private void inputDatabase(TransaksiKaryawan transaksiKaryawan, LogHistory log, String barkod, Integer updateStok, Integer udtr, Integer udla, String timestamp) {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -364,7 +385,7 @@ public class TransaksiKaryawanFragment extends Fragment{
                     .child(GlobalVariabel.Gudang)
                     .child(barkod)
                     .child("jml")
-                    .setValue(ud);
+                    .setValue(updateStok);
 
 
 
@@ -471,52 +492,6 @@ public class TransaksiKaryawanFragment extends Fragment{
      * ==============================================================================================(STAR)
      */
 
-    /**
-     * =========================================================================================================================================================(STAR)
-     * FUNGSI MENDAPATKAN NILAI TOTAL TRANSAKSI DARI TABEL TRANSAKSI FIREBASE
-     */
-    private void ambiltotal(){
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // Name, email address, and profile photo Url
-//            String name = user.getDisplayName();
-            String uid = user.getUid();
-            database = FirebaseDatabase.getInstance().getReference().child(GlobalVariabel.Toko).child(GlobalVariabel.Transaksi).child(uid);
-            database.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot2) {
-
-                    Integer totaltransaksi = dataSnapshot2.child("totalTransaksi").getValue(Integer.class);
-                    Integer totallaba = dataSnapshot2.child("totalLaba").getValue(Integer.class);
-
-                    if (dataSnapshot2.child("totalTransaksi").exists() || dataSnapshot2.child("totalLaba").exists()){
-                        DecimalFormat decim = new DecimalFormat("#,###.##");
-                        tvtotaltransaksi.setText("Rp. "+decim.format(totaltransaksi));
-
-                        totalTransaksi = totaltransaksi;
-                        totalLabaint =  totallaba;
-
-//                        Toast.makeText(getActivity(), "Data ada tapi NULL", Toast.LENGTH_SHORT).show();
-                    } else {
-                        totalTransaksi = 0;
-                        totalLabaint = 0;
-//                        Toast.makeText(getActivity(), "Data CEK", Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-
-            });
-        }
-    }
-
-    /**
-     * =========================================================================================================================================================(STAR)
-     */
 
 }
 
