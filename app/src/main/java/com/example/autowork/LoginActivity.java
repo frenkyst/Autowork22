@@ -1,6 +1,7 @@
 package com.example.autowork;
 
 import android.content.Intent;
+import android.os.UserHandle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -197,7 +198,7 @@ public class LoginActivity extends AppCompatActivity {
 
                             confim("BOSS");
 
-                        } else if (dataSnapshot.child("Karyawan").getValue(String.class).equals("Ya")){
+                        } else if (dataSnapshot.child("Karyawan").exists()){
 
                             confim("Karyawan");
 
@@ -265,15 +266,15 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * @deprecated push data user ke firebase dari variabel userman
-     * @param userman data user
+     * @param userMan data user
      * @param uid key lokasi penyimpanan data
      */
-    private void submit(UserMan userman, String uid) {
+    private void submit(UserMan userMan, String uid) {
         database = FirebaseDatabase.getInstance().getReference();
         database.child(GlobalVariabel.Toko)
                 .child(GlobalVariabel.UserMan)
                 .child(uid)
-                .setValue(userman);
+                .setValue(userMan);
 
         Toast.makeText(LoginActivity.this, "input data user",
                 Toast.LENGTH_SHORT).show();

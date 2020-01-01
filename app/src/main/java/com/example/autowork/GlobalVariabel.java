@@ -2,6 +2,7 @@ package com.example.autowork;
 
 public class GlobalVariabel {
     public static String
+            Owner = null,
             UbahNo = "2",
             Toko = "TOKO "+UbahNo,
             Gudang = "Gudang "+UbahNo,
