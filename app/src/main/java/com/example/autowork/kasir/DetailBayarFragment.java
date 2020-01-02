@@ -21,6 +21,7 @@ import com.example.autowork.adapter.MemintaTransaksikasir;
 import com.example.autowork.model.LogHistory;
 import com.example.autowork.model.LogKasir;
 import com.example.autowork.model.Meminta;
+import com.example.autowork.model.TransaksiKaryawan;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -120,20 +121,11 @@ public class DetailBayarFragment extends Fragment {
                         totalBayar = dataSnapshot.child("totalTransaksi").getValue(Integer.class);
                         DecimalFormat decim = new DecimalFormat("#,###.##");
                         tv_totalBayar.setText("Rp. " + decim.format(totalBayar));
-//                    tv_totalBayar.setText("Rp. "+totalbayar);
 
                     }
                     /**
                      * =============================================================================(END)
                      */
-
-//                    if (dataSnapshot.child("totalTransaksi").equals(null)){
-//                        Toast.makeText(getActivity(), "???????????????", Toast.LENGTH_SHORT).show();
-//                    } else {
-//                        Toast.makeText(getContext(), "???????????????", Toast.LENGTH_SHORT).show();
-////                        getActivity().finish();
-//                    }
-
                 }
 
                 /**
@@ -168,11 +160,9 @@ public class DetailBayarFragment extends Fragment {
             Long timestampl = System.currentTimeMillis();
             timestamp = timestampl.toString();
             GlobalVariabel.timestamp = timestamp;
-//            String childKasir = GlobalVariabel.Toko+"/"+GlobalVariabel.Kasir+"/"+timestamp;
 
             fromPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid);
             toPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.NotaPembayaran+"/"+timestamp);
-//            totalTopath = FirebaseDatabase.getInstance().getReference(childKasir+"/zzzzzzzzz");
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
@@ -220,9 +210,6 @@ public class DetailBayarFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 toPath.setValue(dataSnapshot.getValue());
-//                totalTopath.setValue(dataSnapshot.child("zzzzzzzzz").getValue());
-//                toPath.child("detail").child("zzzzzzzzz").setValue(dataSnapshot.child("zzzzzzzzz").getValue());
-//                toPath.child("totalTransaksi").setValue(dataSnapshot.child("zzzzzzzzz").child("total").getValue());
                 toPath.child("namaKasir").setValue(nama);
                 toPath.child("kodeTransaksi").setValue(timeStamp);
 

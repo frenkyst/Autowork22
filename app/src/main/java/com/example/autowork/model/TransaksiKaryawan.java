@@ -6,6 +6,7 @@ public class TransaksiKaryawan {
     private Integer jml;
     private Integer total;
     private Integer laba;
+    private String key;
 
 
     public TransaksiKaryawan(String nama, Integer jml, Integer laba) {
@@ -22,6 +23,7 @@ public class TransaksiKaryawan {
         this.total = total;
         this.laba = laba;
     }
+
 
     public String getBarkod() {
         return barkod;
@@ -61,6 +63,14 @@ public class TransaksiKaryawan {
 
     public void setLaba(Integer laba) {
         this.laba = laba;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     @Override

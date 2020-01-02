@@ -43,6 +43,7 @@
             android:id="@+id/tv_namaBarang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/abang"
             android:text="-"
             android:textSize="26sp"
             />

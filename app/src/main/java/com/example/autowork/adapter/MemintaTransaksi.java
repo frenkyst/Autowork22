@@ -71,10 +71,6 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
         holder.tv_nama.setText(movie.getNamakaryawan());
         DecimalFormat decim = new DecimalFormat("#,###.##");
         holder.tv_total.setText(decim.format(movie.getTotalTransaksi()));
-//        holder.tv_total.setText(movie.getTotalTransaksi());
-//        holder.tv_totalBayar.setText(movie.getTotal());
-//        holder.tap_edit.setText(movie.getUid());
-
 
         /**
          * ============================================================================================================================================(STAR)
@@ -83,7 +79,6 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
         holder.tap_edit.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
 
                 //creating a popup menu
                 PopupMenu popup = new PopupMenu(mActivity, holder.tap_edit);
@@ -103,11 +98,7 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
                                 Fragment myFragment = new DetailBayarFragment();
                                 activity.getSupportFragmentManager().beginTransaction().replace(R.id.framekasir, myFragment).addToBackStack(null).commit();
 
-
-
-
                                 break;
-
                         }
                         return false;
                     }
@@ -115,16 +106,11 @@ public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyVi
                 //displaying the popup
                 popup.show();
 
-
-
-
             }
         });
         /**
          * ===============================================================================================================================================(END)
          */
-
-
 
     }
 

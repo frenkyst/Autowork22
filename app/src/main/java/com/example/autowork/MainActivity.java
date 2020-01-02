@@ -142,6 +142,7 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.replace(R.id.frameawal, fragment);
             fragmentTransaction.addToBackStack(null).commit();
         } else if (id == R.id.nav_lihatTransaksi) {
+            this.getSupportFragmentManager().popBackStackImmediate();
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
                 // Name, email address, and profile photo Url
