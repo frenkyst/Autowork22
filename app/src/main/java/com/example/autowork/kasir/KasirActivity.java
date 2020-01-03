@@ -40,14 +40,14 @@ public class KasirActivity extends AppCompatActivity
         setContentView(R.layout.activity_kasir);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -71,9 +71,9 @@ public class KasirActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        DetailBayarFragment myFragment = new DetailBayarFragment();
-        fragmentTransaction.remove(myFragment).commit();
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        DetailBayarFragment myFragment = new DetailBayarFragment();
+//        fragmentTransaction.remove(myFragment).commit();
     }
 
     @Override
@@ -127,7 +127,10 @@ public class KasirActivity extends AppCompatActivity
             // Handle the camera action
 
         } else if (id == R.id.nav_gallery) {
-
+            LaporanTransaksiFragment fragment = new LaporanTransaksiFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.framekasir, fragment);
+            fragmentTransaction.commit();
         } else if (id == R.id.nav_slideshow) {
 
         } else if (id == R.id.nav_tools) {

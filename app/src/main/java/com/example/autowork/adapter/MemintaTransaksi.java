@@ -3,8 +3,6 @@ package com.example.autowork.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -19,9 +17,6 @@ import android.widget.TextView;
 import com.example.autowork.GlobalVariabel;
 import com.example.autowork.R;
 import com.example.autowork.kasir.DetailBayarFragment;
-import com.example.autowork.kasir.HomeKasirFragment;
-import com.example.autowork.kasir.KasirActivity;
-import com.example.autowork.model.Meminta;
 import com.example.autowork.model.Transaksi;
 
 import java.text.DecimalFormat;
@@ -29,7 +24,6 @@ import java.util.List;
 
 public class MemintaTransaksi extends RecyclerView.Adapter<MemintaTransaksi.MyViewHolder> {
 
-    private Context context;
     private List<Transaksi> moviesList;
     private Activity mActivity;
 

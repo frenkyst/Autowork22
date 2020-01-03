@@ -10,7 +10,6 @@
 
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/rl_layouttransaksi"
         android:background="@color/viewfinder_border"
         android:layout_width="match_parent"
