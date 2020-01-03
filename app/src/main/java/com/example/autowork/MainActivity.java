@@ -159,7 +159,13 @@ public class MainActivity extends AppCompatActivity
                 fragmentTransaction.addToBackStack(null).commit();
 
             }
+        } else if (id == R.id.nav_editBarang) {
+            this.getSupportFragmentManager().popBackStackImmediate();
 
+            EditDataFragment fragment = new EditDataFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frameawal, fragment);
+            fragmentTransaction.addToBackStack(null).commit();
         } else if (id == R.id.nav_send) {
             startActivity(new Intent(this, KasirActivity.class));
         }

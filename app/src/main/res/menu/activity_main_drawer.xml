@@ -16,19 +16,24 @@
             android:id="@+id/nav_menambahStok"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Menambah Stok" />
+        <item
+            android:id="@+id/nav_transaksi"
+            android:icon="@drawable/ic_menu_share"
+            android:title="Transaksi Penjualan" />
+        <item
+            android:id="@+id/nav_lihatTransaksi"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Lihat Transaksi" />
+        <item
+            android:id="@+id/nav_editBarang"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Lihat Transaksi" />
 
     </group>
 
     <item android:title="Communicate">
         <menu>
-            <item
-                android:id="@+id/nav_transaksi"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Transaksi Penjualan" />
-            <item
-                android:id="@+id/nav_lihatTransaksi"
-                android:icon="@drawable/ic_menu_manage"
-                android:title="Lihat Transaksi" />
+
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"

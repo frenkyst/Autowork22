@@ -3,12 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UpdatestokdataFragment">
-
-
+    tools:context=".EditDataFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -22,8 +19,7 @@
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_gravity="center"
-            android:text="Stock Masuk" />
-
+            android:text="Edit Stok Data" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,24 +43,13 @@
 
         </LinearLayout>
 
+
         <EditText
             android:id="@+id/et_nama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:enabled="false"
             android:hint="Nama Barang" />
-
-
-
-        <EditText
-            android:id="@+id/et_jmlstok"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:enabled="false"
-            android:textAlignment="center"
-            android:hint="Jumlah Stok Awal" />
 
         <EditText
             android:id="@+id/et_jml"
@@ -72,35 +57,66 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textAlignment="center"
-            android:hint="Jumlah Penambahan Stok"
+            android:hint="Jumlah"
             android:inputType="number" />
 
-        <TextView
-            android:id="@+id/tv_jmlplus"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:textSize="24sp"
-            android:textAlignment="center"
-            android:text="Jumlah Setelah Update" />
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            >
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:text="Rp" />
+
+            <EditText
+                android:id="@+id/et_hrgawal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:hint="Harga Awal"
+                android:inputType="number" />
 
 
 
+        </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            >
 
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:text="Rp" />
 
+            <EditText
+                android:id="@+id/et_hrgjual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
 
+                android:hint="Harga Jual"
+                android:inputType="number" />
 
+        </LinearLayout>
 
 
         <Button
-            android:id="@+id/btn_updatestok"
+            android:id="@+id/btn_editBarang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
-            android:text="Update Stok"
+            android:text="Edit Barang"
             android:textAllCaps="false" />
 
         <Button
@@ -112,6 +128,5 @@
             android:text="Cancel"
             android:textAllCaps="false" />
     </LinearLayout>
-
 
 </FrameLayout>
