@@ -13,7 +13,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.autowork.model.LogHistory;
 import com.example.autowork.model.Meminta;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -196,15 +199,29 @@ public class EditDataFragment extends Fragment {
                 etHargaJual.requestFocus();
 
             }{
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        if (user != null) {
+                            // Name, email address, and profile photo Url
+                            String name = user.getDisplayName();
 
-                pushData(new Meminta(
-                                Sbarkod,
-                                Snama,
-                                Integer.parseInt(Sjml),
-                        Integer.parseInt(ShargaAwal),
-                        Integer.parseInt(ShargaJual)), //IKI VARIABEL CLAS LOGHISTORY
+                            Long timestampl = System.currentTimeMillis();
+                            String timestamp = timestampl.toString();
 
-                        Sbarkod); //jmlud DARI  PENJUMLAHAN SETELAH MENGISI INPUT TEXT JML (BUTTON BARKODE)
+                            pushData(new Meminta(
+                                            Sbarkod,
+                                            Snama,
+                                            Integer.parseInt(Sjml),
+                                            Integer.parseInt(ShargaAwal),
+                                            Integer.parseInt(ShargaJual)), //IKI VARIABEL CLAS LOGHISTORY
+
+                                    Sbarkod,
+                                    new LogHistory(timestamp,
+                                            name,
+                                            Integer.parseInt(Sjml),
+                                            "Edit Data Barang"),
+                                    timestamp
+                                    ); //jmlud DARI  PENJUMLAHAN SETELAH MENGISI INPUT TEXT JML (BUTTON BARKODE)
+                        }
 
             }
 
@@ -214,7 +231,7 @@ public class EditDataFragment extends Fragment {
     }
 
     // PROSES PUSH DATA KE FIREBASE
-    private void pushData(Meminta meminta, String kodebarang) {
+    private void pushData(Meminta meminta, String kodebarang, LogHistory logHistory, String timestamp) {
 
         database = FirebaseDatabase.getInstance().getReference();
 
@@ -222,6 +239,10 @@ public class EditDataFragment extends Fragment {
                 .child(GlobalVariabel.Gudang)
                 .child(kodebarang)
                 .setValue(meminta);
+        database.child(GlobalVariabel.Toko)
+                .child(GlobalVariabel.Log)
+                .child(timestamp)
+                .setValue(logHistory);
 
                 Toast.makeText(getActivity(),
                         "Edit BERHASIL...!!!",
