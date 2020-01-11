@@ -22,7 +22,7 @@
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_gravity="center"
-            android:text="Stock Masuk" />
+            android:text="Menambah Stok Barang" />
 
 
         <LinearLayout

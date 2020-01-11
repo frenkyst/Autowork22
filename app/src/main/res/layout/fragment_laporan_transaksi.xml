@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".kasir.LaporanTransaksiFragment">
 
+
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rl_layouttransaksi"
@@ -80,6 +81,7 @@
             android:textSize="16sp" />
 
     </RelativeLayout>
+
 
 
 
