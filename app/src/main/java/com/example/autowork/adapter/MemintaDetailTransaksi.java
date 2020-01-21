@@ -21,7 +21,6 @@ import com.example.autowork.GlobalVariabel;
 import com.example.autowork.R;
 import com.example.autowork.model.LogHistory;
 import com.example.autowork.model.Meminta;
-import com.example.autowork.model.TransaksiKaryawan;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,7 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksikasir.MyViewHolder> {
+public class MemintaDetailTransaksi extends RecyclerView.Adapter<MemintaDetailTransaksi.MyViewHolder> {
 
     private List<Meminta> moviesList;
     private Activity mActivity;
@@ -63,21 +62,21 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
         }
     }
 
-    public MemintaTransaksikasir(List<Meminta> moviesList, Activity activity) {
+    public MemintaDetailTransaksi(List<Meminta> moviesList, Activity activity) {
         this.moviesList = moviesList;
         this.mActivity = activity;
     }
 
     @Override
-    public MemintaTransaksikasir.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MemintaDetailTransaksi.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.meminta_datatransaksi, parent, false);
 
-        return new MemintaTransaksikasir.MyViewHolder(itemView);
+        return new MemintaDetailTransaksi.MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(MemintaTransaksikasir.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(MemintaDetailTransaksi.MyViewHolder holder, final int position) {
         final Meminta movie = moviesList.get(position);
 
         holder.tv_barkod.setText(movie.getBarkod());
@@ -231,20 +230,20 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
 
                             if( dataSnapshot2.child(GlobalVariabel.Gudang).child(kodeBarang).child("hargaawal").exists() &&
                                     dataSnapshot2.child(GlobalVariabel.Gudang).child(kodeBarang).child("hargajual").exists() &&
-                                    dataSnapshot2.child(GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid).child("totalLaba").exists() &&
-                                    dataSnapshot2.child(GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid).child("totalTransaksi").exists() &&
-                                    dataSnapshot2.child(GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid+"/transaksi/"+timestampTransaksi).child("laba").exists() &&
-                                    dataSnapshot2.child(GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid+"/transaksi/"+timestampTransaksi).child("total").exists() &&
-                                    dataSnapshot2.child(GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid+"/transaksi/"+timestampTransaksi).child("jml").exists()){
+                                    dataSnapshot2.child(GlobalVariabel.TransaksiKaryawan+"/"+GlobalVariabel.NamaTransaksi).child("totalLaba").exists() &&
+                                    dataSnapshot2.child(GlobalVariabel.TransaksiKaryawan+"/"+GlobalVariabel.NamaTransaksi).child("totalTransaksi").exists() &&
+                                    dataSnapshot2.child(GlobalVariabel.TransaksiKaryawan+"/"+GlobalVariabel.NamaTransaksi+"/transaksi/"+timestampTransaksi).child("laba").exists() &&
+                                    dataSnapshot2.child(GlobalVariabel.TransaksiKaryawan+"/"+GlobalVariabel.NamaTransaksi+"/transaksi/"+timestampTransaksi).child("total").exists() &&
+                                    dataSnapshot2.child(GlobalVariabel.TransaksiKaryawan+"/"+GlobalVariabel.NamaTransaksi+"/transaksi/"+timestampTransaksi).child("jml").exists()){
                                 //TABEL BARANG
                                 Integer hargaAwal = dataSnapshot2.child(GlobalVariabel.Gudang).child(kodeBarang).child("hargaawal").getValue(Integer.class);
                                 Integer hargaJual = dataSnapshot2.child(GlobalVariabel.Gudang).child(kodeBarang).child("hargajual").getValue(Integer.class);
                                 //TABEL TRANSAKSI
-                                Integer totalLaba = dataSnapshot2.child(GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid).child("totalLaba").getValue(Integer.class);
-                                Integer totalTransaksi = dataSnapshot2.child(GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid).child("totalTransaksi").getValue(Integer.class);
-                                Integer laba = dataSnapshot2.child(GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid+"/transaksi/"+timestampTransaksi).child("laba").getValue(Integer.class);
-                                Integer total = dataSnapshot2.child(GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid+"/transaksi/"+timestampTransaksi).child("total").getValue(Integer.class);
-                                Integer jumlah = dataSnapshot2.child(GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid+"/transaksi/"+timestampTransaksi).child("jml").getValue(Integer.class);
+                                Integer totalLaba = dataSnapshot2.child(GlobalVariabel.TransaksiKaryawan+"/"+GlobalVariabel.NamaTransaksi).child("totalLaba").getValue(Integer.class);
+                                Integer totalTransaksi = dataSnapshot2.child(GlobalVariabel.TransaksiKaryawan+"/"+GlobalVariabel.NamaTransaksi).child("totalTransaksi").getValue(Integer.class);
+                                Integer laba = dataSnapshot2.child(GlobalVariabel.TransaksiKaryawan+"/"+GlobalVariabel.NamaTransaksi+"/transaksi/"+timestampTransaksi).child("laba").getValue(Integer.class);
+                                Integer total = dataSnapshot2.child(GlobalVariabel.TransaksiKaryawan+"/"+GlobalVariabel.NamaTransaksi+"/transaksi/"+timestampTransaksi).child("total").getValue(Integer.class);
+                                Integer jumlah = dataSnapshot2.child(GlobalVariabel.TransaksiKaryawan+"/"+GlobalVariabel.NamaTransaksi+"/transaksi/"+timestampTransaksi).child("jml").getValue(Integer.class);
 
                                 Integer updateJumlah = jumlah+jumlahEdit;
 
@@ -259,15 +258,15 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
                                  * DATA BARANG YANG MASUK TABEL TRANSAKSI 1
                                  */
                                 database.child(GlobalVariabel.Toko)
-                                        .child(GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid+"/transaksi/"+timestampTransaksi)
+                                        .child(GlobalVariabel.TransaksiKaryawan+"/"+GlobalVariabel.NamaTransaksi+"/transaksi/"+timestampTransaksi)
                                         .child("jml")
                                         .setValue(updateJumlah);
                                 database.child(GlobalVariabel.Toko)
-                                        .child(GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid+"/transaksi/"+timestampTransaksi)
+                                        .child(GlobalVariabel.TransaksiKaryawan+"/"+GlobalVariabel.NamaTransaksi+"/transaksi/"+timestampTransaksi)
                                         .child("laba")
                                         .setValue(updateLaba);
                                 database.child(GlobalVariabel.Toko)
-                                        .child(GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid+"/transaksi/"+timestampTransaksi)
+                                        .child(GlobalVariabel.TransaksiKaryawan+"/"+GlobalVariabel.NamaTransaksi+"/transaksi/"+timestampTransaksi)
                                         .child("total")
                                         .setValue(updateTotal);
 
@@ -275,7 +274,7 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
                                  * DATA TOTAL PEMBAYARAN TABEL TRANSAKSI 1
                                  */
                                 database.child(GlobalVariabel.Toko)
-                                        .child(GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid)
+                                        .child(GlobalVariabel.TransaksiKaryawan+"/"+GlobalVariabel.NamaTransaksi)
                                         .child("totalTransaksi")
                                         .setValue(updateTotalTransaki);
 
@@ -283,7 +282,7 @@ public class MemintaTransaksikasir extends RecyclerView.Adapter<MemintaTransaksi
                                  * DATA TOTAL LABA TABEL TRANSAKSI 1
                                  */
                                 database.child(GlobalVariabel.Toko)
-                                        .child(GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid)
+                                        .child(GlobalVariabel.TransaksiKaryawan+"/"+GlobalVariabel.NamaTransaksi)
                                         .child("totalLaba")
                                         .setValue(updateTotalLaba);
 

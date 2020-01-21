@@ -67,9 +67,9 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
-//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//        DetailBayarFragment myFragment = new DetailBayarFragment();
-//        fragmentTransaction.remove(myFragment).commit();
+
+        GlobalVariabel.NamaTransaksi="null";
+
     }
 
     @Override
@@ -138,7 +138,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_transaksi) {
             this.getSupportFragmentManager().popBackStackImmediate();
 
-            TransaksiKaryawanFragment fragment = new TransaksiKaryawanFragment();
+            TransaksiFragment fragment = new TransaksiFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frameawal, fragment);
             fragmentTransaction.addToBackStack(null).commit();

@@ -66,7 +66,7 @@ public class TransaksiKaryawanFragment extends Fragment{
 
     private DatabaseReference database, database1;
 
-    private EditText etBarkod, etNama, etJml;
+    private EditText etBarkod, etNama, etJml, etNamaTransaksi;
     private TextView tvtotal, tvtotaltransaksi,tvtotaltransaksi1;
     private ProgressDialog loading;
     private ViewConfiguration ketok;
@@ -118,6 +118,7 @@ public class TransaksiKaryawanFragment extends Fragment{
 
         database1 = FirebaseDatabase.getInstance().getReference();
 
+        etNamaTransaksi = vt.findViewById(R.id.et_NamaTransaksi);
         etBarkod = vt.findViewById(R.id.et_barkod);
         etNama = vt.findViewById(R.id.et_nama);
         etJml = vt.findViewById(R.id.et_jml);
@@ -125,46 +126,10 @@ public class TransaksiKaryawanFragment extends Fragment{
         tvtotaltransaksi = vt.findViewById(R.id.tv_totaltransaksi);
         tvtotaltransaksi1 = vt.findViewById(R.id.tv_totaltransaksi1);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            String uid = user.getUid();
-
-            database1.child(GlobalVariabel.Toko).child(GlobalVariabel.Transaksi).child(uid).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                    if (dataSnapshot.child("totalTransaksi").exists() && dataSnapshot.child("totalLaba").exists()) {
-
-                        totalTransaksi = dataSnapshot.child("totalTransaksi").getValue(Integer.class);
-                        totalLabaint = dataSnapshot.child("totalLaba").getValue(Integer.class);
-
-                        tvtotaltransaksi.setText("Rp. " + decim.format(totalTransaksi));
-
-                    } else {
-
-                        totalTransaksi = 0;
-                        totalLabaint = 0;
-
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
+        if (GlobalVariabel.NamaTransaksi!="null"){
+            totalTransaksi(GlobalVariabel.NamaTransaksi);
+            etNamaTransaksi.setText(GlobalVariabel.NamaTransaksi);
         }
-
-        // TOMBOL CENSEL
-        vt.findViewById(R.id.btn_cancel).setOnClickListener((view) -> {
-            scane();
-        });
-
-        vt.findViewById(R.id.btn_cancel1).setOnClickListener((view) -> {
-
-
-        });
-
 
 
         // TOMBOL BARKODE
@@ -175,23 +140,31 @@ public class TransaksiKaryawanFragment extends Fragment{
         // TOMBOL TAMBAH BARANG UNTUK INPUT KE TRANSAKSI YANG DI TERUSKAN KE KASIR
         vt.findViewById(R.id.btn_tambahbarang).setOnClickListener((view) -> {
 
+            String SNamaTransaksi = etNamaTransaksi.getText().toString();
+//            GlobalVariabel.NamaTransaksi = SNamaTransaksi;
             String Sbarkod = etBarkod.getText().toString();
             String Snama = etNama.getText().toString();
             String Sjml = etJml.getText().toString();
             String logapa = "Transaksi Karyawan";
 
-//            String Stotal = tvtotal.getText().toString();
+            totalTransaksi(SNamaTransaksi);
 
 //            String Stotaltransaksi = tvtotaltransaksi.getText().toString();
             //String Shrgawal = etHrgawal.getText().toString();
             //String Sjmlud = jmlud.toString();
 
-            if (Snama.equals("") || Sjml.equals("")) {
+            if (SNamaTransaksi.equals("") || Snama.equals("") || Sjml.equals("")) {
                 etJml.setError("Silahkan ISI data dengan BENAR!!!");
                 etJml.requestFocus();
 
 
             } else {
+
+
+
+                Toast.makeText(getActivity(),
+                        totalTransaksi+" / "+totalLabaint+" / "+stotal,
+                        Toast.LENGTH_SHORT).show();
 
                 // UPDATE TOTAL PEMBAYARAN PADA TABEL TRANSAKSI 1
                 totalupdateTransaksi = totalTransaksi + stotal; /** TOTALTRANSAKSI DARI FUNGSI AMBILTOTAL() DAN STOTAL DARI FUNGSI PENJUMLAHAN KETIKA  USER MENGINPUTKAN JUMLAH */
@@ -220,7 +193,7 @@ public class TransaksiKaryawanFragment extends Fragment{
                         new TransaksiKaryawan(
                                 Snama,
                                 Integer.parseInt(Sjml),
-                                Laba)
+                                Laba), SNamaTransaksi
                         ); // HASIL TOTAL PEMBAYARAN
 
 
@@ -362,7 +335,7 @@ public class TransaksiKaryawanFragment extends Fragment{
      * @param updateStok value hasil update barang setelah transaksi
      * @param udtr  value total pembayaran
      */
-    private void inputDatabase(TransaksiKaryawan transaksiKaryawan, LogHistory log, String barkod, Integer updateStok, Integer udtr, Integer udla, String timestamp, TransaksiKaryawan transaksiKaryawanLaba) {
+    private void inputDatabase(TransaksiKaryawan transaksiKaryawan, LogHistory log, String barkod, Integer updateStok, Integer udtr, Integer udla, String timestamp, TransaksiKaryawan transaksiKaryawanLaba, String NamaTransaksi) {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -406,7 +379,7 @@ public class TransaksiKaryawanFragment extends Fragment{
                          * DATA BARANG YANG MASUK TABEL TRANSAKSI 1
                          */
                         database1.child(GlobalVariabel.Toko)
-                                .child(GlobalVariabel.Transaksi+"/"+uid+"/transaksi")
+                                .child(GlobalVariabel.TransaksiKaryawan+"/"+NamaTransaksi+"/transaksi")
                                 .child(timestamp)
                                 .setValue(transaksiKaryawan);
 
@@ -414,7 +387,7 @@ public class TransaksiKaryawanFragment extends Fragment{
                          * DATA TOTAL PEMBAYARAN TABEL TRANSAKSI 1
                          */
                         database1.child(GlobalVariabel.Toko)
-                                .child(GlobalVariabel.Transaksi+"/"+uid)
+                                .child(GlobalVariabel.TransaksiKaryawan+"/"+NamaTransaksi)
                                 .child("totalTransaksi")
                                 .setValue(udtr);
 
@@ -422,17 +395,17 @@ public class TransaksiKaryawanFragment extends Fragment{
                          * DATA TOTAL LABA TABEL TRANSAKSI 1
                          */
                         database1.child(GlobalVariabel.Toko)
-                                .child(GlobalVariabel.Transaksi+"/"+uid)
+                                .child(GlobalVariabel.TransaksiKaryawan+"/"+NamaTransaksi)
                                 .child("totalLaba")
                                 .setValue(udla);
 
                         /**
                          * DATA KARYAWAN YANG MELAKUKAN TRANSAKSI
                          */
-                        database1.child(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi+"/"+uid)
+                        database1.child(GlobalVariabel.Toko+"/"+GlobalVariabel.TransaksiKaryawan+"/"+NamaTransaksi)
                                 .child("namaKaryawan")
                                 .setValue(name);
-                        database1.child(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi+"/"+uid)
+                        database1.child(GlobalVariabel.Toko+"/"+GlobalVariabel.TransaksiKaryawan+"/"+NamaTransaksi)
                                 .child("uid")
                                 .setValue(uid);
 
@@ -462,6 +435,8 @@ public class TransaksiKaryawanFragment extends Fragment{
             });
 
         }
+
+        totalTransaksi(NamaTransaksi);
 
     }
 
@@ -502,6 +477,42 @@ public class TransaksiKaryawanFragment extends Fragment{
      * ==============================================================================================(STAR)
      */
 
+
+    private void totalTransaksi(String NamaTransaksi){
+
+//        String SnamaTransaksi = etNamaTransaksi.getText().toString();
+
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        if (user != null) {
+//            String uid = user.getUid();
+
+        database1.child(GlobalVariabel.Toko).child(GlobalVariabel.TransaksiKaryawan).child(NamaTransaksi).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.child("totalTransaksi").exists() && dataSnapshot.child("totalLaba").exists()) {
+
+                    totalTransaksi = dataSnapshot.child("totalTransaksi").getValue(Integer.class);
+                    totalLabaint = dataSnapshot.child("totalLaba").getValue(Integer.class);
+
+                    tvtotaltransaksi.setText("Rp. " + decim.format(totalTransaksi));
+
+                } else {
+
+                    totalTransaksi = 0;
+                    totalLabaint = 0;
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+//        }
+
+    }
 
 }
 

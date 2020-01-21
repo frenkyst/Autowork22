@@ -8,9 +8,14 @@ public class GlobalVariabel {
             Gudang = "Gudang "+UbahNo,
             Log = "Log "+UbahNo,
             Transaksi = "Transaksi "+UbahNo,
+            TransaksiKaryawan = "Transaksi Karyawan "+UbahNo,
     NotaPembayaran = "Nota Pembayaran "+UbahNo,
     Laba = "Laba "+UbahNo,
-            UserMan = "UserMan "+UbahNo;
+            UserMan = "UserMan "+UbahNo,
+
+
+    NamaTransaksi = "null"
+    ;
 
 
     //VARIABEL BOSS
