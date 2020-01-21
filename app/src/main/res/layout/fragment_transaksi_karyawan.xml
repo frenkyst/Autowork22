@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/puteh"
     tools:context=".TransaksiKaryawanFragment">
 
 
@@ -15,84 +16,185 @@
         android:padding="16dp"
         android:orientation="vertical">
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="28sp"
             android:textStyle="bold"
             android:layout_gravity="center"
             android:text="Transaksi Penjualan" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/outline"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                android:textAlignment="center"
+                android:text=" Nama Tranaksi" />
+
+            <EditText
+                android:id="@+id/et_NamaTransaksi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:hint="Nama Barang"
+                android:textAlignment="center"
+                android:text=""/>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/outline"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:text=" Kode Barang" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
             >
 
             <EditText
                 android:id="@+id/et_barkod"
                 android:layout_width="270dp"
                 android:layout_height="match_parent"
-
                 android:hint="Scan Barcode" />
 
             <Button
                 android:id="@+id/btn_barkod"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
-
-
+                android:background="@drawable/button_shape"
                 android:text="SCAN"
                 android:textAllCaps="false" />
 
-
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/outline"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:text=" Nama Barang" />
 
         <EditText
             android:id="@+id/et_nama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:enabled="false"
             android:hint="Nama Barang"
             android:text=""/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/outline"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:text=" Jumlah Barang" />
 
         <EditText
             android:id="@+id/et_jml"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textAlignment="center"
             android:enabled="false"
             android:hint="Jumlah"
             android:text=""
             android:inputType="number" />
 
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/outline"
+        android:orientation="vertical"
+        >
 
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:text=" Sub Total" />
         <TextView
             android:id="@+id/tv_total"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:textColor="@color/abang"
             android:textSize="30sp"
             android:textAlignment="center"
-            android:text="Rp" />
+            android:text="0" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/outline"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:text=" Total Transaksi" />
         <TextView
             android:id="@+id/tv_totaltransaksi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:textColor="@color/abang"
             android:textSize="30sp"
             android:textAlignment="center"
             android:text="0"
-
             />
+
+    </LinearLayout>
 
         <TextView
             android:id="@+id/tv_totaltransaksi1"
@@ -103,45 +205,19 @@
             android:textSize="30sp"
             android:textAlignment="center"
             android:text="0"
-
             />
-
-
-
-
-
-
-
-
-
-
 
         <Button
             android:id="@+id/btn_tambahbarang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_shape"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:text="Tambah Transaksi"
             android:textAllCaps="false" />
 
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:text="Cancel"
-            android:textAllCaps="false" />
 
-        <Button
-            android:id="@+id/btn_cancel1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:text="Cancel1"
-            android:textAllCaps="false" />
     </LinearLayout>
 
 

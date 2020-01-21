@@ -35,7 +35,7 @@ public class BossActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle("Home");
+        setTitle("");
         setContentView(R.layout.activity_boss);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -16,15 +16,30 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="28sp"
             android:textStyle="bold"
             android:layout_gravity="center"
             android:text="Edit Barang" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/outline"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:text=" Kode Barang" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
             >
 
             <EditText
@@ -38,40 +53,73 @@
                 android:id="@+id/btn_barkod"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/button_shape"
                 android:text="SCAN"
                 android:textAllCaps="false" />
 
         </LinearLayout>
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/outline"
+        android:orientation="vertical"
+        >
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:text=" Nama Barang" />
         <EditText
             android:id="@+id/et_nama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:hint="Nama Barang" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/outline"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:text=" Jumlah Barang" />
         <EditText
             android:id="@+id/et_jml"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textAlignment="center"
             android:hint="Jumlah"
             android:inputType="number" />
+    </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:background="@drawable/outline"
+            android:orientation="vertical"
             >
 
             <TextView
-                android:layout_width="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textSize="24sp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
                 android:textAlignment="center"
-                android:text="Rp" />
+                android:text=" Harga Awal" />
 
             <EditText
                 android:id="@+id/et_hrgawal"
@@ -88,16 +136,19 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:background="@drawable/outline"
+            android:orientation="vertical"
             >
 
             <TextView
-                android:layout_width="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:textSize="24sp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
                 android:textAlignment="center"
-                android:text="Rp" />
+                android:text=" Harga Jual" />
 
             <EditText
                 android:id="@+id/et_hrgjual"
@@ -114,6 +165,7 @@
             android:id="@+id/btn_editBarang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_shape"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:text="Edit Barang"

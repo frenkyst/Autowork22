@@ -37,6 +37,7 @@ public class KasirActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("");
         setContentView(R.layout.activity_kasir);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

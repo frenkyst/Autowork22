@@ -5,6 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main1"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
@@ -20,6 +21,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_kasir"
-        app:menu="@menu/activity_kasir_drawer" />
+        app:menu="@menu/activity_kasir_drawer"
+        android:background="@color/menuKasir"/>
 
 </android.support.v4.widget.DrawerLayout>

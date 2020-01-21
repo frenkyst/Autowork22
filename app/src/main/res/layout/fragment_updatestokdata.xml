@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".UpdatestokdataFragment">
 
 
@@ -12,6 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/puteh"
         android:padding="16dp"
         android:orientation="vertical">
 
@@ -19,16 +21,30 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="28sp"
             android:textStyle="bold"
             android:layout_gravity="center"
             android:text="Menambah Stok Barang" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/outline"
+        android:orientation="vertical"
+        >
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:text=" Kode Barang" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
             >
 
             <EditText
@@ -42,48 +58,108 @@
                 android:id="@+id/btn_barkod"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/button_shape"
                 android:text="SCAN"
                 android:textAllCaps="false" />
 
         </LinearLayout>
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/outline"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:text=" Nama Barang" />
         <EditText
             android:id="@+id/et_nama"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:enabled="false"
             android:hint="Nama Barang" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/outline"
+        android:orientation="vertical"
+        >
 
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:text=" Jumlah Stok Yang Ada" />
         <EditText
             android:id="@+id/et_jmlstok"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:enabled="false"
             android:textAlignment="center"
-            android:hint="Jumlah Stok Awal" />
+            android:hint="Jumlah Stok Yang Ada" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/outline"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:text=" Jumlah Penambahan Stok" />
         <EditText
             android:id="@+id/et_jml"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:textAlignment="center"
             android:hint="Jumlah Penambahan Stok"
             android:inputType="number" />
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/outline"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:textAlignment="center"
+            android:text=" Jumlah Stelah Di Update" />
         <TextView
             android:id="@+id/tv_jmlplus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:textColor="@color/abang"
             android:textSize="24sp"
             android:textAlignment="center"
-            android:text="Jumlah Setelah Update" />
-
+            android:text="Jumlah Setelah Di Update" />
+    </LinearLayout>
 
 
 
@@ -98,6 +174,7 @@
             android:id="@+id/btn_updatestok"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_shape"
             android:layout_gravity="center"
             android:layout_marginTop="16dp"
             android:text="Update Stok"
