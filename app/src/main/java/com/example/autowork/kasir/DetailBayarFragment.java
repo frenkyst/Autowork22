@@ -17,13 +17,9 @@ import android.widget.Toast;
 
 import com.example.autowork.GlobalVariabel;
 import com.example.autowork.R;
-import com.example.autowork.adapter.MemintaTransaksikasir;
-import com.example.autowork.model.LogHistory;
+import com.example.autowork.adapter.MemintaDetailBayar;
 import com.example.autowork.model.LogKasir;
 import com.example.autowork.model.Meminta;
-import com.example.autowork.model.TransaksiKaryawan;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -48,7 +44,7 @@ public class DetailBayarFragment extends Fragment {
     private DatabaseReference database, fromPath, toPath, totalTopath;
 
     private ArrayList<Meminta> daftarReq;
-    private MemintaTransaksikasir memintatransaksikasir;
+    private MemintaDetailBayar memintatransaksikasir;
 
     private RecyclerView rc_list_request;
     private ProgressDialog loading;
@@ -74,6 +70,8 @@ public class DetailBayarFragment extends Fragment {
         database = FirebaseDatabase.getInstance().getReference();
         TextView tv_totalBayar;
         tv_totalBayar = v.findViewById(R.id.tv_totalBayar);
+        TextView tv_NamaDetail;
+        tv_NamaDetail = v.findViewById(R.id.text_NamaDetail);
 
         rc_list_request = v.findViewById(R.id.rc_list_request);
         //fab_add = findViewById(R.id.fab_add);
@@ -88,7 +86,7 @@ public class DetailBayarFragment extends Fragment {
                 true,
                 false);
 
-        database.child(GlobalVariabel.Toko).child(GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid).addValueEventListener(new ValueEventListener() {
+        database.child(GlobalVariabel.Toko).child(GlobalVariabel.Transaksi+"/"+GlobalVariabel.NamaTransaksi).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -132,7 +130,7 @@ public class DetailBayarFragment extends Fragment {
                  * Inisialisasi adapter dan data hotel dalam bentuk ArrayList
                  * dan mengeset Adapter ke dalam RecyclerView
                  */
-                memintatransaksikasir = new MemintaTransaksikasir(daftarReq, getActivity());
+                memintatransaksikasir = new MemintaDetailBayar(daftarReq, getActivity());
                 rc_list_request.setAdapter(memintatransaksikasir);
                 loading.dismiss();
 
@@ -183,7 +181,6 @@ public class DetailBayarFragment extends Fragment {
             Fragment myFragment = new NotaPembayaranFragment();
             activity.getSupportFragmentManager().popBackStackImmediate();
             activity.getSupportFragmentManager().beginTransaction().replace(R.id.framekasir, myFragment).addToBackStack(null).commit();
-
 
 
         });

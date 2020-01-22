@@ -10,7 +10,6 @@
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rl_layouttransaksi"
-        android:background="@color/viewfinder_border"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
@@ -21,29 +20,19 @@
             android:id="@+id/tv_nama"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:text="Nama"
-            android:textSize="16sp" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Daftar Transaksi"
+            android:textStyle="bold"
+            android:textColor="@color/abang"
+            android:textSize="28sp" />
 
-
-
-
-        <TextView
-            android:id="@+id/tv_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-
-            android:layout_marginRight="20dp"
-            android:text="Total    "
-            android:textAlignment="viewEnd"
-            android:textSize="16sp" />
 
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rc_list_request"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="5dp"

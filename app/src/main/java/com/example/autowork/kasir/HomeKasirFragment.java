@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import com.example.autowork.GlobalVariabel;
 import com.example.autowork.R;
 import com.example.autowork.adapter.MemintaTransaksi;
+import com.example.autowork.adapter.MemintaTransaksiKasir;
 import com.example.autowork.model.Transaksi;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,7 +38,7 @@ public class HomeKasirFragment extends Fragment {
     private DatabaseReference database;
 
     private ArrayList<Transaksi> daftarReq;
-    private MemintaTransaksi memintatransaksi;
+    private MemintaTransaksiKasir memintatransaksi;
 
     private RecyclerView rc_list_request;
     private ProgressDialog loading;
@@ -95,7 +96,7 @@ public class HomeKasirFragment extends Fragment {
                  * Inisialisasi adapter dan data hotel dalam bentuk ArrayList
                  * dan mengeset Adapter ke dalam RecyclerView
                  */
-                memintatransaksi = new MemintaTransaksi(daftarReq, getActivity());
+                memintatransaksi = new MemintaTransaksiKasir(daftarReq, getActivity());
                 rc_list_request.setAdapter(memintatransaksi);
                 loading.dismiss();
             }

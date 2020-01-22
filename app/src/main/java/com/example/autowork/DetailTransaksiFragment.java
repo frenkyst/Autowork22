@@ -3,6 +3,7 @@ package com.example.autowork;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,12 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.autowork.adapter.MemintaDetailTransaksi;
-import com.example.autowork.adapter.MemintaTransaksi;
-import com.example.autowork.adapter.MemintaTransaksikasir;
 import com.example.autowork.model.Meminta;
-import com.example.autowork.model.Transaksi;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,7 +46,6 @@ public class DetailTransaksiFragment extends Fragment {
 
     private Integer totalTransaksi;
 
-    String timestamp;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -138,7 +136,50 @@ public class DetailTransaksiFragment extends Fragment {
         });
 
 
+        /**
+         * ========================================================================================================================================(STAR)
+         *TOMBOL BAYAR UNTUK MELAKUKAN TRANSAKSI PEMBAYARAN OLEH KASIR
+         */
+        v.findViewById(R.id.btn_Submit).setOnClickListener((view) -> {
+
+
+            fromPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.TransaksiKaryawan+"/"+GlobalVariabel.NamaTransaksi);
+            toPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi+"/"+GlobalVariabel.NamaTransaksi);
+
+
+                copyRecord(fromPath,toPath);
+
+            Toast.makeText(getActivity(), "Transaksi Berhasil !!", Toast.LENGTH_SHORT).show();
+
+
+        });
+        /**
+         * ========================================================================================================================================(END)
+         *TOMBOL BAYAR UNTUK MELAKUKAN TRANSAKSI PEMBAYARAN OLEH KASIR
+         */
+
         return v;
+    }
+
+    /**
+     *
+     * @description Memindahkan dataq transaksi ke notaPembayaran (firebase)
+     * @param fromPath key lokasi transaksi
+     * @param toPath key lokasi notaPembayaran
+     */
+    public void copyRecord(DatabaseReference fromPath, final DatabaseReference toPath) {
+        fromPath.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                toPath.setValue(dataSnapshot.getValue());
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        fromPath.removeValue();
     }
 
 }

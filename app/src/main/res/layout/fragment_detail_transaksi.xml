@@ -51,9 +51,9 @@
                 />
 
             <LinearLayout
+                android:layout_above="@+id/skat1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:background="@color/birunom"
                 >
                 <TextView
@@ -66,10 +66,10 @@
 
             <LinearLayout
                 android:id="@+id/skat"
+                android:layout_above="@+id/skat1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
                 >
                 <TextView
                     android:layout_width="wrap_content"
@@ -86,7 +86,36 @@
 
             </LinearLayout>
 
+            <Button
+                android:id="@+id/btn_cancel"
+                android:layout_toLeftOf="@+id/skat1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="16dp"
+                android:text="Cancel"
+                android:textAllCaps="false" />
 
+            <TextView
+                android:id="@+id/skat1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:text="  " />
+
+            <Button
+                android:id="@+id/btn_Submit"
+                android:layout_toRightOf="@+id/skat1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="16dp"
+                android:text="Submit Transaksi"
+                android:textAllCaps="false" />
 
         </RelativeLayout>
 
