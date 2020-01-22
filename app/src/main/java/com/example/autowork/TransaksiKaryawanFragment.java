@@ -73,7 +73,7 @@ public class TransaksiKaryawanFragment extends Fragment{
     private Button btn_cancel, btn_tambahbarang, btn_barkod, btn_cencel1;
 
     private String jmlud, hasilbarkod;
-    private Integer sjml, shrgjual, stotal, jmlu, jmludi, totalBayar, totalupdateTransaksi, totalTransaksi=0;
+    private Integer sjml, HargaJual, stotal, totalupdateTransaksi, totalTransaksi=0;
 
     private Integer hargaAwalInt, totalLabaint=0, Laba, totalUpdateLaba;
 
@@ -149,22 +149,12 @@ public class TransaksiKaryawanFragment extends Fragment{
 
             totalTransaksi(SNamaTransaksi);
 
-//            String Stotaltransaksi = tvtotaltransaksi.getText().toString();
-            //String Shrgawal = etHrgawal.getText().toString();
-            //String Sjmlud = jmlud.toString();
-
             if (SNamaTransaksi.equals("") || Snama.equals("") || Sjml.equals("")) {
                 etJml.setError("Silahkan ISI data dengan BENAR!!!");
                 etJml.requestFocus();
 
 
             } else {
-
-
-
-                Toast.makeText(getActivity(),
-                        totalTransaksi+" / "+totalLabaint+" / "+stotal,
-                        Toast.LENGTH_SHORT).show();
 
                 // UPDATE TOTAL PEMBAYARAN PADA TABEL TRANSAKSI 1
                 totalupdateTransaksi = totalTransaksi + stotal; /** TOTALTRANSAKSI DARI FUNGSI AMBILTOTAL() DAN STOTAL DARI FUNGSI PENJUMLAHAN KETIKA  USER MENGINPUTKAN JUMLAH */
@@ -181,7 +171,8 @@ public class TransaksiKaryawanFragment extends Fragment{
                                 Snama,
                                 Integer.parseInt(Sjml),
                                 stotal,
-                                Laba), //IKI VARIABEL MEMINTA || DATA TRANSAKSI BARANG
+                                Laba,
+                                HargaJual), //IKI VARIABEL MEMINTA || DATA TRANSAKSI BARANG
 
                         new LogHistory(
                                 Sbarkod,
@@ -246,6 +237,7 @@ public class TransaksiKaryawanFragment extends Fragment{
                         String nama = dataSnapshot.child("nama").getValue(String.class);
                         Integer jml = dataSnapshot.child("jml").getValue(Integer.class);
                         Integer hrgjual = dataSnapshot.child("hargajual").getValue(Integer.class);
+                        HargaJual = hrgjual;
 
                         etNama.setText(nama); /** MEMUNCULKAN NAMA DARI DATABASE JIKA ADA */
 
@@ -287,7 +279,7 @@ public class TransaksiKaryawanFragment extends Fragment{
                                 stotal = sjml * hrgjual; /** DILAKUKAN PENJUMLAHAN UNTUK MENDAPATKAN TOTAL HARGA BARANG DIKALI JUMLAH BARANG*/
                                 Laba = stotal - (sjml * hargaawal);
 
-                                jmludi = jml - sjml; /** PENJUMLAHAN VALUE JUMLAH BARANG DARI DATABASE FIREBASE DIKURANGI JUMLAH TRANSAKSI DARI EDIT TEXT USER */
+//                                jmludi = jml - sjml; /** PENJUMLAHAN VALUE JUMLAH BARANG DARI DATABASE FIREBASE DIKURANGI JUMLAH TRANSAKSI DARI EDIT TEXT USER */
 
                                 DecimalFormat decim = new DecimalFormat("#,###.##");
                                 tvtotal.setText("Rp. " + decim.format(stotal));/** MENAMPILKAN TOTAL HARGA KE VIEW LAYOUT (KONVERSI VALUE TOTAL HARGA BARANG) */

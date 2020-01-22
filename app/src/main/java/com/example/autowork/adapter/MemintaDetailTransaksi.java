@@ -46,7 +46,7 @@ public class MemintaDetailTransaksi extends RecyclerView.Adapter<MemintaDetailTr
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout rl_layouttransaksi;
-        public TextView tv_barkod, tv_nama, tv_jml, tv_total;
+        public TextView tv_barkod, tv_nama, tv_jml, tv_harga, tv_total;
         public ImageView tap_edit;
 
         public MyViewHolder(View view) {
@@ -55,6 +55,7 @@ public class MemintaDetailTransaksi extends RecyclerView.Adapter<MemintaDetailTr
             tv_barkod = view.findViewById(R.id.tv_barkod);
             tv_nama = view.findViewById(R.id.tv_nama);
             tv_jml = view.findViewById(R.id.tv_jml);
+            tv_harga = view.findViewById(R.id.tv_harga);
             tv_total = view.findViewById(R.id.tv_total);
 
             tap_edit = view.findViewById(R.id.tap_edit);
@@ -82,10 +83,11 @@ public class MemintaDetailTransaksi extends RecyclerView.Adapter<MemintaDetailTr
         holder.tv_barkod.setText(movie.getBarkod());
         holder.tv_nama.setText(movie.getNama());
         holder.tv_jml.setText(String.valueOf(movie.getJml()));
+        holder.tv_harga.setText("Rp "+String.valueOf(movie.getHargajual()));
 
         DecimalFormat decim = new DecimalFormat("#,###.##");
         if(movie.getTotal()!=null) {
-            holder.tv_total.setText(decim.format(movie.getTotal()));
+            holder.tv_total.setText("Rp "+decim.format(movie.getTotal()));
         }
         /**
          * ==============================================================================(STAR)

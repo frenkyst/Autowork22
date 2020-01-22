@@ -59,19 +59,12 @@ public class DetailBayarFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_detail_bayar, container, false);
 
-        if(GlobalVariabel.invisible.equals("ya")){
-            v.findViewById(R.id.btn_bayar).setVisibility(View.INVISIBLE);
-        } else {
-            v.findViewById(R.id.btn_bayar).setVisibility(View.VISIBLE);
-        }
-
-
-
         database = FirebaseDatabase.getInstance().getReference();
         TextView tv_totalBayar;
         tv_totalBayar = v.findViewById(R.id.tv_totalBayar);
         TextView tv_NamaDetail;
         tv_NamaDetail = v.findViewById(R.id.text_NamaDetail);
+        tv_NamaDetail.setText(GlobalVariabel.NamaTransaksi);
 
         rc_list_request = v.findViewById(R.id.rc_list_request);
         //fab_add = findViewById(R.id.fab_add);
@@ -159,7 +152,7 @@ public class DetailBayarFragment extends Fragment {
             timestamp = timestampl.toString();
             GlobalVariabel.timestamp = timestamp;
 
-            fromPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi+"/"+GlobalVariabel.uid);
+            fromPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi+"/"+GlobalVariabel.NamaTransaksi);
             toPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.NotaPembayaran+"/"+timestamp);
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();

@@ -142,24 +142,6 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frameawal, fragment);
             fragmentTransaction.addToBackStack(null).commit();
-        } else if (id == R.id.nav_lihatTransaksi) {
-            this.getSupportFragmentManager().popBackStackImmediate();
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            if (user != null) {
-                // Name, email address, and profile photo Url
-//                String name = user.getDisplayName();
-//                String email = user.getEmail();
-                String uid = user.getUid();
-
-                GlobalVariabel.uid = uid;
-                GlobalVariabel.invisible = "ya";
-
-                DetailBayarFragment fragment = new DetailBayarFragment();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.frameawal, fragment);
-                fragmentTransaction.addToBackStack(null).commit();
-
-            }
         } else if (id == R.id.nav_editBarang) {
             this.getSupportFragmentManager().popBackStackImmediate();
 

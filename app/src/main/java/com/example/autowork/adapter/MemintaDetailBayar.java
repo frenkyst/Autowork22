@@ -84,7 +84,7 @@ public class MemintaDetailBayar extends RecyclerView.Adapter<MemintaDetailBayar.
         holder.tv_barkod.setText(movie.getBarkod());
         holder.tv_nama.setText(movie.getNama());
         holder.tv_jml.setText(String.valueOf(movie.getJml()));
-        holder.tv_harga.setText(String.valueOf(movie.getHargajual()));
+        holder.tv_harga.setText("Rp "+String.valueOf(movie.getHargajual()));
 
         DecimalFormat decim = new DecimalFormat("#,###.##");
         if(movie.getTotal()!=null) {

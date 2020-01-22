@@ -6,6 +6,7 @@ public class TransaksiKaryawan {
     private Integer jml;
     private Integer total;
     private Integer laba;
+    private Integer hargajual;
     private String key;
 
 
@@ -16,14 +17,14 @@ public class TransaksiKaryawan {
     }
 
 
-    public TransaksiKaryawan(String barkod, String nama, Integer jml, Integer total, Integer laba) {
+    public TransaksiKaryawan(String barkod, String nama, Integer jml, Integer total, Integer laba, Integer hargajual) {
         this.barkod = barkod;
         this.nama = nama;
         this.jml = jml;
         this.total = total;
         this.laba = laba;
+        this.hargajual = hargajual;
     }
-
 
     public String getBarkod() {
         return barkod;
@@ -65,6 +66,14 @@ public class TransaksiKaryawan {
         this.laba = laba;
     }
 
+    public Integer getHargajual() {
+        return hargajual;
+    }
+
+    public void setHargajual(Integer hargajual) {
+        this.hargajual = hargajual;
+    }
+
     public String getKey() {
         return key;
     }
@@ -79,6 +88,7 @@ public class TransaksiKaryawan {
                 " "+nama+"\n" +
                 " "+jml+"\n" +
                 " "+total+"\n"+
+                " "+hargajual+"\n"+
                 " "+laba;
     }
 }
