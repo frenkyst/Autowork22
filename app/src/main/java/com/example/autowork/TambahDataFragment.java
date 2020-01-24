@@ -2,6 +2,7 @@ package com.example.autowork;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.autowork.model.LogHistory;
@@ -20,6 +22,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 
 /**
@@ -131,7 +135,9 @@ public class TambahDataFragment extends Fragment {
         //
 
 
-
+        v.findViewById(R.id.btn_barkod).setOnClickListener((view) -> {
+            scane();
+        });
 
 
 
@@ -195,6 +201,33 @@ public class TambahDataFragment extends Fragment {
 
 
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if(result != null) {
+            if(result.getContents() == null) {
+                Toast.makeText(getActivity(), "Data Tidak Ada", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getActivity(), "Data = "+result.getContents(), Toast.LENGTH_SHORT).show();
+                String hasilbarkod = result.getContents();
+                etbarkod.setText(hasilbarkod); // MENAMPILKAN BARKOD HASIL SCAN KE VIEW LAYOUT
+//                mencaribarkod();
+            }
+
+        }
+    }
+
+
+
+    public void scane(){
+        IntentIntegrator integrator = new IntentIntegrator(getActivity()).forSupportFragment(this);
+        integrator.setCaptureActivity(Scaner.class);
+        integrator.setOrientationLocked(false);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
+        integrator.setPrompt("Scan Barkod e?");
+        integrator.initiateScan();
+
+    }
 
 
 
