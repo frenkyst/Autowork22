@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         GlobalVariabel.NamaTransaksi="null";
+        GlobalVariabel.KataKunci="null";
 
     }
 

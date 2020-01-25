@@ -13,8 +13,10 @@ public class GlobalVariabel {
     Laba = "Laba "+UbahNo,
             UserMan = "UserMan "+UbahNo,
 
-
-    NamaTransaksi = "null"
+    //VARIABERL KARYAWAN
+    NamaTransaksi = "null",
+            KataKunci = "null",
+    GoneTapEdit = "tidak";
     ;
 
 

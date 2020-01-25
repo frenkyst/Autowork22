@@ -126,17 +126,15 @@ public class KasirActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             // Handle the camera action
-
-        } else if (id == R.id.nav_gallery) {
+            HomeKasirFragment fragment = new HomeKasirFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.framekasir, fragment);
+            fragmentTransaction.commit();
+        } else if (id == R.id.nav_laporan) {
             LaporanTransaksiFragment fragment = new LaporanTransaksiFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.framekasir, fragment);
             fragmentTransaction.commit();
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_tools) {
-            reloadFragment();
-
         } else if (id == R.id.nav_share) {
             startActivity(new Intent(this, BossActivity.class));
         } else if (id == R.id.nav_send) {

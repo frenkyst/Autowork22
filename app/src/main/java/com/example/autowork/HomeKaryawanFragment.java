@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.autowork.adapter.MemintaView;
 import com.example.autowork.model.Meminta;
@@ -47,7 +48,7 @@ public class HomeKaryawanFragment extends Fragment {
         // Inflate the layout for this fragment
         View vi = inflater.inflate(R.layout.fragment_home_karyawan, container, false);
 
-
+        GlobalVariabel.GoneTapEdit = "ya";
 
         database = FirebaseDatabase.getInstance().getReference();
 
@@ -108,6 +109,8 @@ public class HomeKaryawanFragment extends Fragment {
                 loading.dismiss();
             }
         });
+
+
 
         return vi;
     }
