@@ -209,6 +209,7 @@ public class DetailBayarFragment extends Fragment {
 
             }
         });
+        fromPath.removeValue();
     }
 
     private void pushData(LogKasir log) {
