@@ -40,5 +40,6 @@ public class GlobalVariabel {
 
 
 
+    public static String AutoIncrement;
 
 }

@@ -50,7 +50,7 @@ public class MemintaView extends RecyclerView.Adapter<MemintaView.MyViewHolder> 
     public EditText txt_JumlahBarang;
     public TextView tv_NamaBarang, tv_HargaBarang, tv_NamaTransaksi;
 
-    private DatabaseReference database1, database2;
+    private DatabaseReference database1, database2, database3;
     private Integer totalLabaint=0, totalTransaksi=0;
     private TextView tvtotalTransaksi;
 
@@ -123,7 +123,7 @@ public class MemintaView extends RecyclerView.Adapter<MemintaView.MyViewHolder> 
                             case R.id.item_tambahTransaksi:
                                 //handle menu1 click
 
-                                totalTransaksi(TransaksiKaryawanFragment.SNamaTransaksi);
+                                totalTransaksi(TransaksiKaryawanFragment.etNamaTransaksi.getText().toString());
 
                                 dialog = new AlertDialog.Builder(mActivity);
                                 View dialogView = LayoutInflater.from(mActivity).inflate(R.layout.show_transaksi_dialog, null);
@@ -138,7 +138,7 @@ public class MemintaView extends RecyclerView.Adapter<MemintaView.MyViewHolder> 
                                 tv_HargaBarang = dialogView.findViewById(R.id.tv_HargaBarang);
 
                                 tv_NamaBarang.setText(movie.getNama());
-                                tv_NamaTransaksi.setText(TransaksiKaryawanFragment.SNamaTransaksi);
+                                tv_NamaTransaksi.setText(TransaksiKaryawanFragment.etNamaTransaksi.getText().toString());
                                 DecimalFormat decim = new DecimalFormat("#,###.##");
                                 tv_HargaBarang.setText("Rp. " + decim.format(movie.getHargajual()));
 
@@ -163,24 +163,26 @@ public class MemintaView extends RecyclerView.Adapter<MemintaView.MyViewHolder> 
                                             Integer subTotal = hargaJual * jumlahTransaksi;
                                             Integer Laba = subTotal - (hargaAwal * jumlahTransaksi);
 
-                                            if (TransaksiKaryawanFragment.SNamaTransaksi.equals("")) {
 
-                                                Toast.makeText(mActivity,
-                                                        "Silahkan ISI data dengan BENAR!!!",
-                                                        Toast.LENGTH_SHORT).show();
+                                            // UPDATE TOTAL PEMBAYARAN PADA TABEL TRANSAKSI 1
+                                            Integer totalUpdateTransaksi = totalTransaksi + subTotal; /** TOTALTRANSAKSI DARI FUNGSI AMBILTOTAL() DAN STOTAL DARI FUNGSI PENJUMLAHAN KETIKA  USER MENGINPUTKAN JUMLAH */
+                                            Integer totalUpdateLaba = totalLabaint + Laba;
+
+                                            Long timestampl = System.currentTimeMillis();
+                                            String timestamp = timestampl.toString();
+
+
+                                            // end UPDATE TOTAL PEMBAYARAN PADA TABEL TRANSAKSI 1 =========================
+
+                                            String KodeTransaksi = TransaksiKaryawanFragment.etNamaTransaksi.getText().toString();
+
+                                            if (KodeTransaksi.equals("Auto")) {
+
+                                                incrementCounter(kodeBarang,namaBarang,jumlahTransaksi,subTotal,Laba,hargaJual,totalUpdateTransaksi,totalUpdateLaba,timestamp);
+
 
                                             } else {
 
-
-                                                // UPDATE TOTAL PEMBAYARAN PADA TABEL TRANSAKSI 1
-                                                Integer totalUpdateTransaksi = totalTransaksi + subTotal; /** TOTALTRANSAKSI DARI FUNGSI AMBILTOTAL() DAN STOTAL DARI FUNGSI PENJUMLAHAN KETIKA  USER MENGINPUTKAN JUMLAH */
-                                                Integer totalUpdateLaba = totalLabaint + Laba;
-
-                                                Long timestampl = System.currentTimeMillis();
-                                                String timestamp = timestampl.toString();
-
-
-                                                // end UPDATE TOTAL PEMBAYARAN PADA TABEL TRANSAKSI 1 =========================
 
                                                 inputDatabase(new TransaksiKaryawan(
                                                                 kodeBarang,
@@ -200,7 +202,7 @@ public class MemintaView extends RecyclerView.Adapter<MemintaView.MyViewHolder> 
                                                         new TransaksiKaryawan(
                                                                 namaBarang,
                                                                 jumlahTransaksi,
-                                                                Laba), TransaksiKaryawanFragment.SNamaTransaksi
+                                                                Laba), KodeTransaksi
                                                 ); // HASIL TOTAL PEMBAYARAN
 
 
@@ -411,4 +413,61 @@ public class MemintaView extends RecyclerView.Adapter<MemintaView.MyViewHolder> 
 
     }
 
+
+    public void incrementCounter(String kodeBarang, String namaBarang, Integer jumlahTransaksi, Integer subTotal, Integer Laba, Integer hargaJual, Integer totalUpdateTransaksi, Integer totalUpdateLaba, String timestamp) {
+
+        database3 = FirebaseDatabase.getInstance().getReference();
+        database3.child(GlobalVariabel.Toko).child("AutoIncement").runTransaction(new Transaction.Handler() {
+            @Override
+            public Transaction.Result doTransaction(final MutableData currentData) {
+                if (currentData.getValue() == null) {
+                    currentData.setValue(1);
+                } else {
+                    currentData.setValue((Long) currentData.getValue() + 1);
+
+                }
+
+                return Transaction.success(currentData);
+            }
+
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, boolean b, @Nullable DataSnapshot dataSnapshot) {
+
+
+                if (databaseError != null) {
+                    Toast.makeText(mActivity,
+                            "Transaksi Gagal!!",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Integer value = dataSnapshot.getValue(Integer.class);
+                    GlobalVariabel.AutoIncrement = String.valueOf(value);
+//                    Log.d("Firebase counter increment succeeded.");
+
+                    inputDatabase(new TransaksiKaryawan(
+                                    kodeBarang,
+                                    namaBarang,
+                                    jumlahTransaksi,
+                                    subTotal,
+                                    Laba,
+                                    hargaJual), //IKI VARIABEL MEMINTA || DATA TRANSAKSI BARANG
+
+                            new LogHistory(
+                                    kodeBarang,
+                                    namaBarang,
+                                    jumlahTransaksi, "Transaksi Karyawan"), // IKI LOG KELUAR MASUK TRANSAKSI KARYAWAN
+
+                            kodeBarang, jumlahTransaksi, //jmlud DARI  PENJUMLAHAN SETELAH MENGISI INPUT TEXT JML (BUTTON BARKODE)
+                            totalUpdateTransaksi, totalUpdateLaba, timestamp,
+                            new TransaksiKaryawan(
+                                    namaBarang,
+                                    jumlahTransaksi,
+                                    Laba), String.valueOf(value)
+                    ); // HASIL TOTAL PEMBAYARAN
+
+                    TransaksiKaryawanFragment.etNamaTransaksi.setText(String.valueOf(value));
+
+                }
+            }
+        });
+    }
 }

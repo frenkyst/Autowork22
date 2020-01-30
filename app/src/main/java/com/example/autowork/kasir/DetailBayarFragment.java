@@ -173,7 +173,7 @@ public class DetailBayarFragment extends Fragment {
             AppCompatActivity activity = (AppCompatActivity) view.getContext();
             Fragment myFragment = new NotaPembayaranFragment();
             activity.getSupportFragmentManager().popBackStackImmediate();
-            activity.getSupportFragmentManager().beginTransaction().replace(R.id.framekasir, myFragment).addToBackStack(null).commit();
+            activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame, myFragment).addToBackStack(null).commit();
 
 
         });

@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity
 
         HomeKaryawanFragment fragment = new HomeKaryawanFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frameawal, fragment);
+        fragmentTransaction.replace(R.id.frame, fragment);
         fragmentTransaction.commit();
     }
 
@@ -124,31 +124,38 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
             HomeKaryawanFragment fragment = new HomeKaryawanFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frameawal, fragment);
+            fragmentTransaction.replace(R.id.frame, fragment);
             fragmentTransaction.addToBackStack(null).commit();
         } else if (id == R.id.nav_stokBaru) {
             TambahDataFragment fragment = new TambahDataFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frameawal, fragment);
+            fragmentTransaction.replace(R.id.frame, fragment);
             fragmentTransaction.addToBackStack(null).commit();
         } else if (id == R.id.nav_menambahStok) {
             UpdatestokdataFragment fragment = new UpdatestokdataFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frameawal, fragment);
+            fragmentTransaction.replace(R.id.frame, fragment);
             fragmentTransaction.addToBackStack(null).commit();
         } else if (id == R.id.nav_transaksi) {
             this.getSupportFragmentManager().popBackStackImmediate();
 
             TransaksiFragment fragment = new TransaksiFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frameawal, fragment);
+            fragmentTransaction.replace(R.id.frame, fragment);
             fragmentTransaction.addToBackStack(null).commit();
         } else if (id == R.id.nav_editBarang) {
             this.getSupportFragmentManager().popBackStackImmediate();
 
             EditDataFragment fragment = new EditDataFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frameawal, fragment);
+            fragmentTransaction.replace(R.id.frame, fragment);
+            fragmentTransaction.addToBackStack(null).commit();
+        } else if (id == R.id.nav_histori) {
+            this.getSupportFragmentManager().popBackStackImmediate();
+
+            HistoriTransaksiFragment fragment = new HistoriTransaksiFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame, fragment);
             fragmentTransaction.addToBackStack(null).commit();
         } else if (id == R.id.nav_send) {
             startActivity(new Intent(this, KasirActivity.class));

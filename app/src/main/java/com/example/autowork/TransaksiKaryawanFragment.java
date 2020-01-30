@@ -77,7 +77,7 @@ public class TransaksiKaryawanFragment extends Fragment{
     private RecyclerView rc_list_request;
     private ProgressDialog loading;
 
-    private EditText etBarkod, etNamaTransaksi;
+    public static EditText etBarkod, etNamaTransaksi;
 
     private String hasilbarkod;
 //    public  String SNamaTransaksi;
@@ -142,23 +142,23 @@ public class TransaksiKaryawanFragment extends Fragment{
             etBarkod.setText(GlobalVariabel.KataKunci);
         }
 
-        etNamaTransaksi.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-                SNamaTransaksi = etNamaTransaksi.getText().toString();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+//        etNamaTransaksi.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//                SNamaTransaksi = etNamaTransaksi.getText().toString();
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
 
 
         // TOMBOL BARKODE

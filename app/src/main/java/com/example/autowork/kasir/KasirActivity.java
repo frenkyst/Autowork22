@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
+import com.example.autowork.HistoriTransaksiFragment;
 import com.example.autowork.HomeKaryawanFragment;
 import com.example.autowork.LoginActivity;
 import com.example.autowork.MainActivity;
@@ -60,7 +61,7 @@ public class KasirActivity extends AppCompatActivity
 
         HomeKasirFragment fragment = new HomeKasirFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.framekasir, fragment);
+        fragmentTransaction.replace(R.id.frame, fragment);
         fragmentTransaction.commit();
     }
 
@@ -128,12 +129,17 @@ public class KasirActivity extends AppCompatActivity
             // Handle the camera action
             HomeKasirFragment fragment = new HomeKasirFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.framekasir, fragment);
+            fragmentTransaction.replace(R.id.frame, fragment);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_laporan) {
             LaporanTransaksiFragment fragment = new LaporanTransaksiFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.framekasir, fragment);
+            fragmentTransaction.replace(R.id.frame, fragment);
+            fragmentTransaction.commit();
+        } else if (id == R.id.nav_histori) {
+            HistoriTransaksiFragment fragment = new HistoriTransaksiFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.frame, fragment);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_share) {
             startActivity(new Intent(this, BossActivity.class));
@@ -149,7 +155,7 @@ public class KasirActivity extends AppCompatActivity
     public void reloadFragment(){
         // Reload current fragment
         Fragment frg = null;
-        frg = getSupportFragmentManager().findFragmentById(R.id.framekasir);
+        frg = getSupportFragmentManager().findFragmentById(R.id.frame);
         final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.detach(frg);
         ft.attach(frg);

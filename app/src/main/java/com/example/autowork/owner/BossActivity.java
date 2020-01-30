@@ -57,7 +57,7 @@ public class BossActivity extends AppCompatActivity
 
         HomeBossFragment fragment = new HomeBossFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frameboss, fragment);
+        fragmentTransaction.replace(R.id.frame, fragment);
         fragmentTransaction.commit();
 
 

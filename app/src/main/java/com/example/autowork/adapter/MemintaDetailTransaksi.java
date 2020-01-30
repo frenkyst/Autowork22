@@ -83,9 +83,9 @@ public class MemintaDetailTransaksi extends RecyclerView.Adapter<MemintaDetailTr
         holder.tv_barkod.setText(movie.getBarkod());
         holder.tv_nama.setText(movie.getNama());
         holder.tv_jml.setText(String.valueOf(movie.getJml()));
-        holder.tv_harga.setText("Rp "+String.valueOf(movie.getHargajual()));
 
         DecimalFormat decim = new DecimalFormat("#,###.##");
+        holder.tv_harga.setText("Rp "+decim.format(movie.getHargajual()));
         if(movie.getTotal()!=null) {
             holder.tv_total.setText("Rp "+decim.format(movie.getTotal()));
         }

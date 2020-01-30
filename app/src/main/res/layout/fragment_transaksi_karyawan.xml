@@ -39,13 +39,14 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="12sp"
                 android:textAlignment="center"
-                android:text=" Nama Tranaksi" />
+                android:text=" Kode Tranaksi" />
 
             <EditText
                 android:id="@+id/et_NamaTransaksi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nama Transaksi"
+                android:enabled="false"
+                android:hint="Kode Transaksi"
                 android:textAlignment="center"
                 android:text=""/>
 

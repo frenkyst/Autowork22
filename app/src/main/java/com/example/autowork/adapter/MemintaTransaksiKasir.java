@@ -92,7 +92,7 @@ public class MemintaTransaksiKasir extends RecyclerView.Adapter<MemintaTransaksi
 
                                 AppCompatActivity activity1 = (AppCompatActivity) view.getContext();
                                 Fragment myFragment1 = new DetailBayarFragment();
-                                activity1.getSupportFragmentManager().beginTransaction().replace(R.id.framekasir, myFragment1).addToBackStack(null).commit();
+                                activity1.getSupportFragmentManager().beginTransaction().replace(R.id.frame, myFragment1).addToBackStack(null).commit();
 
                                 break;
                         }
