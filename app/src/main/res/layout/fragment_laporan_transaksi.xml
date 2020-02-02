@@ -9,85 +9,100 @@
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rl_layouttransaksi"
-        android:background="@color/viewfinder_border"
+        android:background="@color/puteh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         >
 
-
-
         <TextView
-            android:id="@+id/tv_namaBarang"
-            android:layout_alignParentLeft="true"
+            android:id="@+id/tv0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:text="Nama Barang"
-            android:textSize="16sp" />
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:text="Laporan Transaksi"
+            android:textSize="28dp"
+            />
+
 
         <TextView
-            android:id="@+id/tv_jumlahBarang"
-            android:layout_toLeftOf="@+id/tv_totalLaba"
+            android:id="@+id/tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="4dp"
-            android:text="Jumlah Barang"
-            android:textSize="16sp" />
-
-
-        <TextView
-            android:id="@+id/tv_totalLaba"
-
-            android:layout_alignParentRight="true"
-            android:layout_width="90dp"
-            android:layout_height="wrap_content"
-
-            android:layout_marginRight="5dp"
-            android:text="Total Laba"
-            android:textAlignment="viewEnd"
-            android:textSize="16sp" />
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rc_list_request"
-            android:background="@color/warnaNota"
-            android:layout_marginTop="30dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
-
-            android:clipToPadding="false" />
+            android:layout_marginRight="52dp"
+            android:layout_toLeftOf="@+id/skat"
+            android:layout_alignBaseline="@+id/skat"
+            android:text="Dari Tanggal"
+            android:textSize="12dp"
+            />
 
         <TextView
-            android:id="@+id/tv_totalLaba1"
+            android:id="@+id/tv_tanggal1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
+            android:layout_toLeftOf="@+id/skat"
+            android:layout_alignBaseline="@+id/skat1"
+            android:text="00-00-0000"
+            android:textSize="18dp"
+            />
+
+        <TextView
+            android:id="@+id/skat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tv0"
+            android:text=" "/>
+        <TextView
+            android:id="@+id/skat1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/skat"
+            android:text=" "/>
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="43dp"
+            android:layout_toRightOf="@+id/skat"
+            android:layout_alignBaseline="@+id/skat"
+            android:text="Sampai Tanggal"
+            android:textSize="12dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_tanggal2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_toRightOf="@+id/skat"
+            android:layout_alignBaseline="@+id/skat1"
+            android:text="00-00-0000"
+            android:textSize="18dp"
+            />
 
 
-            android:layout_alignBottom="@id/rc_list_request"
-            android:layout_alignParentRight="true"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="2dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginBottom="-45dp"
-            android:background="@color/warnaNota1"
-            android:layout="@id/rc_list_request"
-            android:padding="7dp"
-            android:text="Rp.-"
-            android:textSize="16sp" />
+        <Button
+            android:id="@+id/btn_pdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/skat1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="PDF"/>
+
+
 
     </RelativeLayout>
 
 
-    <Button
-        android:id="@+id/btn_pdf"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PDF"/>
+
 
 
 </FrameLayout>

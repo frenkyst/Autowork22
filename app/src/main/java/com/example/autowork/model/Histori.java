@@ -5,17 +5,12 @@ public class Histori {
     private String namaKaryawan;
     private String namaKasir;
     private Integer totalTransaksi;
+    private String tanggalTransaksi;
     private String key;
 
     public Histori(){ }
 
 
-    public Histori(String namaKaryawan, String namaKasir, Integer totalTransaksi, String key) {
-        this.namaKaryawan = namaKaryawan;
-        this.namaKasir = namaKasir;
-        this.totalTransaksi = totalTransaksi;
-        this.key = key;
-    }
 
     public String getNamaKaryawan() {
         return namaKaryawan;
@@ -41,6 +36,14 @@ public class Histori {
         this.totalTransaksi = totalTransaksi;
     }
 
+    public String getTanggalTransaksi() {
+        return tanggalTransaksi;
+    }
+
+    public void setTanggalTransaksi(String tanggalTransaksi) {
+        this.tanggalTransaksi = tanggalTransaksi;
+    }
+
     public String getKey() {
         return key;
     }
@@ -54,6 +57,7 @@ public class Histori {
     public String toString() {
         return  " "+namaKaryawan+"\n" +
                 " "+namaKasir+"\n" +
+                " "+totalTransaksi+"\n" +
                 " "+totalTransaksi;
 
     }

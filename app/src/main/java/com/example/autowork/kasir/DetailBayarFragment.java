@@ -148,12 +148,12 @@ public class DetailBayarFragment extends Fragment {
          */
         v.findViewById(R.id.btn_bayar).setOnClickListener((view) -> {
 
-            Long timestampl = System.currentTimeMillis();
+            Long timestampl = System.currentTimeMillis()/1000;
             timestamp = timestampl.toString();
             GlobalVariabel.timestamp = timestamp;
 
             fromPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.Transaksi+"/"+GlobalVariabel.NamaTransaksi);
-            toPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.NotaPembayaran+"/"+timestamp);
+            toPath = FirebaseDatabase.getInstance().getReference(GlobalVariabel.Toko+"/"+GlobalVariabel.NotaPembayaran+"/"+GlobalVariabel.NamaTransaksi);
 
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
@@ -193,15 +193,15 @@ public class DetailBayarFragment extends Fragment {
      * @param fromPath key lokasi transaksi
      * @param toPath key lokasi notaPembayaran
      * @param nama nama kasir yang melakukan transaksi
-     * @param timeStamp waktu yang di konveersi ke angka
+     * @param timestamp waktu yang di konveersi ke angka
      */
-    public void copyRecord(DatabaseReference fromPath, final DatabaseReference toPath, String nama, String timeStamp) {
+    public void copyRecord(DatabaseReference fromPath, final DatabaseReference toPath, String nama, String timestamp) {
         fromPath.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 toPath.setValue(dataSnapshot.getValue());
                 toPath.child("namaKasir").setValue(nama);
-                toPath.child("kodeTransaksi").setValue(timeStamp);
+                toPath.child("tanggalTransaksi").setValue(timestamp);
 
             }
             @Override

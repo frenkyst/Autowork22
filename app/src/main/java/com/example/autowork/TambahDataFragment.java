@@ -165,7 +165,7 @@ public class TambahDataFragment extends Fragment {
                 //.child(prikey)
                 .setValue(meminta);
 
-        Long timestampl = System.currentTimeMillis();
+        Long timestampl = System.currentTimeMillis()/1000;
         String timestamp = timestampl.toString();
 
         /**

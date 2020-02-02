@@ -2,42 +2,55 @@ package com.example.autowork.model;
 
 public class Laba {
 
-    private String nama;
-    private Integer jml;
-    private Integer laba;
+    private String namaKaryawan;
+    private String namaKasir;
+    private Integer totalTransaksi;
+    private Integer totalLaba;
+    private String tanggalTransaksi;
     private String key;
 
     public Laba() {
     }
 
-    public Laba(String nama, Integer jml, Integer laba) {
-        this.nama = nama;
-        this.jml = jml;
-        this.laba = laba;
+
+    public String getNamaKaryawan() {
+        return namaKaryawan;
     }
 
-    public String getNama() {
-        return nama;
+    public void setNamaKaryawan(String namaKaryawan) {
+        this.namaKaryawan = namaKaryawan;
     }
 
-    public void setNama(String nama) {
-        this.nama = nama;
+    public String getNamaKasir() {
+        return namaKasir;
     }
 
-    public Integer getJml() {
-        return jml;
+    public void setNamaKasir(String namaKasir) {
+        this.namaKasir = namaKasir;
     }
 
-    public void setJml(Integer jml) {
-        this.jml = jml;
+    public Integer getTotalTransaksi() {
+        return totalTransaksi;
     }
 
-    public Integer getLaba() {
-        return laba;
+    public void setTotalTransaksi(Integer totalTransaksi) {
+        this.totalTransaksi = totalTransaksi;
     }
 
-    public void setLaba(Integer laba) {
-        this.laba = laba;
+    public Integer getTotalLaba() {
+        return totalLaba;
+    }
+
+    public void setTotalLaba(Integer totalLaba) {
+        this.totalLaba = totalLaba;
+    }
+
+    public String getTanggalTransaksi() {
+        return tanggalTransaksi;
+    }
+
+    public void setTanggalTransaksi(String tanggalTransaksi) {
+        this.tanggalTransaksi = tanggalTransaksi;
     }
 
     public String getKey() {
@@ -50,8 +63,10 @@ public class Laba {
 
     @Override
     public String toString() {
-        return  " "+nama+"\n" +
-                " "+jml+"\n" +
-                " "+laba;
+        return  " "+namaKaryawan+"\n" +
+                " "+namaKasir+"\n" +
+                " "+totalTransaksi+"\n" +
+                " "+totalLaba+"\n" +
+                " "+tanggalTransaksi;
     }
 }

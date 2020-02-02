@@ -21,14 +21,14 @@ public class MemintaNota extends RecyclerView.Adapter<MemintaNota.MyViewHolder>{
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout rl_layoutnota;
-        public TextView tv_nama, tv_total, tv_jumlah, tv_hargaAwal;
+        public TextView tv_nama, tv_total, tv_jumlah, tv_hargaJual;
 
         public MyViewHolder(View view) {
             super(view);
             rl_layoutnota = view.findViewById(R.id.rl_layout);
             tv_nama = view.findViewById(R.id.tv_nama);
             tv_jumlah = view.findViewById(R.id.tv_jml);
-            tv_hargaAwal = view.findViewById(R.id.tv_hargaAwal);
+            tv_hargaJual = view.findViewById(R.id.tv_hargaJual);
             tv_total = view.findViewById(R.id.tv_total);
         }
     }
@@ -69,7 +69,7 @@ public class MemintaNota extends RecyclerView.Adapter<MemintaNota.MyViewHolder>{
 //        String hargaAwal1 = String.valueOf(hargaAwal);
 //        DecimalFormat.format(hargaAwal1);
         DecimalFormat decim = new DecimalFormat("#,###.##");
-        holder.tv_hargaAwal.setText(decim.format(hargaAwal));
+        holder.tv_hargaJual.setText(decim.format(hargaAwal));
 
 
 

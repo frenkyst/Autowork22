@@ -9,14 +9,32 @@ tools:context=".kasir.NotaPembayaranFragment">
 
     <RelativeLayout
         android:id="@+id/rl_layouttransaksi"
-        android:background="@color/warnaNota"
+        android:background="@color/puteh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
         >
 
+        <Button
+            android:id="@+id/btn_pdf"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignBaseline="@id/tv_header"
+            android:text="PDF"/>
+
+        <TextView
+            android:id="@+id/tv_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="Nota"
+            android:textSize="28sp" />
+
         <TextView
             android:id="@+id/tv_kode"
+            android:layout_below="@id/tv_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Kode   : "
@@ -27,6 +45,7 @@ tools:context=".kasir.NotaPembayaranFragment">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/tv_kode"
+            android:layout_alignBaseline="@id/tv_kode"
             android:text="-"
             android:textSize="18sp" />
 
@@ -35,11 +54,11 @@ tools:context=".kasir.NotaPembayaranFragment">
             android:layout_below="@id/tv_kode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nama : "
+            android:text="Nama Kasir : "
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/tv_nama"
+            android:id="@+id/tv_namaKasir"
             android:layout_toRightOf="@id/tv_nama1"
             android:layout_alignBaseline="@+id/tv_nama1"
             android:layout_width="wrap_content"
@@ -48,9 +67,26 @@ tools:context=".kasir.NotaPembayaranFragment">
             android:textSize="18sp"/>
 
         <TextView
+            android:id="@+id/tv_nama2"
+            android:layout_below="@id/tv_nama1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Karyawan : "
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_namaKaryawan"
+            android:layout_toRightOf="@id/tv_nama2"
+            android:layout_alignBaseline="@+id/tv_nama2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:textSize="18sp"/>
+
+        <TextView
             android:id="@+id/tv_tanggal"
+            android:layout_below="@+id/tv_nama2"
             android:layout_alignParentRight="true"
-            android:layout_alignBaseline="@id/tv_nama1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="7dp"
@@ -61,8 +97,8 @@ tools:context=".kasir.NotaPembayaranFragment">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rc_list_request"
-            android:background="@color/warnaNota"
-            android:layout_marginTop="60dp"
+            android:layout_below="@+id/tv_tanggal"
+            android:background="@color/puteh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="50dp"
@@ -82,7 +118,7 @@ tools:context=".kasir.NotaPembayaranFragment">
             android:layout_marginEnd="2dp"
             android:layout_marginRight="2dp"
             android:layout_marginBottom="-45dp"
-            android:background="@color/warnaNota1"
+            android:background="@color/puteh"
             android:layout="@id/rc_list_request"
             android:padding="7dp"
             android:text="Rp.-"

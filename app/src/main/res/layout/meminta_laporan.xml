@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_layoutLaba"
+    android:background="@color/puteh"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="2dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginRight="2dp"
+    android:layout_marginBottom="2dp">
+
+    <RelativeLayout
+        android:id="@+id/ll_tap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        >
+
+
+
+
+        <TextView
+            android:id="@+id/tv_kodeTransaksi"
+            android:layout_alignBaseline="@id/tv_kodeTransaksi1"
+            android:layout_toRightOf="@id/tv_kodeTransaksi1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="Kode Transaksi"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_namaKaryawan"
+            android:layout_below="@+id/tv_kodeTransaksi"
+            android:layout_alignBaseline="@id/tv_namaKaryawan1"
+            android:layout_toRightOf="@id/tv_namaKaryawan1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="Nama Karyawan"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_namaKasir"
+            android:layout_below="@id/tv_namaKaryawan"
+            android:layout_alignBaseline="@id/tv_namaKasir1"
+            android:layout_toRightOf="@id/tv_namaKasir1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="Nama Kasir"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_totalTransaksi"
+            android:layout_below="@id/tv_namaKasir"
+            android:layout_alignBaseline="@id/tv_totalTransaksi1"
+            android:layout_toRightOf="@id/tv_totalTransaksi1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="Total Transaksi"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/tv_totalLaba"
+            android:layout_below="@id/tv_totalTransaksi"
+            android:layout_alignBaseline="@id/tv_totalLaba1"
+            android:layout_toRightOf="@id/tv_totalLaba1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Laba"
+            android:textAlignment="viewEnd"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_tanggal"
+            android:layout_below="@id/tv_totalLaba"
+            android:layout_alignBaseline="@id/tv_tanggal1"
+            android:layout_toRightOf="@id/tv_tanggal1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tanggal"
+            android:textAlignment="viewEnd"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_kodeTransaksi1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="Kode Transaksi : "
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_namaKaryawan1"
+            android:layout_below="@+id/tv_kodeTransaksi1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="Nama Karyawan : "
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_namaKasir1"
+            android:layout_below="@id/tv_namaKaryawan1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="Nama Kasir : "
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_totalTransaksi1"
+            android:layout_below="@id/tv_namaKasir1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:text="Total Transaksi : "
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/tv_totalLaba1"
+            android:layout_below="@id/tv_totalTransaksi1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Laba : "
+            android:textAlignment="viewEnd"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_tanggal1"
+            android:layout_below="@id/tv_totalLaba1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tanggal : "
+            android:textAlignment="viewEnd"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

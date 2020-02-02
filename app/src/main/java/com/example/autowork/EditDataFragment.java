@@ -204,7 +204,7 @@ public class EditDataFragment extends Fragment {
                             // Name, email address, and profile photo Url
                             String name = user.getDisplayName();
 
-                            Long timestampl = System.currentTimeMillis();
+                            Long timestampl = System.currentTimeMillis()/1000;
                             String timestamp = timestampl.toString();
 
                             pushData(new Meminta(

@@ -302,7 +302,7 @@ public class MemintaDetailTransaksi extends RecyclerView.Adapter<MemintaDetailTr
                                         .child("jml")
                                         .setValue(updateJumlah);
 
-                                Long timestampl = System.currentTimeMillis();
+                                Long timestampl = System.currentTimeMillis()/1000;
                                 String timestamp = timestampl.toString();
                                 /**
                                  * INPUT LOG TRANSAKSI KARYAWAN

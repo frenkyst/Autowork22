@@ -168,7 +168,7 @@ public class MemintaView extends RecyclerView.Adapter<MemintaView.MyViewHolder> 
                                             Integer totalUpdateTransaksi = totalTransaksi + subTotal; /** TOTALTRANSAKSI DARI FUNGSI AMBILTOTAL() DAN STOTAL DARI FUNGSI PENJUMLAHAN KETIKA  USER MENGINPUTKAN JUMLAH */
                                             Integer totalUpdateLaba = totalLabaint + Laba;
 
-                                            Long timestampl = System.currentTimeMillis();
+                                            Long timestampl = System.currentTimeMillis()/1000;
                                             String timestamp = timestampl.toString();
 
 

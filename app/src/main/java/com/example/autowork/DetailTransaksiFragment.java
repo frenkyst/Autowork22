@@ -151,6 +151,7 @@ public class DetailTransaksiFragment extends Fragment {
 
             Toast.makeText(getActivity(), "Transaksi Berhasil !!", Toast.LENGTH_SHORT).show();
 
+            getActivity().getSupportFragmentManager().popBackStackImmediate();
 
         });
         /**

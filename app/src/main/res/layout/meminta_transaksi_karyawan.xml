@@ -14,6 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
+
+
         <TextView
             android:id="@+id/tv_namaTransaksi"
             android:layout_width="match_parent"
@@ -43,6 +45,14 @@
         >
 
         <TextView
+            android:id="@+id/tv_id2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama Karyawan  =>  "
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_toRightOf="@+id/tv_id2"
             android:id="@+id/tv_namaKaryawan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,18 +60,18 @@
             android:textSize="16sp" />
 
         <TextView
-            android:layout_toLeftOf="@+id/tv_totalKaryawan"
-            android:layout_centerInParent="true"
+            android:id="@+id/tv_id1"
+            android:layout_below="@+id/tv_namaKaryawan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total Transaksi =>  "
+            android:text="Total Transaksi   =>  "
             android:textSize="16sp" />
         <TextView
             android:id="@+id/tv_totalKaryawan"
-            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/tv_id1"
+            android:layout_alignBaseline="@+id/tv_id1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:text="Total"
             android:textAlignment="viewEnd"
             android:textSize="16sp" />

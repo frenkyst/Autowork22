@@ -3,6 +3,7 @@ package com.example.autowork.kasir;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -20,6 +22,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,9 +52,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.TimeZone;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,85 +80,54 @@ public class LaporanTransaksiFragment extends Fragment {
     private RecyclerView rc_list_request;
     private ProgressDialog loading;
 
-    private TextView tv_totalLaba1;
+    private TextView tv_totalLaba, tv_totalTransaksi, tv_date1, tv_date2;
+    private String TotalTransaksi,TotalLaba, timestamp1, timestamp2;
+    private Integer timestamp11, timestamp22;
+
+    private int mYear, mMonth, mDay, mHour, mMinute;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        builder.detectFileUriExposure();
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_laporan_transaksi, container, false);
 
+                database = FirebaseDatabase.getInstance().getReference();
+        tv_totalLaba = v.findViewById(R.id.tv_totalLaba);
+        tv_totalTransaksi = v.findViewById(R.id.tv_totalTransaksi);
+        tv_date1 = v.findViewById(R.id.tv_tanggal1);
+        tv_date2 = v.findViewById(R.id.tv_tanggal2);
 
-        database = FirebaseDatabase.getInstance().getReference();
-        tv_totalLaba1 = v.findViewById(R.id.tv_totalLaba1);
+        Date c = Calendar.getInstance().getTime();
 
-        rc_list_request = v.findViewById(R.id.rc_list_request);
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        String formattedDate = df.format(c);
+        tv_date1.setText(formattedDate);
+        tv_date2.setText(formattedDate);
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        rc_list_request.setLayoutManager(mLayoutManager);
-        rc_list_request.setItemAnimator(new DefaultItemAnimator());
+        long timestampl = c.getTime()/1000;
+        timestamp1 = String.valueOf(timestampl);
+        timestamp2 = String.valueOf(timestampl);
 
-        loading = ProgressDialog.show(getActivity(),
-                null,
-                "Please wait...",
-                true,
-                false);
+        timestamp11 = Integer.valueOf(timestamp1);
+        timestamp22 = Integer.valueOf(timestamp2);
 
-        database.child(GlobalVariabel.Toko).child(GlobalVariabel.Laba).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                /**
-                 * Saat ada data baru, masukkan datanya ke ArrayList
-                 */
-                daftarReq = new ArrayList<>();
-                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
-                    /**
-                     * Mapping data pada DataSnapshot ke dalam object Wisata
-                     * Dan juga menyimpan primary key pada object Wisata
-                     * untuk keperluan Edit dan Delete data
-                     */
-                    Laba requests = noteDataSnapshot.getValue(Laba.class);
-                    requests.setKey(noteDataSnapshot.getKey());
+        getLaporan(timestamp11,timestamp22);
 
-                    /**
-                     * Menambahkan object Wisata yang sudah dimapping
-                     * ke dalam ArrayList
-                     */
-                    daftarReq.add(requests);
 
-                }
 
-                /**
-                 * Inisialisasi adapter dan data hotel dalam bentuk ArrayList
-                 * dan mengeset Adapter ke dalam RecyclerView
-                 */
-                memintalaba = new MemintaLaba(daftarReq, getActivity());
-                rc_list_request.setAdapter(memintalaba);
-                loading.dismiss();
+//        rc_list_request = v.findViewById(R.id.rc_list_request);
+//
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+//        rc_list_request.setLayoutManager(mLayoutManager);
+//        rc_list_request.setItemAnimator(new DefaultItemAnimator());
 
-                int totalPrice = 0;
-                for (int i = 0; i<daftarReq.size(); i++)
-                {
-                    totalPrice +=  daftarReq.get(i).getLaba();
-                }
-                DecimalFormat decim = new DecimalFormat("#,###.##");
-                tv_totalLaba1.setText("Rp. "+decim.format(totalPrice));
 
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                /**
-                 * Kode ini akan dipanggil ketika ada error dan
-                 * pengambilan data gagal dan memprint error nya
-                 * ke LogCat
-                 */
-                System.out.println(databaseError.getDetails() + " " + databaseError.getMessage());
-                loading.dismiss();
-            }
-        });
 
 
 
@@ -169,7 +147,89 @@ public class LaporanTransaksiFragment extends Fragment {
 
         });
 
+
+
+        v.findViewById(R.id.tv_tanggal1).setOnClickListener((view) -> {
+
+            date1();
+
+        });
+
+        v.findViewById(R.id.tv_tanggal2).setOnClickListener((view) -> {
+
+            date2();
+
+        });
+
+
         return v;
+    }
+
+
+    private void getLaporan(Integer timestamp11, Integer timestamp22){
+
+        loading = ProgressDialog.show(getActivity(),
+                null,
+                "Please wait...",
+                true,
+                false);
+
+        database.child(GlobalVariabel.Toko).child(GlobalVariabel.NotaPembayaran).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                /**
+                 * Saat ada data baru, masukkan datanya ke ArrayList
+                 */
+                daftarReq = new ArrayList<>();
+                for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
+
+                    if(noteDataSnapshot.child("tanggalTransaksi").exists()){
+                        if(Integer.valueOf(noteDataSnapshot.child("tanggalTransaksi").getValue(String.class)) >= timestamp11 & Integer.valueOf(noteDataSnapshot.child("tanggalTransaksi").getValue(String.class)) <= timestamp22){
+
+                            Laba requests = noteDataSnapshot.getValue(Laba.class);
+                            requests.setKey(noteDataSnapshot.getKey());
+
+                            daftarReq.add(requests);
+//                            break;
+                        }
+                    }
+
+
+                }
+
+                /**
+                 * Inisialisasi adapter dan data hotel dalam bentuk ArrayList
+                 * dan mengeset Adapter ke dalam RecyclerView
+                 */
+//                memintalaba = new MemintaLaba(daftarReq, getActivity());
+//                rc_list_request.setAdapter(memintalaba);
+                loading.dismiss();
+
+                int totalPrice = 0,totalPrice1 = 0;
+                for (int i = 0; i<daftarReq.size(); i++)
+                {
+                    totalPrice +=  daftarReq.get(i).getTotalTransaksi();
+                    totalPrice1 +=  daftarReq.get(i).getTotalLaba();
+                }
+                DecimalFormat decim = new DecimalFormat("#,###.##");
+                TotalTransaksi = "Rp. "+decim.format(totalPrice);
+                TotalLaba = "Rp. "+decim.format(totalPrice1);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                /**
+                 * Kode ini akan dipanggil ketika ada error dan
+                 * pengambilan data gagal dan memprint error nya
+                 * ke LogCat
+                 */
+                System.out.println(databaseError.getDetails() + " " + databaseError.getMessage());
+                loading.dismiss();
+            }
+        });
+
     }
 
 
@@ -187,9 +247,12 @@ public class LaporanTransaksiFragment extends Fragment {
 //    GiftitemPOJO type;
 //    GiftitemPOJO date;
 
-    Laba name;
-    Laba jml;
-    Laba laba;
+    Laba kodeTransaksi;
+    Laba namaKaryawan;
+    Laba namaKasir;
+    Laba totalTransaksi;
+    Laba totalLaba;
+    Laba tanggal;
 
 
 //    class DoLOgin extends AsyncTask {
@@ -272,46 +335,72 @@ public class LaporanTransaksiFragment extends Fragment {
             Log.i(TAG, "Created a new directory for PDF");
         }
 
-        String pdfname = "GiftItem.pdf";
+        Date c = Calendar.getInstance().getTime();
+
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = df.format(c);
+
+        String pdfname = formattedDate+".pdf";
         pdfFile = new File(docsFolder.getAbsolutePath(), pdfname);
         OutputStream output = new FileOutputStream(pdfFile);
         Document document = new Document(PageSize.A4);
-        PdfPTable table = new PdfPTable(new float[]{1, 1, 1});
+        PdfPTable table = new PdfPTable(new float[]{1, 2, 2, 2, 2, 2});
         table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
         table.getDefaultCell().setFixedHeight(20);
         table.setTotalWidth(PageSize.A4.getWidth());
         table.setWidthPercentage(100);
         table.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
-        table.addCell("Nama");
-        table.addCell("Jumlah");
+        table.addCell("Kode");
+        table.addCell("Karyawan");
+        table.addCell("Kasir");
+        table.addCell("Transaksi");
         table.addCell("Laba");
+        table.addCell("Tanggal");
         table.setHeaderRows(1);
         PdfPCell[] cells = table.getRow(0).getCells();
         for (int j = 0; j < cells.length; j++) {
             cells[j].setBackgroundColor(BaseColor.GRAY);
         }
         for (int i = 0; i < daftarReq.size(); i++) {
-            name = daftarReq.get(i);
-            jml = daftarReq.get(i);
-            laba = daftarReq.get(i);
-            String namen = name.getNama();
-            Integer jmln = jml.getJml();
-            Integer laban = laba.getLaba();
+            kodeTransaksi = daftarReq.get(i);
+            namaKaryawan = daftarReq.get(i);
+            namaKasir = daftarReq.get(i);
+            totalTransaksi = daftarReq.get(i);
+            totalLaba = daftarReq.get(i);
+            tanggal = daftarReq.get(i);
+            DecimalFormat decim = new DecimalFormat("#,###.##");
+            String kodeTransaksin = kodeTransaksi.getKey();
+            String namaKaryawann = namaKaryawan.getNamaKaryawan();
+            String namaKasirn = namaKasir.getNamaKasir();
+            String totalTransaksin = "Rp. "+decim.format(totalTransaksi.getTotalTransaksi());
+            String totalLaban = "Rp. "+decim.format(totalLaba.getTotalLaba());
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            String dateString = formatter.format(new Date(Long.parseLong(tanggal.getTanggalTransaksi())*1000));
+            String tanggaln = dateString;
 
-            table.addCell(String.valueOf(namen));
-            table.addCell(String.valueOf(jmln));
-            table.addCell(String.valueOf(laban));
+
+            table.addCell(String.valueOf(kodeTransaksin));
+            table.addCell(String.valueOf(namaKaryawann));
+            table.addCell(String.valueOf(namaKasirn));
+            table.addCell(String.valueOf(totalTransaksin));
+            table.addCell(String.valueOf(totalLaban));
+            table.addCell(String.valueOf(tanggaln));
 
         }
-
+        table.addCell(" ");
+        table.addCell(" ");
+        table.addCell(" ");
+        table.addCell(TotalTransaksi);
+        table.addCell(TotalLaba);
+        table.addCell(" ");
 //        System.out.println("Done");
 
 
-        Font f = new Font(Font.FontFamily.TIMES_ROMAN, 30.0f, Font.NORMAL, BaseColor.GREEN);
+        Font f = new Font(Font.FontFamily.TIMES_ROMAN, 30.0f, Font.NORMAL, BaseColor.GRAY);
         Font g = new Font(Font.FontFamily.TIMES_ROMAN, 20.0f, Font.NORMAL, BaseColor.RED);
 
         PdfPTable tableHeader = new PdfPTable(new float[] { 1 });
-        PdfPCell cellOne = new PdfPCell(new Phrase(new Paragraph("Laporan Laba \n\n", f)));
+        PdfPCell cellOne = new PdfPCell(new Phrase(new Paragraph("Laporan Transaksi \n\n", f)));
         cellOne.setHorizontalAlignment(Element.ALIGN_CENTER);
         cellOne.setBorder(Rectangle.NO_BORDER);
         tableHeader.addCell(cellOne);
@@ -319,8 +408,9 @@ public class LaporanTransaksiFragment extends Fragment {
         PdfWriter.getInstance(document, output);
         document.open();
 
+
         document.add(tableHeader);
-        document.add(new Paragraph("Pdf File Through Itext \n\n", g));
+//        document.add(new Paragraph("Pdf File Through Itext \n\n", f));
         document.add(table);
 
 //        for (int i = 0; i < MyList1.size(); i++) {
@@ -348,6 +438,81 @@ public class LaporanTransaksiFragment extends Fragment {
         }
     }
 
+
+    private void date1(){
+        // Get Current Date
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+//                        tv_date1.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                        Calendar combinedCal = new GregorianCalendar(TimeZone.getTimeZone("GMT+7"));
+
+                        combinedCal.set(year, monthOfYear, dayOfMonth);
+                        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                        String formattedDate = df.format(combinedCal.getTime());
+                        tv_date1.setText(formattedDate);
+
+                        combinedCal.set(Calendar.HOUR_OF_DAY, 23);
+                        combinedCal.set(Calendar.MINUTE, 59);
+
+                        long timestampl = combinedCal.getTimeInMillis()/1000;
+                        timestamp1 = String.valueOf(timestampl);
+
+                        timestamp11 = Integer.valueOf(timestamp1);
+                        getLaporan(timestamp11,timestamp22);
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }
+
+    private void date2(){
+        // Get Current Date
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+//                        tv_date2.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                        Calendar combinedCal = new GregorianCalendar(TimeZone.getTimeZone("GMT+7"));
+
+                        combinedCal.set(year, monthOfYear, dayOfMonth);
+                        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                        String formattedDate = df.format(combinedCal.getTime());
+                        tv_date2.setText(formattedDate);
+
+                        combinedCal.set(Calendar.HOUR_OF_DAY, 23);
+                        combinedCal.set(Calendar.MINUTE, 59);
+
+                        long timestampl = combinedCal.getTimeInMillis()/1000;
+                        timestamp2 = String.valueOf(timestampl);
+
+                        timestamp22 = Integer.valueOf(timestamp2);
+                        getLaporan(timestamp11,timestamp22);
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+    }
 
 
 }

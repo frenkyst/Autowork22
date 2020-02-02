@@ -156,7 +156,7 @@ public class UpdatestokdataFragment extends Fragment {
                         status = "Error ! Ulangi !";
                     } else {
 
-                        Long timestampl = System.currentTimeMillis();
+                        Long timestampl = System.currentTimeMillis()/1000;
                         String timestamp = timestampl.toString();
 
                         database1.child(GlobalVariabel.Toko)

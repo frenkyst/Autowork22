@@ -24,6 +24,8 @@ import com.example.autowork.model.Meminta;
 import com.google.firebase.database.DatabaseReference;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MemintaHistori extends RecyclerView.Adapter<MemintaHistori.MyViewHolder> {
@@ -36,7 +38,7 @@ public class MemintaHistori extends RecyclerView.Adapter<MemintaHistori.MyViewHo
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout rl_layouttransaksi;
-        public TextView tv_namaKaryawan, tv_NamaKasir, tv_totalTransaksi, tv_kodeTranaksi;
+        public TextView tv_namaKaryawan, tv_NamaKasir, tv_totalTransaksi, tv_kodeTranaksi, tv_tanggalTransaksi;
         public ImageView tap_edit;
 
         public MyViewHolder(View view) {
@@ -46,6 +48,7 @@ public class MemintaHistori extends RecyclerView.Adapter<MemintaHistori.MyViewHo
             tv_NamaKasir = view.findViewById(R.id.tv_namaKasir);
             tv_totalTransaksi = view.findViewById(R.id.tv_totalTransaksi);
             tv_kodeTranaksi = view.findViewById(R.id.tv_kodeTransaksi);
+            tv_tanggalTransaksi = view.findViewById(R.id.tv_tanggal);
 
             tap_edit = view.findViewById(R.id.tap_edit);
 
@@ -78,6 +81,10 @@ public class MemintaHistori extends RecyclerView.Adapter<MemintaHistori.MyViewHo
 
         holder.tv_totalTransaksi.setText("Rp "+decim.format(movie.getTotalTransaksi()));
 
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        String dateString = formatter.format(new Date(Long.parseLong(movie.getTanggalTransaksi())*1000));
+        holder.tv_tanggalTransaksi.setText(dateString);
+
 
         /**
          * ============================================================================================================================================(STAR)
@@ -98,7 +105,7 @@ public class MemintaHistori extends RecyclerView.Adapter<MemintaHistori.MyViewHo
                         switch (item.getItemId()) {
                             case R.id.item_detail:
                                 //handle menu1 click
-                                GlobalVariabel.timestamp = movie.getKey();
+                                GlobalVariabel.NamaTransaksi = movie.getKey();
 
                                 AppCompatActivity activity1 = (AppCompatActivity) view.getContext();
                                 Fragment myFragment1 = new NotaPembayaranFragment();

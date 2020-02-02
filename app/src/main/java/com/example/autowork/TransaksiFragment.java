@@ -80,17 +80,16 @@ public class TransaksiFragment extends Fragment {
 
                     for (DataSnapshot noteDataSnapshot : dataSnapshot.getChildren()) {
 
-                        if(noteDataSnapshot.child("namaKaryawan").getValue(String.class).equals(name)){
+                        if (noteDataSnapshot.child("namaKaryawan").exists()) {
+                            if (noteDataSnapshot.child("namaKaryawan").getValue(String.class).equals(name)) {
 
-                            Transaksi requests = noteDataSnapshot.getValue(Transaksi.class);
-                            requests.setKey(noteDataSnapshot.getKey());
+                                Transaksi requests = noteDataSnapshot.getValue(Transaksi.class);
+                                requests.setKey(noteDataSnapshot.getKey());
 
-                            daftarReq.add(requests);
+                                daftarReq.add(requests);
 //                            break;
+                            }
                         }
-
-
-
                     }
 
                 }
