@@ -17,6 +17,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.widget.TextView;
 
 import com.example.autowork.HistoriTransaksiFragment;
 import com.example.autowork.HomeKaryawanFragment;
@@ -31,6 +32,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class KasirActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -82,8 +84,23 @@ public class KasirActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.kasir, menu);
+        Nama = findViewById(R.id.tv_user);
+        Email = findViewById(R.id.tv_email);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Name, email address, and profile photo Url
+            String nama = user.getDisplayName();
+            String email = user.getEmail();
+            String uid = user.getUid();
+
+            Nama.setText(nama);
+            Email.setText(email);
+        }
         return true;
     }
+
+    private TextView Nama, Email;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

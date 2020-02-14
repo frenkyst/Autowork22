@@ -125,13 +125,13 @@ public class BossActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-
-        } else if (id == R.id.nav_karyawan) {
-
-        } else if (id == R.id.nav_kasir) {
-
-        } else if (id == R.id.nav_baru) {
-
+//
+//        } else if (id == R.id.nav_karyawan) {
+//
+//        } else if (id == R.id.nav_kasir) {
+//
+//        } else if (id == R.id.nav_baru) {
+//
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

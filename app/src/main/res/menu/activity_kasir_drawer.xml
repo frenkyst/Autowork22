@@ -14,7 +14,7 @@
             android:title="Laporan" />
         <item
             android:id="@+id/nav_histori"
-            android:icon="@drawable/ic_menu_transaksi"
+            android:icon="@drawable/ic_menu_histori"
             android:title="Histori Transaksi" />
     </group>
 

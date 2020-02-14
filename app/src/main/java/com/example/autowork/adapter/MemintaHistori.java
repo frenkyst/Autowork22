@@ -94,30 +94,11 @@ public class MemintaHistori extends RecyclerView.Adapter<MemintaHistori.MyViewHo
             @Override
             public void onClick(View view) {
 
-                //creating a popup menu
-                PopupMenu popup = new PopupMenu(mActivity, holder.tap_edit);
-                //inflating menu from xml resource
-                popup.inflate(R.menu.detail_menu);
-                //adding click listener
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.item_detail:
-                                //handle menu1 click
-                                GlobalVariabel.NamaTransaksi = movie.getKey();
+                GlobalVariabel.NamaTransaksi = movie.getKey();
 
-                                AppCompatActivity activity1 = (AppCompatActivity) view.getContext();
-                                Fragment myFragment1 = new NotaPembayaranFragment();
-                                activity1.getSupportFragmentManager().beginTransaction().replace(R.id.frame, myFragment1).addToBackStack(null).commit();
-
-                                break;
-                        }
-                        return false;
-                    }
-                });
-                //displaying the popup
-                popup.show();
+                AppCompatActivity activity1 = (AppCompatActivity) view.getContext();
+                Fragment myFragment1 = new NotaPembayaranFragment();
+                activity1.getSupportFragmentManager().beginTransaction().replace(R.id.frame, myFragment1).addToBackStack(null).commit();
 
             }
         });

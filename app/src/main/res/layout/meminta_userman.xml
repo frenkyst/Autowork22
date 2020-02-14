@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:visibility="visible"
             android:text=" "
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_nama"
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:text="Nama"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_email"
@@ -43,7 +43,7 @@
             android:textAlignment="viewEnd"
             android:text="Email"
 
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
     </RelativeLayout>
 

@@ -22,7 +22,8 @@
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
             android:text="Laporan Transaksi"
-            android:textSize="28dp"
+            android:textStyle="bold"
+            android:textSize="18dp"
             />
 
 
@@ -30,7 +31,7 @@
             android:id="@+id/tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="52dp"
+            android:layout_marginRight="40dp"
             android:layout_toLeftOf="@+id/skat"
             android:layout_alignBaseline="@+id/skat"
             android:text="Dari Tanggal"
@@ -45,7 +46,7 @@
             android:layout_toLeftOf="@+id/skat"
             android:layout_alignBaseline="@+id/skat1"
             android:text="00-00-0000"
-            android:textSize="18dp"
+            android:textSize="14sp"
             />
 
         <TextView
@@ -69,7 +70,7 @@
             android:id="@+id/tv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="43dp"
+            android:layout_marginLeft="40dp"
             android:layout_toRightOf="@+id/skat"
             android:layout_alignBaseline="@+id/skat"
             android:text="Sampai Tanggal"
@@ -84,7 +85,7 @@
             android:layout_toRightOf="@+id/skat"
             android:layout_alignBaseline="@+id/skat1"
             android:text="00-00-0000"
-            android:textSize="18dp"
+            android:textSize="14sp"
             />
 
 
@@ -92,6 +93,7 @@
             android:id="@+id/btn_pdf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/button_shape"
             android:layout_below="@+id/skat1"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"

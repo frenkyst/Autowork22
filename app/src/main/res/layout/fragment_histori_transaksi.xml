@@ -23,7 +23,7 @@
             android:text="Histori Transaksi"
             android:textStyle="bold"
             android:textColor="@color/abang"
-            android:textSize="28sp" />
+            android:textSize="16sp" />
 
 
     </RelativeLayout>

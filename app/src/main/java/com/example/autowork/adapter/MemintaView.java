@@ -440,7 +440,7 @@ public class MemintaView extends RecyclerView.Adapter<MemintaView.MyViewHolder> 
                             Toast.LENGTH_SHORT).show();
                 } else {
                     Integer value = dataSnapshot.getValue(Integer.class);
-                    GlobalVariabel.AutoIncrement = String.valueOf(value);
+                    GlobalVariabel.AutoIncrement = "T "+String.valueOf(value);
 //                    Log.d("Firebase counter increment succeeded.");
 
                     inputDatabase(new TransaksiKaryawan(
@@ -461,10 +461,10 @@ public class MemintaView extends RecyclerView.Adapter<MemintaView.MyViewHolder> 
                             new TransaksiKaryawan(
                                     namaBarang,
                                     jumlahTransaksi,
-                                    Laba), String.valueOf(value)
+                                    Laba), "T "+String.valueOf(value)
                     ); // HASIL TOTAL PEMBAYARAN
 
-                    TransaksiKaryawanFragment.etNamaTransaksi.setText(String.valueOf(value));
+                    TransaksiKaryawanFragment.etNamaTransaksi.setText("T "+String.valueOf(value));
 
                 }
             }

@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimary"
-                android:textSize="28sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_gravity="center"
                 android:text="Detail : " />
@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimary"
-                android:textSize="28sp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 android:layout_gravity="center"
                 android:text="Detail " />
@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Total Bayar ?"
-                android:textSize="34sp" />
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/btn_bayar"
@@ -69,9 +69,10 @@
                 android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/button_shape"
                 android:layout_alignParentBottom="true"
                 android:text="BAYAR TRANSAKSI"
-                android:textSize="24sp" />
+                android:textSize="18sp" />
         </RelativeLayout>
     </LinearLayout>
 

@@ -24,7 +24,7 @@
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"
             android:text="Nama"
-            android:textSize="18sp" />
+            android:textSize="12sp" />
 
         <ImageView
             android:id="@+id/tap_edit"
@@ -48,7 +48,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="Code"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 />
 
             <TextView
@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:text="Jumlah"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_harga"
@@ -68,7 +68,7 @@
                 android:textColor="@color/ijo"
                 android:textStyle="bold"
                 android:text="Harga"
-                android:textSize="18sp" />
+                android:textSize="12sp" />
 
         </RelativeLayout>
 

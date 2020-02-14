@@ -14,26 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >
-        <TextView
-            android:id="@+id/tv_kodeTransaksi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/birunom"
-            android:textAlignment="center"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
-            android:text="Kode Transaksi"
-            android:textSize="18sp" />
 
-        <ImageView
-            android:id="@+id/tap_edit"
-            android:layout_centerInParent="true"
-            android:background="@color/puteh"
-            android:layout_width="16dp"
-            android:layout_height="20dp"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/ic_popup_edit"
-            />
+
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -42,27 +25,48 @@
         android:layout_height="wrap_content"
         >
 
+        <ImageView
+            android:id="@+id/tap_edit"
+            android:layout_centerInParent="true"
+            android:background="@color/puteh"
+            android:layout_width="16dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_kanan"
+            />
+
+        <TextView
+            android:id="@+id/tv_kodeTransaksi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Kode Transaksi"
+            android:textStyle="bold"
+            android:textSize="12sp" />
+
         <TextView
             android:id="@+id/tv1"
+            android:layout_below="@+id/tv_kodeTransaksi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nama Karyawan"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
         <TextView
             android:id="@+id/tv11"
+            android:layout_alignBaseline="@+id/tv1"
             android:layout_toRightOf="@+id/tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" : "
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_namaKaryawan"
+            android:layout_alignBaseline="@+id/tv1"
             android:layout_toRightOf="@+id/tv11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nama Karyawan"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv2"
@@ -70,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nama Kasir"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
         <TextView
             android:id="@+id/tv22"
             android:layout_toRightOf="@+id/tv2"
@@ -78,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" : "
-            android:textSize="16sp" />
+            android:textSize="12sp" />
         <TextView
             android:id="@+id/tv_namaKasir"
             android:layout_toRightOf="@+id/tv22"
@@ -86,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nama Kasir"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv3"
@@ -94,7 +98,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total Transaksi"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
         <TextView
             android:id="@+id/tv33"
             android:layout_toRightOf="@+id/tv3"
@@ -102,7 +106,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" : "
-            android:textSize="16sp" />
+            android:textSize="12sp" />
         <TextView
             android:id="@+id/tv_totalTransaksi"
             android:layout_toRightOf="@+id/tv33"
@@ -110,15 +114,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total Transaksi"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
         <TextView
             android:id="@+id/tv_tanggal"
-            android:layout_below="@+id/tv3"
             android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tanggal"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
 
     </RelativeLayout>

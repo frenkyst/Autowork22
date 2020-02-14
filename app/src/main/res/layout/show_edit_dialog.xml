@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Edit Transaksi"
-            android:textSize="32sp"
+            android:textSize="14sp"
             android:textColor="@color/abang"
             android:textStyle="bold"
             android:layout_marginRight="9dp"
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ubah :"
-            android:textSize="26sp"
+            android:textSize="12sp"
             android:layout_marginRight="9dp"
             />
 
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/abang"
             android:text="-"
-            android:textSize="26sp"
+            android:textSize="12sp"
             />
 
     </LinearLayout>
@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Jumlah :"
-            android:textSize="18sp"
+            android:textSize="12sp"
             android:layout_marginRight="9dp"
             />
 

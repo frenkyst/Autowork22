@@ -25,8 +25,9 @@
             android:id="@+id/tv_NamaTransaksi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="Nama Transaksi"
-            android:textSize="28sp"
+            android:textSize="16sp"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
             />
@@ -44,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nama Barang :"
-            android:textSize="18sp"
+            android:textSize="12sp"
             android:layout_marginRight="9dp"
             />
 
@@ -54,7 +55,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
             android:text="-"
-            android:textSize="18sp"
+            android:textSize="12sp"
             />
 
     </LinearLayout>
@@ -69,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Harga Barang :"
-            android:textSize="18sp"
+            android:textSize="12sp"
             android:layout_marginRight="9dp"
             />
 
@@ -79,7 +80,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorPrimary"
             android:text="-"
-            android:textSize="18sp"
+            android:textSize="12sp"
             />
 
     </LinearLayout>
@@ -95,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Jumlah :"
-            android:textSize="18sp"
+            android:textSize="12sp"
             android:layout_marginRight="9dp"
             />
 

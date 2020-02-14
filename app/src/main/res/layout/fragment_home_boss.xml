@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:text="Nama"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_email"
@@ -34,7 +34,7 @@
             android:layout_marginRight="100dp"
             android:text="Email"
 
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
     </RelativeLayout>
 
