@@ -141,16 +141,22 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             // Handle the camera action
+            this.getSupportFragmentManager().popBackStackImmediate();
+
             HomeKaryawanFragment fragment = new HomeKaryawanFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame, fragment);
             fragmentTransaction.addToBackStack(null).commit();
         } else if (id == R.id.nav_stokBaru) {
+            this.getSupportFragmentManager().popBackStackImmediate();
+
             TambahDataFragment fragment = new TambahDataFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame, fragment);
             fragmentTransaction.addToBackStack(null).commit();
         } else if (id == R.id.nav_menambahStok) {
+            this.getSupportFragmentManager().popBackStackImmediate();
+
             UpdatestokdataFragment fragment = new UpdatestokdataFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame, fragment);
@@ -176,8 +182,8 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame, fragment);
             fragmentTransaction.addToBackStack(null).commit();
-        } else if (id == R.id.nav_send) {
-            startActivity(new Intent(this, KasirActivity.class));
+//        } else if (id == R.id.nav_send) {
+//            startActivity(new Intent(this, KasirActivity.class));
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

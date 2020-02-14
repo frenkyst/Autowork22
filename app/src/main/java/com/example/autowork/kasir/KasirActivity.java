@@ -144,24 +144,30 @@ public class KasirActivity extends AppCompatActivity
 
         if (id == R.id.nav_home) {
             // Handle the camera action
+            this.getSupportFragmentManager().popBackStackImmediate();
+
             HomeKasirFragment fragment = new HomeKasirFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame, fragment);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_laporan) {
+            this.getSupportFragmentManager().popBackStackImmediate();
+
             LaporanTransaksiFragment fragment = new LaporanTransaksiFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame, fragment);
             fragmentTransaction.commit();
         } else if (id == R.id.nav_histori) {
+            this.getSupportFragmentManager().popBackStackImmediate();
+
             HistoriTransaksiFragment fragment = new HistoriTransaksiFragment();
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame, fragment);
             fragmentTransaction.commit();
-        } else if (id == R.id.nav_share) {
-            startActivity(new Intent(this, BossActivity.class));
-        } else if (id == R.id.nav_send) {
-            startActivity(new Intent(this, MainActivity.class));
+//        } else if (id == R.id.nav_share) {
+//            startActivity(new Intent(this, BossActivity.class));
+//        } else if (id == R.id.nav_send) {
+//            startActivity(new Intent(this, MainActivity.class));
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
