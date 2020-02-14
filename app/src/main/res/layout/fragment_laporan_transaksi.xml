@@ -9,9 +9,12 @@
     <!-- TODO: Update blank fragment layout -->
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/rl_layouttransaksi"
-        android:background="@color/puteh"
+        android:background="@color/abu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
 
         >
 
@@ -21,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
+            android:textColor="@color/abang"
             android:text="Laporan Transaksi"
             android:textStyle="bold"
             android:textSize="18dp"
@@ -34,6 +38,7 @@
             android:layout_marginRight="40dp"
             android:layout_toLeftOf="@+id/skat"
             android:layout_alignBaseline="@+id/skat"
+            android:textColor="@color/ijo"
             android:text="Dari Tanggal"
             android:textSize="12dp"
             />
@@ -45,6 +50,7 @@
             android:layout_marginRight="40dp"
             android:layout_toLeftOf="@+id/skat"
             android:layout_alignBaseline="@+id/skat1"
+            android:textColor="@color/ijo"
             android:text="00-00-0000"
             android:textSize="14sp"
             />
@@ -73,6 +79,7 @@
             android:layout_marginLeft="40dp"
             android:layout_toRightOf="@+id/skat"
             android:layout_alignBaseline="@+id/skat"
+            android:textColor="@color/ijo"
             android:text="Sampai Tanggal"
             android:textSize="12dp"
             />
@@ -84,6 +91,7 @@
             android:layout_marginLeft="40dp"
             android:layout_toRightOf="@+id/skat"
             android:layout_alignBaseline="@+id/skat1"
+            android:textColor="@color/ijo"
             android:text="00-00-0000"
             android:textSize="14sp"
             />

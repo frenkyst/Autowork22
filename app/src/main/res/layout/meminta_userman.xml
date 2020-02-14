@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/rl_layoutuserman"
-    android:background="@color/viewfinder_border"
+    android:background="@color/abu"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginLeft="2dp"
@@ -30,17 +30,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
+            android:textStyle="bold"
             android:text="Nama"
             android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_email"
-            android:layout_toRightOf="@+id/tv_nama"
-            android:layout_alignParentRight="true"
+            android:layout_below="@+id/tv_nama"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="4dp"
-            android:textAlignment="viewEnd"
+            android:layout_marginLeft="4dp"
             android:text="Email"
 
             android:textSize="12sp" />

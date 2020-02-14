@@ -2,6 +2,8 @@ package com.example.autowork.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import com.example.autowork.R;
 import com.example.autowork.model.UserMan;
 import com.example.autowork.owner.BossActivity;
 import com.example.autowork.owner.DetailUserActivity;
+import com.example.autowork.owner.DetailuserBossFragment;
 
 import java.util.List;
 
@@ -75,9 +78,11 @@ public class MemintaUserManboss extends RecyclerView.Adapter<MemintaUserManboss.
                 GlobalVariabel.uid = movie.getUid();
 //                GlobalVariabel.VarFragmen="DetailuserBossFragment";
 
-                Intent intent = new Intent(mActivity, DetailUserActivity.class);
+                AppCompatActivity activity1 = (AppCompatActivity) view.getContext();
+                Fragment myFragment1 = new DetailuserBossFragment();
+                activity1.getSupportFragmentManager().beginTransaction().replace(R.id.frame, myFragment1).addToBackStack(null).commit();
 
-                mActivity.startActivity(intent);
+//                mActivity.startActivity(intent);
 //                mActivity.finish();
 
 
